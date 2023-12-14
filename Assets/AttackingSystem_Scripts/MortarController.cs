@@ -19,7 +19,7 @@ public class MortarController : MonoBehaviour
 
     private float adjustDistanceFactor;
     private Vector3[] routePoints = new Vector3[SetParameters.CurvePointsTotalCount + 1];
-    [SerializeField] private ObjectPool_Projectile objectPoolMortarScript;
+    private ObjectPool_Projectile objectPoolMortarScript;
 
     private Transform shipGameObject;
     private Transform myShipCenter;
@@ -46,6 +46,16 @@ public class MortarController : MonoBehaviour
 
     private void Start()
     {
+        GameObject objectPoolMortarBomb = GameObject.Find("ObjectPoolMortarBombs");
+        if (objectPoolMortarBomb != null)
+        {
+            objectPoolMortarScript = objectPoolMortarBomb.GetComponent<ObjectPool_Projectile>();
+        }
+        else
+        {
+            Debug.LogWarning("Object Pool Mortar script not assigned!!!");
+        }
+
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.startWidth = lineWidth;
         lineRenderer.positionCount = curvePointsTotalCount + 1;

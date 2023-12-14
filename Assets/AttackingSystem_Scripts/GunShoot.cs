@@ -6,7 +6,7 @@ using static ShipCategorizer_Level;
 
 public class GunShoot : MonoBehaviour
 {
-    [SerializeField] private ObjectPool_Projectile objectPoolBulletScript;
+    private ObjectPool_Projectile objectPoolBulletScript;
     private float lineWidth;
     private float bulletVelocity;
     private float gunmanMaxRange;
@@ -76,6 +76,16 @@ public class GunShoot : MonoBehaviour
 
     private void Start()
     {
+        GameObject objectPoolBullet = GameObject.Find("ObjectPoolBullets");
+        if (objectPoolBullet != null)
+        {
+            objectPoolBulletScript = objectPoolBullet.GetComponent<ObjectPool_Projectile>();
+        }
+        else
+        {
+            Debug.LogWarning("Object Pool Bullet script not assigned!!!");
+        }
+
         for (int i = 0; i < totalGunmanCount; i++)
         {
             gunmanControllerScript[i].lineRenderer.startWidth = lineWidth;

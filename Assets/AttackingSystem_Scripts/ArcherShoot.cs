@@ -6,7 +6,7 @@ using static ShipCategorizer_Level;
 
 public class ArcherShoot : MonoBehaviour
 {
-    [SerializeField] private ObjectPool_Projectile objectPoolArrowScript;
+    private ObjectPool_Projectile objectPoolArrowScript;
     private float lineWidth;
     private float arrowVelocity;
     private float leastDistanceForStraightHit;
@@ -81,6 +81,16 @@ public class ArcherShoot : MonoBehaviour
 
     private void Start()
     {
+        GameObject objectPoolArrows = GameObject.Find("ObjectPoolArrows");
+        if (objectPoolArrows != null)
+        {
+            objectPoolArrowScript = objectPoolArrows.GetComponent<ObjectPool_Projectile>();
+        }
+        else
+        {
+            Debug.LogWarning("Object Pool Arrow script not assigned!!!");
+        }
+
         for (int i = 0; i < totalArcherCount; i++)
         {
             archerControllerScript[i].lineRenderer.startWidth = lineWidth;

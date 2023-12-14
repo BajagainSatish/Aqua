@@ -18,7 +18,7 @@ public class CannonController : MonoBehaviour
     [SerializeField] private GameObject cannonRotator;
     public GameObject newCannon;
 
-    public ObjectPool_Projectile objectPool_CanonBallScript;
+    public ObjectPool_Projectile objectPoolCannonBallScript;
     private readonly ParticleSystem[] smokeParticleEffect = new ParticleSystem[3];
 
     private Transform shipGameObject;
@@ -60,6 +60,16 @@ public class CannonController : MonoBehaviour
 
     private void Start()
     {
+        GameObject objectPoolCannonBall = GameObject.Find("ObjectPoolCannonBalls");
+        if (objectPoolCannonBall != null)
+        {
+            objectPoolCannonBallScript = objectPoolCannonBall.GetComponent<ObjectPool_Projectile>();
+        }
+        else
+        {
+            Debug.LogWarning("Object Pool Cannon script not assigned!!!");
+        }
+
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.startWidth = lineWidth;
         lineRenderer.positionCount = 2;
@@ -132,7 +142,7 @@ public class CannonController : MonoBehaviour
                             shootCannonBall = false;
                             if (!shootOnce)
                             {
-                                cannonBall = objectPool_CanonBallScript.ReturnProjectile();
+                                cannonBall = objectPoolCannonBallScript.ReturnProjectile();
 
                                 ProjectileController projectileControllerScript = cannonBall.GetComponent<ProjectileController>();
                                 projectileControllerScript.weaponDamage = shipCategorizer_LevelScript.weaponDamage;
@@ -223,7 +233,7 @@ public class CannonController : MonoBehaviour
 
     public void ShootCanonBall()
     {
-        GameObject newCanonBall = objectPool_CanonBallScript.ReturnProjectile();
+        GameObject newCanonBall = objectPoolCannonBallScript.ReturnProjectile();
         if (newCanonBall != null)
         {
             newCanonBall.transform.position = A.position;

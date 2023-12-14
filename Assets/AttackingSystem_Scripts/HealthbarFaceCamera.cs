@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HealthbarFaceCamera : MonoBehaviour
 {
-    public Transform mainCamera;
+    private Transform mainCamera;
 
     private TextMeshProUGUI levelText;
 
@@ -25,6 +25,16 @@ public class HealthbarFaceCamera : MonoBehaviour
     }
     private void Start()
     {
+        GameObject mainCameraGameObject = GameObject.Find("Main Camera");
+        if (mainCameraGameObject != null)
+        {
+            mainCamera = mainCameraGameObject.transform;
+        }
+        else
+        {
+            Debug.LogWarning("Main camera not found!!! Healthbar won't face camera");
+        }
+
         shipGameObject = MortarController.FindHighestParent(transform);
 
         if (shipGameObject.TryGetComponent<ShipCategorizer_Level>(out _))
