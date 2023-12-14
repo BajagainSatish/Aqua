@@ -359,8 +359,9 @@ GameObject:
   - component: {fileID: 3331261132299277582}
   - component: {fileID: 5935151866268270277}
   - component: {fileID: 1415800012}
+  - component: {fileID: 5420631231521525291}
   m_Layer: 0
-  m_Name: Archer
+  m_Name: Archer_Medium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -482,7 +483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe73ace818923554c92f06e3c03fbf84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipLevel: 1
+  shipLevel: 0
   shipHealth: 0
   shipMenHealth: 0
   weaponRange: 0
@@ -529,6 +530,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   objectHeight: -0.15
+--- !u!114 &5420631231521525291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677333210658142900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d82a855531cf8541bf12539beee889f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipSize: 1
 --- !u!1 &4143788649906602373
 GameObject:
   m_ObjectHideFlags: 0

@@ -4876,8 +4876,9 @@ GameObject:
   - component: {fileID: 4884727664621848326}
   - component: {fileID: 8205488955485102191}
   - component: {fileID: 1191830764}
+  - component: {fileID: 2235382253332629809}
   m_Layer: 0
-  m_Name: Mortar
+  m_Name: Mortar_Medium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4942,7 +4943,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd591dacc5929294bb61768f9d7a785e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isP1Ship: 1
+  isP1Ship: 0
   shipIsFunctional: 0
   shipMenAreAlive: 0
 --- !u!114 &4640687470691159025
@@ -5001,7 +5002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe73ace818923554c92f06e3c03fbf84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipLevel: 1
+  shipLevel: 0
   shipHealth: 0
   shipMenHealth: 0
   weaponRange: 0
@@ -5048,6 +5049,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   objectHeight: 0.44
+--- !u!114 &2235382253332629809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7476012147820114070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d82a855531cf8541bf12539beee889f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shipSize: 1
 --- !u!1 &7748366126500935148
 GameObject:
   m_ObjectHideFlags: 0

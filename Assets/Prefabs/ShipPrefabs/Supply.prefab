@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd591dacc5929294bb61768f9d7a785e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isP1Ship: 1
+  isP1Ship: 0
   shipIsFunctional: 0
   shipMenAreAlive: 0
 --- !u!114 &8345500768541114641
