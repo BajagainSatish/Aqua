@@ -84,10 +84,10 @@ public static class SetParameters
     //Ship Cost(Based on 3 factors: ShipType + ShipLevel + ShipSize)
 
     //Ship Cost based on ship type
-    public static int[] ArcherShipCost { get; } = { 80, 120, 160, 200 };
-    public static int[] GunmanShipCost { get; } = { 80, 120, 160, 200 };
+    public static int[] ArcherShipCost { get; } = { 40, 80, 120, 160 };
+    public static int[] GunmanShipCost { get; } = { 60, 100, 140, 180 };
     public static int[] CannonShipCost { get; } = { 80, 120, 160, 200 };
-    public static int[] MortarShipCost { get; } = { 80, 120, 160, 200 };
+    public static int[] MortarShipCost { get; } = { 100, 140, 180, 220 };
 
     //Ship Cost based on ship size
     public static int SmallShipCost { get; } = 50;

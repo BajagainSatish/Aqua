@@ -12,12 +12,20 @@ public class InventoryItemDisplay : MonoBehaviour
     private static readonly int totalLevels = 4;
 
     [SerializeField] private Sprite[] levelSprites = new Sprite[2 * totalLevels];//lower index = active, higher index = inactive sprite
+    [SerializeField] private ActiveShipTypeSelector activeShipTypeSelectorScript;
 
     private GameObject levelsGameObject;
     private GameObject[] level = new GameObject[totalLevels];
     private bool[] levelIsActive = new bool[totalLevels];
 
     private int currentlyActiveLevel;
+
+    private string sizeOfShip_Item;
+    private string typeOfShip_Item;
+
+    private int weaponBasedShipCost;
+    private int sizeBasedShipCost;
+    private int totalShipCost;
 
     private void Awake()
     {
@@ -40,12 +48,15 @@ public class InventoryItemDisplay : MonoBehaviour
         {
             levelIsActive[i] = false;
         }
+        DetermineShipSize();       
     }
     private void Start()
     {
-        itemName.text = itemDetails.shipSize;
+        EvaluateShipCost();
+
+        itemName.text = sizeOfShip_Item;
         itemIcon.sprite = itemDetails.shipSprite;
-        itemCost.text = itemDetails.shipCost.ToString();
+        itemCost.text = totalShipCost.ToString();
 
         currentlyActiveLevel = 1;
         ActivateDeactivateLevelSprite();
@@ -56,6 +67,7 @@ public class InventoryItemDisplay : MonoBehaviour
         {
             currentlyActiveLevel = 1;
             ActivateDeactivateLevelSprite();
+            EvaluateShipCost();
         }
     }
     public void ClickOn2()
@@ -64,6 +76,7 @@ public class InventoryItemDisplay : MonoBehaviour
         {
             currentlyActiveLevel = 2;
             ActivateDeactivateLevelSprite();
+            EvaluateShipCost();
         }
     }
     public void ClickOn3()
@@ -72,6 +85,7 @@ public class InventoryItemDisplay : MonoBehaviour
         {
             currentlyActiveLevel = 3;
             ActivateDeactivateLevelSprite();
+            EvaluateShipCost();
         }
     }
     public void ClickOn4()
@@ -80,6 +94,7 @@ public class InventoryItemDisplay : MonoBehaviour
         {
             currentlyActiveLevel = 4;
             ActivateDeactivateLevelSprite();
+            EvaluateShipCost();
         }
     }
     private void ActivateDeactivateLevelSprite()
@@ -176,5 +191,62 @@ public class InventoryItemDisplay : MonoBehaviour
                 }
             }
         }
+    }
+    private void DetermineShipSize()
+    {
+        if (name == "Large")
+        {
+            sizeOfShip_Item = "Large";
+        }
+        else if (name == "Medium")
+        {
+            sizeOfShip_Item = "Medium";
+        }
+        else if (name == "Small")
+        {
+            sizeOfShip_Item = "Small";
+        }
+        else
+        {
+            print("Invalid size!!!");
+        }
+
+        if (sizeOfShip_Item == "Large")
+        {
+            sizeBasedShipCost = SetParameters.LargeShipCost;
+        }
+        else if (sizeOfShip_Item == "Medium")
+        {
+            sizeBasedShipCost = SetParameters.MediumShipCost;
+        }
+        else if (sizeOfShip_Item == "Small")
+        {
+            sizeBasedShipCost = SetParameters.SmallShipCost;
+        }
+    }
+    public void EvaluateShipCost()
+    {
+        //Need 3 things: Ship type, Ship size, Ship Level
+        typeOfShip_Item = activeShipTypeSelectorScript.activeShipType;
+
+        if (typeOfShip_Item == "Archer")
+        {
+            weaponBasedShipCost = SetParameters.ArcherShipCost[currentlyActiveLevel - 1];
+        }
+        else if (typeOfShip_Item == "Cannon")
+        {
+            weaponBasedShipCost = SetParameters.CannonShipCost[currentlyActiveLevel - 1];
+        }
+        else if (typeOfShip_Item == "Gun")
+        {
+            weaponBasedShipCost = SetParameters.GunmanShipCost[currentlyActiveLevel - 1];
+        }
+        else if (typeOfShip_Item == "Mortar")
+        {
+            weaponBasedShipCost = SetParameters.MortarShipCost[currentlyActiveLevel - 1];
+        }
+
+        totalShipCost = weaponBasedShipCost + sizeBasedShipCost;
+        itemCost.text = totalShipCost.ToString();
     }
 }

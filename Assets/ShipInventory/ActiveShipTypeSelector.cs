@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ActiveShipTypeSelector : MonoBehaviour
 {
-    private string activeShipType;
+    public string activeShipType;
     private int totalShipTypes = 4;
+    private static int totalSizeCount = 3;
 
     private GameObject[] background = new GameObject[4];
+    [SerializeField]private InventoryItemDisplay[] inventoryItemDisplayScript = new InventoryItemDisplay[totalSizeCount];
+
     //0 = archer, 1 = cannon, 2 = gunman, 3 = mortar
     private void Awake()
     {
@@ -24,6 +27,7 @@ public class ActiveShipTypeSelector : MonoBehaviour
         {
             activeShipType = "Archer";
             SetBackgroundColor();
+            ReEvaluateShipCost();
         }
     }
     public void ClickOnCannon()
@@ -32,6 +36,7 @@ public class ActiveShipTypeSelector : MonoBehaviour
         {
             activeShipType = "Cannon";
             SetBackgroundColor();
+            ReEvaluateShipCost();
         }
     }
     public void ClickOnGun()
@@ -40,6 +45,7 @@ public class ActiveShipTypeSelector : MonoBehaviour
         {
             activeShipType = "Gun";
             SetBackgroundColor();
+            ReEvaluateShipCost();
         }
     }
     public void ClickOnMortar()
@@ -48,6 +54,7 @@ public class ActiveShipTypeSelector : MonoBehaviour
         {
             activeShipType = "Mortar";
             SetBackgroundColor();
+            ReEvaluateShipCost();
         }
     }
     private void SetBackgroundColor()
@@ -95,6 +102,13 @@ public class ActiveShipTypeSelector : MonoBehaviour
         else
         {
             Debug.LogError("Invalid hex color code: " + hexColor);
+        }
+    }
+    private void ReEvaluateShipCost()
+    {
+        for (int i = 0; i < totalSizeCount; i++)
+        {
+            inventoryItemDisplayScript[i].EvaluateShipCost();
         }
     }
 }
