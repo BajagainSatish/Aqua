@@ -11963,7 +11963,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 26844f6f52818284c841e9cc2d23602c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13071,9 +13071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471b7a8e844f9864fb177a2c6f6e5d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDetails: {fileID: 11400000, guid: 46a5d7a6e7a59ca4199786063502aab6, type: 2}
   itemName: {fileID: 331237629}
-  itemIcon: {fileID: 1726720121}
   itemCost: {fileID: 1401399565}
   levelSprites:
   - {fileID: 21300000, guid: a1bb2c080fc17044293f95dc5e1e1010, type: 3}
@@ -13097,9 +13095,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05dc077fe52f41488e62da11c0cfae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipSize: 
+  dragObjectPrefabArcher: {fileID: 4213680578999260542, guid: edc5100c922c25d47899eb8814fb93d4,
+    type: 3}
+  dragObjectPrefabGunman: {fileID: 1801491517626665056, guid: be5b2fbecb7b0db48bd45f52c0a9de64,
+    type: 3}
+  dragObjectPrefabCannon: {fileID: 2385500740163270387, guid: 60817e3123caebd4aad55ca989db72f7,
+    type: 3}
+  dragObjectPrefabMortar: {fileID: 3634553774564120466, guid: 855a63151906ce94ea914137c3ea68ca,
+    type: 3}
+  instantiateObjectPrefabArcher:
+  - {fileID: 863684763099416751, guid: e10c44d7dad95d549b73638cc68219e8, type: 3}
+  - {fileID: 2677333210658142900, guid: baecd423d0b01024ea761c5d05e51403, type: 3}
+  - {fileID: 135588756567403600, guid: bc1f4ee71de8c2e42a062971a55f36b1, type: 3}
+  instantiateObjectPrefabGunman:
+  - {fileID: 3151885099365061330, guid: 7b0409780a0a0054e8eb3f38933a3b84, type: 3}
+  - {fileID: 1969464428724826065, guid: e5db145f6c5a5f64580cc1e530757817, type: 3}
+  - {fileID: 4260367956499230941, guid: c184d49644007ee468988cc24b4dda38, type: 3}
+  instantiateObjectPrefabCannon:
+  - {fileID: 7279310334159499242, guid: 45d9f01be38b2f146986ff1824a17102, type: 3}
+  - {fileID: 4149126135670364798, guid: 4e0e15c69005492498d8a5ebd4e236dc, type: 3}
+  - {fileID: 2686487701326197390, guid: a67e3cd0c9b920346ba7ba219c4cd5ef, type: 3}
+  instantiateObjectPrefabMortar:
+  - {fileID: 4782823212274096782, guid: ac5f138667d55904c857f9efbdb4b14b, type: 3}
+  - {fileID: 7476012147820114070, guid: 535908c75b5de214e89ac3d4b16418fa, type: 3}
+  - {fileID: 2929866852620963096, guid: 0ba4080139610bd46b0a15f56a0d562c, type: 3}
   dragObjectPrefab: {fileID: 4213680578999260542, guid: d4062d0437bc9a64d92f31a53d009908,
     type: 3}
-  instantiateObjectPrefab: {fileID: 7268628339517414514, guid: 32dc9a54c04958e40b0f3edb56661831,
+  instantiateObjectPrefab: {fileID: 4597674437048287453, guid: 36db757bcce55644b8c850aed7422949,
     type: 3}
 --- !u!114 &1218542731
 MonoBehaviour:
@@ -13798,9 +13821,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05dc077fe52f41488e62da11c0cfae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipSize: 
+  dragObjectPrefabArcher: {fileID: 4213680578999260542, guid: 4c346f28701f5a24dba449e6f271aaa2,
+    type: 3}
+  dragObjectPrefabGunman: {fileID: 1801491517626665056, guid: 84ca42fcf56dc7040969069e83edc90d,
+    type: 3}
+  dragObjectPrefabCannon: {fileID: 2385500740163270387, guid: 4c3fa05467504224ca85811a15396b54,
+    type: 3}
+  dragObjectPrefabMortar: {fileID: 4597674437048287453, guid: 36db757bcce55644b8c850aed7422949,
+    type: 3}
+  instantiateObjectPrefabArcher:
+  - {fileID: 863684763099416751, guid: e10c44d7dad95d549b73638cc68219e8, type: 3}
+  - {fileID: 2677333210658142900, guid: baecd423d0b01024ea761c5d05e51403, type: 3}
+  - {fileID: 135588756567403600, guid: bc1f4ee71de8c2e42a062971a55f36b1, type: 3}
+  instantiateObjectPrefabGunman:
+  - {fileID: 3151885099365061330, guid: 7b0409780a0a0054e8eb3f38933a3b84, type: 3}
+  - {fileID: 1969464428724826065, guid: e5db145f6c5a5f64580cc1e530757817, type: 3}
+  - {fileID: 4260367956499230941, guid: c184d49644007ee468988cc24b4dda38, type: 3}
+  instantiateObjectPrefabCannon:
+  - {fileID: 7279310334159499242, guid: 45d9f01be38b2f146986ff1824a17102, type: 3}
+  - {fileID: 4149126135670364798, guid: 4e0e15c69005492498d8a5ebd4e236dc, type: 3}
+  - {fileID: 2686487701326197390, guid: a67e3cd0c9b920346ba7ba219c4cd5ef, type: 3}
+  instantiateObjectPrefabMortar:
+  - {fileID: 4782823212274096782, guid: ac5f138667d55904c857f9efbdb4b14b, type: 3}
+  - {fileID: 7476012147820114070, guid: 535908c75b5de214e89ac3d4b16418fa, type: 3}
+  - {fileID: 2929866852620963096, guid: 0ba4080139610bd46b0a15f56a0d562c, type: 3}
   dragObjectPrefab: {fileID: 4213680578999260542, guid: d4062d0437bc9a64d92f31a53d009908,
     type: 3}
-  instantiateObjectPrefab: {fileID: 7268628339517414514, guid: 32dc9a54c04958e40b0f3edb56661831,
+  instantiateObjectPrefab: {fileID: 4597674437048287453, guid: 36db757bcce55644b8c850aed7422949,
     type: 3}
 --- !u!114 &1675847395
 MonoBehaviour:
@@ -13814,9 +13862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471b7a8e844f9864fb177a2c6f6e5d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDetails: {fileID: 11400000, guid: 46a5d7a6e7a59ca4199786063502aab6, type: 2}
   itemName: {fileID: 730344941}
-  itemIcon: {fileID: 696933078}
   itemCost: {fileID: 2035082228}
   levelSprites:
   - {fileID: 21300000, guid: a1bb2c080fc17044293f95dc5e1e1010, type: 3}
@@ -13904,7 +13950,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c62ab6bf0dc28734e8d630e67200b575, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14177,7 +14223,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 3319aec413485224486d92187c2f2fb5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15082,6 +15128,10 @@ MonoBehaviour:
   - {fileID: 1675847395}
   - {fileID: 2040400166}
   - {fileID: 1218542729}
+  inventoryItemDragHandlerScript:
+  - {fileID: 1675847394}
+  - {fileID: 2040400167}
+  - {fileID: 1218542730}
 --- !u!1 &2035082226
 GameObject:
   m_ObjectHideFlags: 0
@@ -15195,9 +15245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471b7a8e844f9864fb177a2c6f6e5d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemDetails: {fileID: 11400000, guid: 46a5d7a6e7a59ca4199786063502aab6, type: 2}
   itemName: {fileID: 1921049622}
-  itemIcon: {fileID: 1783358039}
   itemCost: {fileID: 556094983}
   levelSprites:
   - {fileID: 21300000, guid: a1bb2c080fc17044293f95dc5e1e1010, type: 3}
@@ -15221,9 +15269,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05dc077fe52f41488e62da11c0cfae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipSize: 
+  dragObjectPrefabArcher: {fileID: 4213680578999260542, guid: d4062d0437bc9a64d92f31a53d009908,
+    type: 3}
+  dragObjectPrefabGunman: {fileID: 1801491517626665056, guid: 9582d77dcb3fdd74b9f34d0b893e8439,
+    type: 3}
+  dragObjectPrefabCannon: {fileID: 2385500740163270387, guid: 873ddc1b883e257498cf81234a921235,
+    type: 3}
+  dragObjectPrefabMortar: {fileID: 5669756924093181917, guid: 4a9a62622dfa6284e809290cdb4f87d7,
+    type: 3}
+  instantiateObjectPrefabArcher:
+  - {fileID: 863684763099416751, guid: e10c44d7dad95d549b73638cc68219e8, type: 3}
+  - {fileID: 2677333210658142900, guid: baecd423d0b01024ea761c5d05e51403, type: 3}
+  - {fileID: 135588756567403600, guid: bc1f4ee71de8c2e42a062971a55f36b1, type: 3}
+  instantiateObjectPrefabGunman:
+  - {fileID: 3151885099365061330, guid: 7b0409780a0a0054e8eb3f38933a3b84, type: 3}
+  - {fileID: 1969464428724826065, guid: e5db145f6c5a5f64580cc1e530757817, type: 3}
+  - {fileID: 4260367956499230941, guid: c184d49644007ee468988cc24b4dda38, type: 3}
+  instantiateObjectPrefabCannon:
+  - {fileID: 7279310334159499242, guid: 45d9f01be38b2f146986ff1824a17102, type: 3}
+  - {fileID: 4149126135670364798, guid: 4e0e15c69005492498d8a5ebd4e236dc, type: 3}
+  - {fileID: 2686487701326197390, guid: a67e3cd0c9b920346ba7ba219c4cd5ef, type: 3}
+  instantiateObjectPrefabMortar:
+  - {fileID: 4782823212274096782, guid: ac5f138667d55904c857f9efbdb4b14b, type: 3}
+  - {fileID: 7476012147820114070, guid: 535908c75b5de214e89ac3d4b16418fa, type: 3}
+  - {fileID: 2929866852620963096, guid: 0ba4080139610bd46b0a15f56a0d562c, type: 3}
   dragObjectPrefab: {fileID: 4213680578999260542, guid: d4062d0437bc9a64d92f31a53d009908,
     type: 3}
-  instantiateObjectPrefab: {fileID: 7268628339517414514, guid: 32dc9a54c04958e40b0f3edb56661831,
+  instantiateObjectPrefab: {fileID: 4597674437048287453, guid: 36db757bcce55644b8c850aed7422949,
     type: 3}
 --- !u!114 &2040400168
 MonoBehaviour:

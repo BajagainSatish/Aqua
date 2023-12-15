@@ -397,6 +397,7 @@ MonoBehaviour:
   shipLevel: 0
   shipHealth: 0
   shipMenHealth: 0
+  totalShipCost: 0
   weaponRange: 0
   weaponDamage: 0
 --- !u!114 &791926850646262762

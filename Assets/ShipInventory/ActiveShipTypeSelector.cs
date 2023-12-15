@@ -6,10 +6,11 @@ public class ActiveShipTypeSelector : MonoBehaviour
 {
     public string activeShipType;
     private int totalShipTypes = 4;
-    private static int totalSizeCount = 3;
+    private readonly static int totalSizeCount = 3;
 
     private GameObject[] background = new GameObject[4];
     [SerializeField]private InventoryItemDisplay[] inventoryItemDisplayScript = new InventoryItemDisplay[totalSizeCount];
+    [SerializeField] private InventoryItemDragHandler[] inventoryItemDragHandlerScript = new InventoryItemDragHandler[totalSizeCount];
 
     //0 = archer, 1 = cannon, 2 = gunman, 3 = mortar
     private void Awake()
@@ -21,6 +22,10 @@ public class ActiveShipTypeSelector : MonoBehaviour
         activeShipType = "Archer";
         SetBackgroundColor();
     }
+    private void Start()
+    {
+        SelectProperShipForDrag();
+    }
     public void ClickOnArcher()
     {
         if (activeShipType != "Archer")
@@ -28,6 +33,7 @@ public class ActiveShipTypeSelector : MonoBehaviour
             activeShipType = "Archer";
             SetBackgroundColor();
             ReEvaluateShipCost();
+            SelectProperShipForDrag();
         }
     }
     public void ClickOnCannon()
@@ -37,6 +43,7 @@ public class ActiveShipTypeSelector : MonoBehaviour
             activeShipType = "Cannon";
             SetBackgroundColor();
             ReEvaluateShipCost();
+            SelectProperShipForDrag();
         }
     }
     public void ClickOnGun()
@@ -46,6 +53,7 @@ public class ActiveShipTypeSelector : MonoBehaviour
             activeShipType = "Gun";
             SetBackgroundColor();
             ReEvaluateShipCost();
+            SelectProperShipForDrag();
         }
     }
     public void ClickOnMortar()
@@ -55,6 +63,7 @@ public class ActiveShipTypeSelector : MonoBehaviour
             activeShipType = "Mortar";
             SetBackgroundColor();
             ReEvaluateShipCost();
+            SelectProperShipForDrag();
         }
     }
     private void SetBackgroundColor()
@@ -109,6 +118,37 @@ public class ActiveShipTypeSelector : MonoBehaviour
         for (int i = 0; i < totalSizeCount; i++)
         {
             inventoryItemDisplayScript[i].EvaluateShipCost();
+        }
+    }
+    private void SelectProperShipForDrag()
+    {
+        if (activeShipType == "Archer")
+        {
+            for (int i = 0; i < totalSizeCount; i++)
+            {
+                inventoryItemDragHandlerScript[i].dragObjectPrefab = inventoryItemDragHandlerScript[i].dragObjectPrefabArcher;//large, medium, small
+            }
+        }
+        else if (activeShipType == "Cannon")
+        {
+            for (int i = 0; i < totalSizeCount; i++)
+            {
+                inventoryItemDragHandlerScript[i].dragObjectPrefab = inventoryItemDragHandlerScript[i].dragObjectPrefabCannon;//large, medium, small
+            }
+        }
+        else if (activeShipType == "Gun")
+        {
+            for (int i = 0; i < totalSizeCount; i++)
+            {
+                inventoryItemDragHandlerScript[i].dragObjectPrefab = inventoryItemDragHandlerScript[i].dragObjectPrefabGunman;//large, medium, small
+            }
+        }
+        else if (activeShipType == "Mortar")
+        {
+            for (int i = 0; i < totalSizeCount; i++)
+            {
+                inventoryItemDragHandlerScript[i].dragObjectPrefab = inventoryItemDragHandlerScript[i].dragObjectPrefabMortar;//large, medium, small
+            }
         }
     }
 }

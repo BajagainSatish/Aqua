@@ -3,18 +3,19 @@ using UnityEngine.EventSystems;
 
 public class InventoryItemDragHandler : DraggingTriggerer, IBeginDragHandler ,IDragHandler, IEndDragHandler
 {
-    private static int shipSizes = 3;
+    private readonly static int shipSizes = 3;
+    public string shipSize;
 
     //Array to be initialized in the inspector in order of Small, medium, large
-    [SerializeField] private GameObject[] dragObjectPrefabArcher = new GameObject[shipSizes];
-    [SerializeField] private GameObject[] dragObjectPrefabGunman = new GameObject[shipSizes];
-    [SerializeField] private GameObject[] dragObjectPrefabCannon = new GameObject[shipSizes];
-    [SerializeField] private GameObject[] dragObjectPrefabMortar = new GameObject[shipSizes];
+    public GameObject dragObjectPrefabArcher;
+    public GameObject dragObjectPrefabGunman;
+    public GameObject dragObjectPrefabCannon;
+    public GameObject dragObjectPrefabMortar;
 
-    [SerializeField] private GameObject[] instantiateObjectPrefabArcher = new GameObject[shipSizes];
-    [SerializeField] private GameObject[] instantiateObjectPrefabGunman = new GameObject[shipSizes];
-    [SerializeField] private GameObject[] instantiateObjectPrefabCannon = new GameObject[shipSizes];
-    [SerializeField] private GameObject[] instantiateObjectPrefabMortar = new GameObject[shipSizes];
+    public GameObject[] instantiateObjectPrefabArcher = new GameObject[shipSizes];
+    public GameObject[] instantiateObjectPrefabGunman = new GameObject[shipSizes];
+    public GameObject[] instantiateObjectPrefabCannon = new GameObject[shipSizes];
+    public GameObject[] instantiateObjectPrefabMortar = new GameObject[shipSizes];
 
     public GameObject dragObjectPrefab;
     public GameObject instantiateObjectPrefab;
@@ -22,6 +23,21 @@ public class InventoryItemDragHandler : DraggingTriggerer, IBeginDragHandler ,ID
     private GameObject dragObject;
 
     private bool isDragging = false;
+    private void Awake()
+    {
+        if (name == "Large")
+        {
+            shipSize = "Large";
+        }
+        else if (name == "Medium")
+        {
+            shipSize = "Medium";
+        }
+        if (name == "Small")
+        {
+            shipSize = "Small";
+        }
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
         dragObject = Instantiate(dragObjectPrefab);

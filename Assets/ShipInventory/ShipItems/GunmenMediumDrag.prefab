@@ -5991,7 +5991,7 @@ GameObject:
   - component: {fileID: 3273770830043114122}
   - component: {fileID: 3833310493200204688}
   m_Layer: 0
-  m_Name: GunmenShipDrag
+  m_Name: GunmenMediumDrag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
