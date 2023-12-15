@@ -3,10 +3,7 @@ using UnityEngine.UI;
 
 public class InventoryItemDisplay : MonoBehaviour
 {
-    [SerializeField] private InventoryItem itemDetails;
-
     [SerializeField] Text itemName;
-    [SerializeField] Image itemIcon;
     [SerializeField] Text itemCost;
 
     private static readonly int totalLevels = 4;
@@ -55,7 +52,6 @@ public class InventoryItemDisplay : MonoBehaviour
         EvaluateShipCost();
 
         itemName.text = sizeOfShip_Item;
-        itemIcon.sprite = itemDetails.shipSprite;
         itemCost.text = totalShipCost.ToString();
 
         currentlyActiveLevel = 1;
