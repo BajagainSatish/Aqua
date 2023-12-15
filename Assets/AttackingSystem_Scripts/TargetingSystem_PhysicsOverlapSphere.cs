@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static ShipCategorizer_Size;
 
 public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
 {
     private ShipCategorizer_Player thisShipCategorizerPlayerScript;
+    private ShipCategorizer_Level thisShipCategorizer_LevelScript;
+    private ShipCategorizer_Size shipCategorizer_SizeScript;
+
     private bool isPlayer1;
     private GameObject target;
     private Collider targetCollider;
@@ -14,17 +18,19 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
     private GameObject parentShooterObject;
     private string shooter;
 
-    private readonly GameObject[] shooters = new GameObject[SetParameters.MediumShipMenCount];
-    private readonly ArcherController[] archerControllerScript = new ArcherController[SetParameters.MediumShipMenCount];
-    private readonly CannonController[] cannonControllerScript = new CannonController[SetParameters.MediumShipMenCount];
-    private readonly GunmanController[] gunmanControllerScript = new GunmanController[SetParameters.MediumShipMenCount];
-    private readonly MortarController[] mortarControllerScript = new MortarController[SetParameters.MediumShipMenCount];
+    private GameObject[] shooters;
+    private ArcherController[] archerControllerScript;
+    private CannonController[] cannonControllerScript;
+    private GunmanController[] gunmanControllerScript;
+    private MortarController[] mortarControllerScript;
 
     private Transform shipCenter;
     //public bool testActiveShip;
     private float shipMaxRange;
 
     private List<Collider> enemyShipsInRange = new List<Collider>();
+
+    private int shipMenCount;
 
     public enum ShipType
     {
@@ -36,11 +42,20 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
     private bool thisShipMenAreAlive;
     private bool thisShipIsCannonOrMortarShip;
 
-    private ShipCategorizer_Level thisShipCategorizer_LevelScript;
-
     private void Awake()
     {
+        thisShipCategorizerPlayerScript = GetComponent<ShipCategorizer_Player>();
         thisShipCategorizer_LevelScript = GetComponent<ShipCategorizer_Level>();
+        shipCategorizer_SizeScript = GetComponent<ShipCategorizer_Size>();
+
+        ShipSize currentShipSize = DetermineThisShipSize();
+        shipMenCount = GetShipMenCount(currentShipSize);
+
+        shooters = new GameObject[shipMenCount];
+        archerControllerScript = new ArcherController[shipMenCount];
+        cannonControllerScript = new CannonController[shipMenCount];
+        gunmanControllerScript = new GunmanController[shipMenCount];
+        mortarControllerScript = new MortarController[shipMenCount];
 
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -116,7 +131,6 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
     }
     private void Start()
     {
-        thisShipCategorizerPlayerScript = GetComponent<ShipCategorizer_Player>();
         isPlayer1 = thisShipCategorizerPlayerScript.isP1Ship;
         shipMaxRange = thisShipCategorizer_LevelScript.weaponRange;
     }
@@ -401,6 +415,35 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
                     subMortarControllerScript.B = null;
                 }
             }
+        }
+    }
+    private ShipSize DetermineThisShipSize()
+    {
+        if (shipCategorizer_SizeScript.shipSize == ShipSize.Small)
+        {
+            return ShipSize.Small;
+        }
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Medium)
+        {
+            return ShipSize.Medium;
+        }
+        else
+        {
+            return ShipSize.Large;
+        }
+    }
+    private int GetShipMenCount(ShipSize shipSize)
+    {
+        switch (shipSize)
+        {
+            case ShipSize.Small:
+                return SetParameters.SmallShipMenCount;
+            case ShipSize.Medium:
+                return SetParameters.MediumShipMenCount;
+            case ShipSize.Large:
+                return SetParameters.LargeShipMenCount;
+            default:
+                return 0;
         }
     }
     /*private void TestShipCode()

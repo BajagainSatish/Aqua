@@ -8,7 +8,9 @@ public static class SetParameters
     // {Level1, Level2, Level3, Level4}
 
     // Common to all 4 attacking ships
+    public static int SmallShipMenCount { get; } = 2;
     public static int MediumShipMenCount { get; } = 4;
+    public static int LargeShipMenCount { get; } = 6;
 
     // Archer Values
     public static float ArcherLineWidth { get; } = 0.01f;

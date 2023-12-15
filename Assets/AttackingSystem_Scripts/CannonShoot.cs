@@ -17,11 +17,7 @@ public class CannonShoot : MonoBehaviour
     {
         shipCategorizer_LevelScript = GetComponent<ShipCategorizer_Level>();
         ammoSystemScript = GetComponent<HealthAmmoSystem>();
-    }
-    private void Start()
-    {
-        sufficientAmmoPresent = true;
-        
+
         if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level1)
         {
             AssignValue(0);
@@ -38,6 +34,10 @@ public class CannonShoot : MonoBehaviour
         {
             AssignValue(3);
         }
+    }
+    private void Start()
+    {
+        sufficientAmmoPresent = true;
         targetEnemy = null;
     }
     private void Update()

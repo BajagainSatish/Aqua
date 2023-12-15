@@ -17,10 +17,6 @@ public class MortarShoot : MonoBehaviour
     {
         shipCategorizer_LevelScript = GetComponent<ShipCategorizer_Level>();
         ammoSystemScript = GetComponent<HealthAmmoSystem>();
-    }
-    private void Start()
-    {
-        sufficientAmmoPresent = true;
 
         if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level1)
         {
@@ -38,6 +34,10 @@ public class MortarShoot : MonoBehaviour
         {
             AssignValue(3);
         }
+    }
+    private void Start()
+    {
+        sufficientAmmoPresent = true;
         targetEnemy = null;
     }
     private void Update()

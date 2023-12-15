@@ -148,8 +148,8 @@ public class MortarController : MonoBehaviour
                                 }
                                 shootOnce = true;
                                 StartCoroutine(MoveThroughRoute());
-                                mortarShootScript.totalAmmoCount--;
-                                mortarShootScript.ammoSystemScript.AmmoCountDecrease(1);
+                                mortarShootScript.totalAmmoCount--;//actual reduction of ammo
+                                mortarShootScript.ammoSystemScript.AmmoCountDecrease(1);//reduction to show in ammo bar
                                 StartCoroutine(CoolDownTime());
                             }
                             //above code executes only once inside update so targetPosition won't be updated if trajectory changes, and ball moves towards previous target
@@ -167,7 +167,7 @@ public class MortarController : MonoBehaviour
         {
             noEnemyInSight = true;
 
-            if (mortarShootScript.targetEnemy != null)//Check ensures single assigning by any one CannonController script only
+            if (mortarShootScript.targetEnemy != null)//Check ensures single assigning by any one MortarController script only
             {
                 mortarShootScript.targetEnemy = null;
             }

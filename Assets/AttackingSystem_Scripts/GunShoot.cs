@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static AnimationGunman;
 using static ShipCategorizer_Level;
+using static ShipCategorizer_Size;
 
 public class GunShoot : MonoBehaviour
 {
@@ -13,20 +14,22 @@ public class GunShoot : MonoBehaviour
     private float waitBeforeShoot_Aiming;
     private float waitAfterShoot;
     private int totalGunmanCount;
+    private int shipMenCount;
 
     private GameObject bullet;
     private Vector3 myShipPosition;
     private GameObject scaleFactorGameObject;
     private GameObject shipCenter;
     private GameObject gunmanParentObject;
-    private readonly GameObject[] gunmen = new GameObject[SetParameters.MediumShipMenCount];
-    private readonly GunmanController[] gunmanControllerScript = new GunmanController[SetParameters.MediumShipMenCount];
-    private readonly AnimationGunman[] gunmanAnimationScript = new AnimationGunman[SetParameters.MediumShipMenCount];
+    private GameObject[] gunmen;
+    private GunmanController[] gunmanControllerScript;
+    private AnimationGunman[] gunmanAnimationScript;
 
     private Vector3 endPosition;
 
     private ShipCategorizer_Level shipCategorizer_LevelScript;
     private ShipCategorizer_Player shipCategorizer_PlayerScript;
+    private ShipCategorizer_Size shipCategorizer_SizeScript;
     private HealthAmmoSystem ammoSystemScript;
 
     public int totalAmmoCount;
@@ -38,7 +41,16 @@ public class GunShoot : MonoBehaviour
     {
         shipCategorizer_LevelScript = GetComponent<ShipCategorizer_Level>();
         shipCategorizer_PlayerScript = GetComponent<ShipCategorizer_Player>();
+        shipCategorizer_SizeScript = GetComponent<ShipCategorizer_Size>();
         ammoSystemScript = GetComponent<HealthAmmoSystem>();
+
+        ShipSize currentShipSize = DetermineThisShipSize();
+        shipMenCount = GetShipMenCount(currentShipSize);
+
+        // Initialize arrays based on the determined crew size
+        gunmen = new GameObject[shipMenCount];
+        gunmanControllerScript = new GunmanController[shipMenCount];
+        gunmanAnimationScript = new AnimationGunman[shipMenCount];
 
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -61,14 +73,14 @@ public class GunShoot : MonoBehaviour
                 gunmanParentObject = gameObject;
             }
         }
-        for (int i = 0; i < SetParameters.MediumShipMenCount; i++)
+        for (int i = 0; i < shipMenCount; i++)
         {
             gunmen[i] = gunmanParentObject.transform.GetChild(i).gameObject;
             gunmanControllerScript[i] = gunmen[i].GetComponent<GunmanController>();
             gunmanAnimationScript[i] = gunmen[i].GetComponent<AnimationGunman>();
         }
 
-        totalGunmanCount = SetParameters.MediumShipMenCount;
+        totalGunmanCount = shipMenCount;
         lineWidth = SetParameters.GunmanLineWidth;
         bulletVelocity = SetParameters.GunmanBulletVelocity;
         sufficientAmmoPresent = true;
@@ -261,6 +273,35 @@ public class GunShoot : MonoBehaviour
         else
         {
             sufficientAmmoPresent = true;
+        }
+    }
+    private ShipSize DetermineThisShipSize()
+    {
+        if (shipCategorizer_SizeScript.shipSize == ShipSize.Small)
+        {
+            return ShipSize.Small;
+        }
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Medium)
+        {
+            return ShipSize.Medium;
+        }
+        else
+        {
+            return ShipSize.Large;
+        }
+    }
+    private int GetShipMenCount(ShipSize shipSize)
+    {
+        switch (shipSize)
+        {
+            case ShipSize.Small:
+                return SetParameters.SmallShipMenCount;
+            case ShipSize.Medium:
+                return SetParameters.MediumShipMenCount;
+            case ShipSize.Large:
+                return SetParameters.LargeShipMenCount;
+            default:
+                return 0;
         }
     }
 }

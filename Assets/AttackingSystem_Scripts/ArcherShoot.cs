@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static AnimationArcher;
 using static ShipCategorizer_Level;
+using static ShipCategorizer_Size;
 
 public class ArcherShoot : MonoBehaviour
 {
@@ -16,18 +17,20 @@ public class ArcherShoot : MonoBehaviour
     private float waitAfterShoot;
     private float totalArcherCount;
     private int curvePointsTotalCount;
+    private int shipMenCount;
 
     private GameObject arrow;
     private Vector3 myShipPosition;
     private GameObject scaleFactorGameObject;
     private GameObject myShipCenter;
     private GameObject archerParentObject;
-    private GameObject[] archers = new GameObject[SetParameters.MediumShipMenCount];
-    private ArcherController[] archerControllerScript = new ArcherController[SetParameters.MediumShipMenCount];
-    private AnimationArcher[] archerAnimatorScript = new AnimationArcher[SetParameters.MediumShipMenCount];
+    private GameObject[] archers;
+    private ArcherController[] archerControllerScript;
+    private AnimationArcher[] archerAnimatorScript;
 
     private ShipCategorizer_Level shipCategorizer_LevelScript;
     private ShipCategorizer_Player shipCategorizer_PlayerScript;
+    private ShipCategorizer_Size shipCategorizer_SizeScript;
     private HealthAmmoSystem ammoSystemScript;
 
     private float adjustDistanceFactor;
@@ -41,7 +44,16 @@ public class ArcherShoot : MonoBehaviour
     {
         shipCategorizer_LevelScript = GetComponent<ShipCategorizer_Level>();
         shipCategorizer_PlayerScript = GetComponent<ShipCategorizer_Player>();
+        shipCategorizer_SizeScript = GetComponent<ShipCategorizer_Size>();
         ammoSystemScript = GetComponent<HealthAmmoSystem>();
+
+        ShipSize currentShipSize = DetermineThisShipSize();
+        shipMenCount = GetShipMenCount(currentShipSize);
+
+        // Initialize arrays based on the determined crew size
+        archers = new GameObject[shipMenCount];
+        archerControllerScript = new ArcherController[shipMenCount];
+        archerAnimatorScript = new AnimationArcher[shipMenCount];
 
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -63,14 +75,14 @@ public class ArcherShoot : MonoBehaviour
                 archerParentObject = gameObject;
             }
         }
-        for (int i = 0; i < SetParameters.MediumShipMenCount; i++)
+        for (int i = 0; i < shipMenCount; i++)
         {
             archers[i] = archerParentObject.transform.GetChild(i).gameObject;
             archerControllerScript[i] = archers[i].GetComponent<ArcherController>();
             archerAnimatorScript[i] = archers[i].GetComponent<AnimationArcher>();
         }
 
-        totalArcherCount = SetParameters.MediumShipMenCount;
+        totalArcherCount = shipMenCount;
         curvePointsTotalCount = SetParameters.CurvePointsTotalCount;
         lineWidth = SetParameters.ArcherLineWidth;        
         arrowVelocity = SetParameters.ArcherArrowVelocity;
@@ -306,6 +318,35 @@ public class ArcherShoot : MonoBehaviour
         else
         {
             sufficientAmmoPresent = true;
+        }
+    }
+    private ShipSize DetermineThisShipSize()
+    {
+        if (shipCategorizer_SizeScript.shipSize == ShipSize.Small)
+        {
+            return ShipSize.Small;
+        }
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Medium)
+        {
+            return ShipSize.Medium;
+        }
+        else
+        {
+            return ShipSize.Large;
+        }
+    }
+    private int GetShipMenCount(ShipSize shipSize)
+    {
+        switch (shipSize)
+        {
+            case ShipSize.Small:
+                return SetParameters.SmallShipMenCount;
+            case ShipSize.Medium:
+                return SetParameters.MediumShipMenCount;
+            case ShipSize.Large:
+                return SetParameters.LargeShipMenCount;
+            default:
+                return 0;
         }
     }
 }
