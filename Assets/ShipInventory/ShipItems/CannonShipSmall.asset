@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cca00403abecffe4399f637f54dbe656, type: 3}
-  m_Name: ArcherShipS
+  m_Name: CannonShipSmall
   m_EditorClassIdentifier: 
-  shipSize: Small
-  shipSprite: {fileID: 21300000, guid: 3319aec413485224486d92187c2f2fb5, type: 3}
-  shipLevel: 0
-  shipCost: 0
+  shipSize: 
+  shipSprite: {fileID: 0}
+  shipLevel: 00000000000000000000000000000000
+  shipCost: 00000000000000000000000000000000

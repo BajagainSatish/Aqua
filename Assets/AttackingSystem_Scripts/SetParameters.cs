@@ -81,9 +81,20 @@ public static class SetParameters
     public static int[] CannonWeaponMaxAmmo { get; } = { 20, 28, 40, 56 };
     public static int[] MortarWeaponMaxAmmo { get; } = { 20, 28, 40, 56 };
 
+    //Ship Cost(Based on 3 factors: ShipType + ShipLevel + ShipSize)
+
+    //Ship Cost based on ship type
+    public static int[] ArcherShipCost { get; } = { 80, 120, 160, 200 };
+    public static int[] GunmanShipCost { get; } = { 80, 120, 160, 200 };
+    public static int[] CannonShipCost { get; } = { 80, 120, 160, 200 };
+    public static int[] MortarShipCost { get; } = { 80, 120, 160, 200 };
+
+    //Ship Cost based on ship size
+    public static int SmallShipCost { get; } = 50;
+    public static int MediumShipCost { get; } = 100;
+    public static int LargeShipCost { get; } = 200;
+
     // Ship Rotation Speed to align to the enemy ship
     public static float[] ShipRotationSpeed { get; } = { 0.2f, 0.5f, 1f, 2f };
-
     public static float[] ShipSpeed { get; } = { 1.05f, 1.10f, 1.15f, 1.20f };
-    public static int[] ShipCost { get; } = { 80, 120, 160, 200 };
 }
