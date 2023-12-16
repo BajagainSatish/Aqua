@@ -10,6 +10,7 @@ public class ShipCategorizer_Level : MonoBehaviour
         Level1, Level2, Level3, Level4
     };
     public ShipLevels shipLevel;
+    private ShipLevels previousShipLevel;
 
     public int shipHealth;
     public int shipMenHealth;
@@ -31,6 +32,7 @@ public class ShipCategorizer_Level : MonoBehaviour
     {
         targetingSystem_PhysicsOverlapSphereScript = GetComponent<TargetingSystem_PhysicsOverlapSphere>();
         shipCategorizer_SizeScript = GetComponent<ShipCategorizer_Size>();
+        previousShipLevel = shipLevel;
 
         if (shipLevel == ShipLevels.Level1)
         {
@@ -51,6 +53,30 @@ public class ShipCategorizer_Level : MonoBehaviour
 
         EvaluateShipSize();
         EvaluateShipCost();
+    }
+
+    private void Update()
+    {
+        if (shipLevel != previousShipLevel)//means level of ship has been changed
+        {
+            if (shipLevel == ShipLevels.Level1)
+            {
+                AssignValue(0);
+            }
+            else if (shipLevel == ShipLevels.Level2)
+            {
+                AssignValue(1);
+            }
+            else if (shipLevel == ShipLevels.Level3)
+            {
+                AssignValue(2);
+            }
+            else if (shipLevel == ShipLevels.Level4)
+            {
+                AssignValue(3);
+            }
+            previousShipLevel = shipLevel;
+        }
     }
 
     private void EvaluateShipCost()

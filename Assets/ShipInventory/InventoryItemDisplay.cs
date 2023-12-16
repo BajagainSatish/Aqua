@@ -24,6 +24,21 @@ public class InventoryItemDisplay : MonoBehaviour
     private int sizeBasedShipCost;
     private int totalShipCost;
 
+    public int GetShipCost
+    {
+        get
+        {
+            return totalShipCost;
+        }
+    }
+    public int GetShipLevel
+    {
+        get
+        {
+            return currentlyActiveLevel;
+        }
+    }
+
     private void Awake()
     {
         for (int i = 0; i < transform.childCount; i++)

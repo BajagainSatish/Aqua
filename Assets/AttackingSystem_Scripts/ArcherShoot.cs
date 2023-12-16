@@ -89,6 +89,23 @@ public class ArcherShoot : MonoBehaviour
         leastDistanceForStraightHit = SetParameters.ArchersleastDistanceForStraightHit;
         adjustCurveAngle = SetParameters.ArcherAdjustCurveAngle;
         sufficientAmmoPresent = true;
+
+        if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level1)
+        {
+            AssignValue(0);
+        }
+        else if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level2)
+        {
+            AssignValue(1);
+        }
+        else if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level3)
+        {
+            AssignValue(2);
+        }
+        else if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level4)
+        {
+            AssignValue(3);
+        }
     }
 
     private void Start()
@@ -110,22 +127,6 @@ public class ArcherShoot : MonoBehaviour
         }
         archerMaxRange = shipCategorizer_LevelScript.weaponRange;
 
-        if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level1)
-        {
-            AssignValue(0);
-        }
-        else if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level2)
-        {
-            AssignValue(1);
-        }
-        else if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level3)
-        {
-            AssignValue(2);
-        }
-        else if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level4)
-        {
-            AssignValue(3);
-        }
         sufficientAmmoPresent = true;
         targetEnemy = null;
     }

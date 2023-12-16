@@ -1055,8 +1055,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: -0.069992065, y: 0.12559628, z: -0.06546998}
+  m_Size: {x: 2, y: 1.8113588, z: 2}
+  m_Center: {x: -0.069992065, y: 0.91009694, z: -0.06546998}
 --- !u!114 &6925756300066683501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1131,6 +1131,7 @@ MonoBehaviour:
   shipLevel: 0
   shipHealth: 0
   shipMenHealth: 0
+  totalShipCost: 0
   weaponRange: 0
   weaponDamage: 0
 --- !u!114 &3858088204507499456
@@ -1174,7 +1175,7 @@ MonoBehaviour:
   draggableSurface:
     serializedVersion: 2
     m_Bits: 128
-  objectHeight: 0.906
+  objectHeight: -0.5
 --- !u!114 &4058734651310715239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1363,7 +1364,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2}
+  m_AnchoredPosition: {x: 0, y: 2.98}
   m_SizeDelta: {x: 276.8948, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &6611186183764926551
@@ -1446,7 +1447,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4910293607477913631}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.09200287, y: -0.851, z: 0}
+  m_LocalPosition: {x: -0.09200287, y: 0.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1477,7 +1478,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6649706661032908239}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.035, y: 0.16, z: -0.03}
+  m_LocalPosition: {x: -0.035, y: 1.14, z: -0.03}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 0
   m_Children:

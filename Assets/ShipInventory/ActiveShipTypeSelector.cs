@@ -127,6 +127,7 @@ public class ActiveShipTypeSelector : MonoBehaviour
             for (int i = 0; i < totalSizeCount; i++)
             {
                 inventoryItemDragHandlerScript[i].dragObjectPrefab = inventoryItemDragHandlerScript[i].dragObjectPrefabArcher;//large, medium, small
+                inventoryItemDragHandlerScript[i].instantiateObjectPrefab = inventoryItemDragHandlerScript[i].instantiateObjectPrefabArcher;//large, medium, small
             }
         }
         else if (activeShipType == "Cannon")
@@ -134,6 +135,7 @@ public class ActiveShipTypeSelector : MonoBehaviour
             for (int i = 0; i < totalSizeCount; i++)
             {
                 inventoryItemDragHandlerScript[i].dragObjectPrefab = inventoryItemDragHandlerScript[i].dragObjectPrefabCannon;//large, medium, small
+                inventoryItemDragHandlerScript[i].instantiateObjectPrefab = inventoryItemDragHandlerScript[i].instantiateObjectPrefabCannon;//large, medium, small
             }
         }
         else if (activeShipType == "Gun")
@@ -141,6 +143,7 @@ public class ActiveShipTypeSelector : MonoBehaviour
             for (int i = 0; i < totalSizeCount; i++)
             {
                 inventoryItemDragHandlerScript[i].dragObjectPrefab = inventoryItemDragHandlerScript[i].dragObjectPrefabGunman;//large, medium, small
+                inventoryItemDragHandlerScript[i].instantiateObjectPrefab = inventoryItemDragHandlerScript[i].instantiateObjectPrefabGunman;//large, medium, small
             }
         }
         else if (activeShipType == "Mortar")
@@ -148,6 +151,7 @@ public class ActiveShipTypeSelector : MonoBehaviour
             for (int i = 0; i < totalSizeCount; i++)
             {
                 inventoryItemDragHandlerScript[i].dragObjectPrefab = inventoryItemDragHandlerScript[i].dragObjectPrefabMortar;//large, medium, small
+                inventoryItemDragHandlerScript[i].instantiateObjectPrefab = inventoryItemDragHandlerScript[i].instantiateObjectPrefabMortar;//large, medium, small
             }
         }
     }

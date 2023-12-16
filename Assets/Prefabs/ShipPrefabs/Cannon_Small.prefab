@@ -306,7 +306,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61193230773493851}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.035, y: 0.16, z: -0.03}
+  m_LocalPosition: {x: -0.035, y: 1.11, z: -0.03}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9919,7 +9919,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1780390901698551179}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.09200287, y: -0.851, z: 0}
+  m_LocalPosition: {x: -0.09200287, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45420,7 +45420,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2}
+  m_AnchoredPosition: {x: 0, y: 2.95}
   m_SizeDelta: {x: 276.8948, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &517422324233049539
@@ -46362,8 +46362,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: -0.069992065, y: 0.12559628, z: -0.06546998}
+  m_Size: {x: 2, y: 1.7743715, z: 2}
+  m_Center: {x: -0.069992065, y: 0.8698936, z: -0.06546998}
 --- !u!114 &4363104837213491193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46438,6 +46438,7 @@ MonoBehaviour:
   shipLevel: 0
   shipHealth: 0
   shipMenHealth: 0
+  totalShipCost: 0
   weaponRange: 0
   weaponDamage: 0
 --- !u!114 &7573727279567126100
