@@ -7,7 +7,7 @@ public class HealthbarFaceCamera : MonoBehaviour
 {
     private Transform mainCamera;
 
-    private TextMeshProUGUI levelText;
+    private TextMeshProUGUI descriptionText;
 
     private Transform shipGameObject;
     private string shipLevelText;
@@ -16,10 +16,10 @@ public class HealthbarFaceCamera : MonoBehaviour
     {
         for (int i = 0; i < transform.childCount; i++)
         {
-            if (transform.GetChild(i).gameObject.name == "LevelText" || transform.GetChild(i).gameObject.name == "SupplyShipText")
+            if (transform.GetChild(i).gameObject.name == "LevelText" || transform.GetChild(i).gameObject.name == "SupplyShipText" || transform.GetChild(i).gameObject.name == "MainBuildingText")
             {
                 GameObject gameObject = transform.GetChild(i).gameObject;
-                levelText = gameObject.GetComponent<TextMeshProUGUI>();
+                descriptionText = gameObject.GetComponent<TextMeshProUGUI>();
             }
         }
     }
@@ -40,11 +40,15 @@ public class HealthbarFaceCamera : MonoBehaviour
         if (shipGameObject.TryGetComponent<ShipCategorizer_Level>(out _))
         {
             shipLevelText = shipGameObject.GetComponent<ShipCategorizer_Level>().shipLevel.ToString();
-            levelText.text = shipLevelText;//later handle case when ship's level is upgraded in runtime, level text also changes.
+            descriptionText.text = shipLevelText;//later handle case when ship's level is upgraded in runtime, level text also changes.
+        }
+        else if (shipGameObject.TryGetComponent<ShipCategorizer_Player>(out _))
+        {
+            descriptionText.text = "Supply";
         }
         else
         {
-            levelText.text = "Supply";
+            descriptionText.text = "Main Building";
         }
     }
     private void LateUpdate()
