@@ -33,13 +33,12 @@ public class PlayerTurnSystem : MonoBehaviour
     {
         if (playerTurn == PlayerTurn.Player1Turn)
         {
-            playerTurn = PlayerTurn.Player2Turn;
+            SetTurnToPlayer2();
         }
         else if (playerTurn == PlayerTurn.Player2Turn)
         {
-            playerTurn = PlayerTurn.Player1Turn;
+            SetTurnToPlayer1();
         }
-        EvaluateDisplayText();
     }
     public void SetPlayerTurnToNone()
     {

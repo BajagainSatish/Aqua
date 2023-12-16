@@ -8,6 +8,7 @@ public class HealthAmmoSystem : MonoBehaviour
     private int maxShipMenHealth;
     private int maxAmmo;
 
+    //Ammo is set according to ship size during starting of game, so now change shipHealth and shipMenHealth according to level from shipCategorizerLevelScript.
     public int currentShipHealth;
     public int currentShipMenHealth;
     public int currentAmmo;
@@ -147,5 +148,10 @@ public class HealthAmmoSystem : MonoBehaviour
         {
             shooters.SetActive(true);
         }
+    }
+    public void SetShipAndShipMenHealth(int shipHealth, int shipMenHealth)
+    {
+        currentShipHealth = shipHealth;
+        currentShipMenHealth = shipMenHealth;
     }
 }

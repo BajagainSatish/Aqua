@@ -2,37 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static ShipCategorizer_Level;
+using static ShipCategorizer_Size;
 
 public class CannonShoot : MonoBehaviour
 {
     public int totalAmmoCount;
     public bool sufficientAmmoPresent;
 
-    private ShipCategorizer_Level shipCategorizer_LevelScript;
-    public HealthAmmoSystem ammoSystemScript;
+    private ShipCategorizer_Size shipCategorizer_SizeScript;
+    public HealthAmmoSystem ammoSystemScript;//used within another script
 
     public Transform targetEnemy;
 
     private void Awake()
     {
-        shipCategorizer_LevelScript = GetComponent<ShipCategorizer_Level>();
+        shipCategorizer_SizeScript = GetComponent<ShipCategorizer_Size>();
         ammoSystemScript = GetComponent<HealthAmmoSystem>();
 
-        if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level1)
+        if (shipCategorizer_SizeScript.shipSize == ShipSize.Small)
         {
-            AssignValue(0);
+            AssignAmmo_SizeBased(0);
         }
-        else if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level2)
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Medium)
         {
-            AssignValue(1);
+            AssignAmmo_SizeBased(1);
         }
-        else if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level3)
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Large)
         {
-            AssignValue(2);
-        }
-        else if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level4)
-        {
-            AssignValue(3);
+            AssignAmmo_SizeBased(2);
         }
     }
     private void Start()
@@ -55,7 +52,7 @@ public class CannonShoot : MonoBehaviour
             sufficientAmmoPresent = true;
         }
     }
-    private void AssignValue(int index)
+    private void AssignAmmo_SizeBased(int index)
     {
         totalAmmoCount = SetParameters.CannonWeaponMaxAmmo[index];
     }

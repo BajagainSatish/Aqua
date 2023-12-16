@@ -75,11 +75,11 @@ public static class SetParameters
 
     // Weapon Ammunition
     // Ammo is total no of players times no of projectiles
-    // For now, medium ship men count = 4 so all values are strictly maintained in multiples of 4
-    public static int[] ArcherWeaponMaxAmmo { get; } = { 20, 28, 40, 56 };
-    public static int[] GunmanWeaponMaxAmmo { get; } = { 20, 28, 40, 56 };
-    public static int[] CannonWeaponMaxAmmo { get; } = { 20, 28, 40, 56 };
-    public static int[] MortarWeaponMaxAmmo { get; } = { 20, 28, 40, 56 };
+    // Small, Medium, Large, in multiples of 2,4 and 6.
+    public static int[] ArcherWeaponMaxAmmo { get; } = { 20, 40, 60 };
+    public static int[] GunmanWeaponMaxAmmo { get; } = { 20, 40, 60 };
+    public static int[] CannonWeaponMaxAmmo { get; } = { 20, 40, 60 };
+    public static int[] MortarWeaponMaxAmmo { get; } = { 20, 40, 60 };
 
     //Ship Cost(Based on 3 factors: ShipType + ShipLevel + ShipSize)
 

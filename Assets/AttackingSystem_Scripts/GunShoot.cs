@@ -87,19 +87,32 @@ public class GunShoot : MonoBehaviour
 
         if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level1)
         {
-            AssignValue(0);
+            AssignValue_LevelBased(0);
         }
         else if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level2)
         {
-            AssignValue(1);
+            AssignValue_LevelBased(1);
         }
         else if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level3)
         {
-            AssignValue(2);
+            AssignValue_LevelBased(2);
         }
         else if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level4)
         {
-            AssignValue(3);
+            AssignValue_LevelBased(3);
+        }
+
+        if (shipCategorizer_SizeScript.shipSize == ShipSize.Small)
+        {
+            AssignAmmo_SizeBased(0);
+        }
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Medium)
+        {
+            AssignAmmo_SizeBased(1);
+        }
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Large)
+        {
+            AssignAmmo_SizeBased(2);
         }
     }
 
@@ -259,10 +272,13 @@ public class GunShoot : MonoBehaviour
         Vector3 ab = Vector3.Lerp(A.position, B.position, t);//Interpolate from point A to B
         return ab;
     }
-    private void AssignValue(int index)
+    private void AssignValue_LevelBased(int index)
     {
         waitBeforeShoot_Aiming = SetParameters.GunmanWaitBeforeShootAiming[index];
         waitAfterShoot = SetParameters.GunmanWaitAfterShoot[index];
+    }
+    private void AssignAmmo_SizeBased(int index)
+    {
         totalAmmoCount = SetParameters.GunmanWeaponMaxAmmo[index];
     }
     private void HandleAmmoCount()

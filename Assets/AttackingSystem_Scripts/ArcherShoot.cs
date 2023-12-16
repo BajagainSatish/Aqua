@@ -92,19 +92,32 @@ public class ArcherShoot : MonoBehaviour
 
         if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level1)
         {
-            AssignValue(0);
+            AssignValue_LevelBased(0);
         }
         else if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level2)
         {
-            AssignValue(1);
+            AssignValue_LevelBased(1);
         }
         else if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level3)
         {
-            AssignValue(2);
+            AssignValue_LevelBased(2);
         }
         else if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level4)
         {
-            AssignValue(3);
+            AssignValue_LevelBased(3);
+        }
+
+        if (shipCategorizer_SizeScript.shipSize == ShipSize.Small)
+        {
+            AssignAmmo_SizeBased(0);
+        }
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Medium)
+        {
+            AssignAmmo_SizeBased(1);
+        }
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Large)
+        {
+            AssignAmmo_SizeBased(2);
         }
     }
 
@@ -303,13 +316,15 @@ public class ArcherShoot : MonoBehaviour
 
         return Vector3.Lerp(ac, cb, t);
     }
-    private void AssignValue(int index)
+    private void AssignValue_LevelBased(int index)
     {
         waitBeforeShoot_Aiming = SetParameters.ArcherWaitBeforeShootAiming[index];
         waitAfterShoot = SetParameters.ArcherWaitAfterShoot[index];
+    }
+    private void AssignAmmo_SizeBased(int index)
+    {
         totalAmmoCount = SetParameters.ArcherWeaponMaxAmmo[index];
     }
-
     private void HandleAmmoCount()
     {
         if (totalAmmoCount <= 0)
