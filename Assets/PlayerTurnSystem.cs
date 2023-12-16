@@ -8,7 +8,7 @@ public class PlayerTurnSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerTurnText;
     public enum PlayerTurn
     {
-        Player1Turn, Player2Turn, None
+        Player1Turn, Player2Turn,GameTime, None
     }
     //Player 1 Turn, Player 2 Turn: Strategy Time
     //None: Common Game Time
@@ -16,7 +16,7 @@ public class PlayerTurnSystem : MonoBehaviour
 
     private void Start()
     {
-        playerTurn = PlayerTurn.Player1Turn;
+        playerTurn = PlayerTurn.None;
         EvaluateDisplayText();
     }
     public void SetTurnToPlayer1()
@@ -29,16 +29,10 @@ public class PlayerTurnSystem : MonoBehaviour
         playerTurn = PlayerTurn.Player2Turn;
         EvaluateDisplayText();
     }
-    public void SwitchPlayer()
+    public void SetTurnToGameTime()
     {
-        if (playerTurn == PlayerTurn.Player1Turn)
-        {
-            SetTurnToPlayer2();
-        }
-        else if (playerTurn == PlayerTurn.Player2Turn)
-        {
-            SetTurnToPlayer1();
-        }
+        playerTurn = PlayerTurn.GameTime;
+        EvaluateDisplayText();
     }
     public void SetPlayerTurnToNone()
     {
@@ -57,9 +51,13 @@ public class PlayerTurnSystem : MonoBehaviour
         {
             displayText = "Player 2's Turn";
         }
+        else if (playerTurn == PlayerTurn.GameTime)
+        {
+            displayText = "GameTime";
+        }
         else//None
         {
-            displayText = "Game Time";
+            displayText = "None";
         }
         playerTurnText.text = displayText.ToString();
     }
