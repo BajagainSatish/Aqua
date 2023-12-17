@@ -4,8 +4,9 @@ using UnityEngine;
 
 public static class SetParameters
 {
-    public static float StrategyTime { get; } = 15;
+    public static float StrategyTime { get; } = 16;//gives effect of 15 seconds
     public static float CommonGameTime { get; } = 240;//4 minutes
+    public static float CameraSwitchDuration { get; } = 3f;
     //Values in array are in order of increasing levels
     // {Level1, Level2, Level3, Level4}
 

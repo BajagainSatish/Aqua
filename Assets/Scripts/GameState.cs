@@ -18,11 +18,13 @@ public class GameState : MonoBehaviour
     [SerializeField] private CameraControlRuntime cameraControlRuntime;
 
     private bool hasAssignedTime;//flag is used to prevent repeatedly assigning the time in each frame
+    private float waitForCameraSwitch;
 
     private void Awake()
     {
         strategyTime = SetParameters.StrategyTime;
         gameTime = SetParameters.CommonGameTime;
+        waitForCameraSwitch = SetParameters.CameraSwitchDuration;
     }
     private void Start()
     {
@@ -113,8 +115,9 @@ public class GameState : MonoBehaviour
             hasAssignedTime = false;
         }
     }
-    public void GameStateToP1StrategyTime()
+    public void GameStateToP1StrategyTime()//Initially play button is pressed
     {
-        currentGameState = CurrentGameState.StrategyTimeP1;
+        cameraControlRuntime.startPosition = cameraControlRuntime.transform.position;
+        cameraControlRuntime.firstCameraSwitch = true;
     }
 }
