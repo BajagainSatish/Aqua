@@ -60,21 +60,21 @@ public class ShipAlignTowardsEnemy : MonoBehaviour
     }
     private void Update()
     {
-        if (thisShipType == "CannonShip" && cannonShootScript.targetEnemy != null)
+        if (thisShipType == "CannonShip" && cannonShootScript.targetEnemyForShipRotation != null)
         {
-            target = cannonShootScript.targetEnemy;
+            target = cannonShootScript.targetEnemyForShipRotation;
         }
-        else if (thisShipType == "ArcherShip" && archerShootScript.targetEnemy != null)
+        else if (thisShipType == "ArcherShip" && archerShootScript.targetEnemyForShipRotation != null)
         {
-            target = archerShootScript.targetEnemy;
+            target = archerShootScript.targetEnemyForShipRotation;
         }
-        else if (thisShipType == "GunmanShip" && gunShootScript.targetEnemy != null)
+        else if (thisShipType == "GunmanShip" && gunShootScript.targetEnemyForShipRotation != null)
         {
-            target = gunShootScript.targetEnemy;
+            target = gunShootScript.targetEnemyForShipRotation;
         }
-        else if (thisShipType == "MortarShip" && mortarShootScript.targetEnemy != null)
+        else if (thisShipType == "MortarShip" && mortarShootScript.targetEnemyForShipRotation != null)
         {
-            target = mortarShootScript.targetEnemy;
+            target = mortarShootScript.targetEnemyForShipRotation;
         }
         else
         {

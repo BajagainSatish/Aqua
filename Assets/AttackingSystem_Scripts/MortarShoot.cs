@@ -10,14 +10,14 @@ public class MortarShoot : MonoBehaviour
     public bool sufficientAmmoPresent;
     
     private ShipCategorizer_Size shipCategorizer_SizeScript;
-    public HealthAmmoSystem ammoSystemScript;//used within another script
+    public ShipHealthAmmoSystem ammoSystemScript;//used within another script
 
-    public Transform targetEnemy;
+    public Transform targetEnemyForShipRotation;
 
     private void Awake()
     {
         shipCategorizer_SizeScript = GetComponent<ShipCategorizer_Size>();
-        ammoSystemScript = GetComponent<HealthAmmoSystem>();
+        ammoSystemScript = GetComponent<ShipHealthAmmoSystem>();
 
         if (shipCategorizer_SizeScript.shipSize == ShipSize.Small)
         {
@@ -35,7 +35,7 @@ public class MortarShoot : MonoBehaviour
     private void Start()
     {
         sufficientAmmoPresent = true;
-        targetEnemy = null;
+        targetEnemyForShipRotation = null;
     }
     private void Update()
     {

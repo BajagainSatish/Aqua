@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthAmmoSystem : MonoBehaviour
+public class ShipHealthAmmoSystem : MonoBehaviour
 {
     private int maxShipHealth;
     private int maxShipMenHealth;

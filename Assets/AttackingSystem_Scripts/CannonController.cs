@@ -115,11 +115,6 @@ public class CannonController : MonoBehaviour
 
             if (distance < cannonMaxRange)
             {
-                if (cannonShootScript.targetEnemy == null)//Check ensures single assigning by any one CannonController script only
-                {
-                    cannonShootScript.targetEnemy = B;//Ensure rotation of ship towards enemy
-                }
-
                 lineRenderer.SetPosition(0, Evaluate(0));//set start point (vertex = 0, position = Evaluate(0))
                 lineRenderer.SetPosition(1, Evaluate(1));//set end point
 
@@ -174,11 +169,6 @@ public class CannonController : MonoBehaviour
         else//B = null
         {
             noEnemyInSight = true;
-
-            if (cannonShootScript.targetEnemy != null)//Check ensures single assigning by any one CannonController script only
-            {
-                cannonShootScript.targetEnemy = null;
-            }
         }
     }
     private IEnumerator MoveObject(Vector3 startPos, Vector3 endPos, GameObject cannonBall)

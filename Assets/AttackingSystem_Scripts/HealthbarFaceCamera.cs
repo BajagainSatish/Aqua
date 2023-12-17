@@ -6,10 +6,8 @@ using UnityEngine;
 public class HealthbarFaceCamera : MonoBehaviour
 {
     private Transform mainCamera;
-
     private TextMeshProUGUI descriptionText;
-
-    private Transform shipGameObject;
+    private Transform shipOrBuildingObject;
     private string shipLevelText;
 
     private void Awake()
@@ -35,24 +33,49 @@ public class HealthbarFaceCamera : MonoBehaviour
             Debug.LogWarning("Main camera not found!!! Healthbar won't face camera");
         }
 
-        shipGameObject = MortarController.FindHighestParent(transform);
+        shipOrBuildingObject = MortarController.FindHighestParent(transform);
 
-        if (shipGameObject.TryGetComponent<ShipCategorizer_Level>(out _))
+        if (shipOrBuildingObject.TryGetComponent<ShipCategorizer_Level>(out _))
         {
-            shipLevelText = shipGameObject.GetComponent<ShipCategorizer_Level>().shipLevel.ToString();
+            shipLevelText = shipOrBuildingObject.GetComponent<ShipCategorizer_Level>().shipLevel.ToString();
             descriptionText.text = shipLevelText;//later handle case when ship's level is upgraded in runtime, level text also changes.
         }
-        else if (shipGameObject.TryGetComponent<ShipCategorizer_Player>(out _))
+        else if (shipOrBuildingObject.TryGetComponent<ShipCategorizer_Player>(out _))
         {
             descriptionText.text = "Supply";
         }
         else
         {
-            descriptionText.text = "Main Building";
+            Transform islandBuilding = FindBuildingParent(transform);
+
+            if (islandBuilding.TryGetComponent<BuildingCategorizer_Player>(out _))
+            {
+                BuildingCategorizer_Player buildingCategorizer_Player = islandBuilding.GetComponent<BuildingCategorizer_Player>();
+
+                if (buildingCategorizer_Player.buildingIsMainBuilding)
+                {
+                    descriptionText.text = "Main Building";
+                }
+                else
+                {
+                    descriptionText.text = "Building";
+                }
+            }
         }
     }
     private void LateUpdate()
     {
         transform.LookAt(transform.position + mainCamera.forward);
+    }
+    public static Transform FindBuildingParent(Transform childTransform)
+    {
+        if (childTransform.TryGetComponent<BuildingCategorizer_Player>(out _))
+        {
+            return childTransform;
+        }
+        else
+        {
+            return FindBuildingParent(childTransform.parent);
+        }
     }
 }

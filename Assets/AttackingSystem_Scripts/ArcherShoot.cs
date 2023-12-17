@@ -31,21 +31,21 @@ public class ArcherShoot : MonoBehaviour
     private ShipCategorizer_Level shipCategorizer_LevelScript;
     private ShipCategorizer_Player shipCategorizer_PlayerScript;
     private ShipCategorizer_Size shipCategorizer_SizeScript;
-    private HealthAmmoSystem ammoSystemScript;
+    private ShipHealthAmmoSystem ammoSystemScript;
 
     private float adjustDistanceFactor;
 
     public int totalAmmoCount;
     private bool sufficientAmmoPresent;
 
-    public Transform targetEnemy;
+    public Transform targetEnemyForShipRotation;
 
     private void Awake()
     {
         shipCategorizer_LevelScript = GetComponent<ShipCategorizer_Level>();
         shipCategorizer_PlayerScript = GetComponent<ShipCategorizer_Player>();
         shipCategorizer_SizeScript = GetComponent<ShipCategorizer_Size>();
-        ammoSystemScript = GetComponent<HealthAmmoSystem>();
+        ammoSystemScript = GetComponent<ShipHealthAmmoSystem>();
 
         ShipSize currentShipSize = DetermineThisShipSize();
         shipMenCount = GetShipMenCount(currentShipSize);
@@ -141,7 +141,7 @@ public class ArcherShoot : MonoBehaviour
         archerMaxRange = shipCategorizer_LevelScript.weaponRange;
 
         sufficientAmmoPresent = true;
-        targetEnemy = null;
+        targetEnemyForShipRotation = null;
     }
     private void Update()
     {
@@ -167,11 +167,6 @@ public class ArcherShoot : MonoBehaviour
 
                 if (distance < archerMaxRange)
                 {
-                    if (targetEnemy == null)//Assign only if targetEnemy is not already equal to target B.
-                    {
-                        targetEnemy = B;//Ensure rotation of ship towards enemy
-                    }
-
                     //Draw Curve from archer to enemy
                     for (int j = 0; j < curvePointsTotalCount + 1; j++)
                     {
@@ -253,11 +248,6 @@ public class ArcherShoot : MonoBehaviour
                 //Such problem occured only during first encounter, where arrow was shot immediately but no animation played, and no delay was there
                 //To solve that problem, bool noEnemyInSight was introduced
                 archerControllerScript[i].noEnemyInSight = true;
-
-                if (targetEnemy != null)
-                {
-                    targetEnemy = null;
-                }
             }
         }
     }

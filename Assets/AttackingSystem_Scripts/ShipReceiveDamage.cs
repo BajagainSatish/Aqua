@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReceiveDamage : MonoBehaviour
+public class ShipReceiveDamage : MonoBehaviour
 {
-    private HealthAmmoSystem healthSystemScript;
+    private ShipHealthAmmoSystem healthSystemScript;
     private ShipCategorizer_Player shipCategorizer_PlayerScript;
 
     private bool thisShipIsPlayer1;
 
     private void Awake()
     {
-        healthSystemScript = GetComponent<HealthAmmoSystem>();
+        healthSystemScript = GetComponent<ShipHealthAmmoSystem>();
         shipCategorizer_PlayerScript = GetComponent<ShipCategorizer_Player>();
     }
 

@@ -11,7 +11,7 @@ public class ShipCategorizer_Player : MonoBehaviour
     public bool shipIsFunctional;//not annihilated/destroyed by enemy attack.
     public bool shipMenAreAlive;
 
-    private HealthAmmoSystem healthSystemScript;
+    private ShipHealthAmmoSystem healthSystemScript;
     private int currentShipHealth;
     private int currentShipMenHealth;
 
@@ -35,7 +35,7 @@ public class ShipCategorizer_Player : MonoBehaviour
         {
             AddP2ShipToP2ShipList();
         }
-        healthSystemScript = GetComponent<HealthAmmoSystem>();
+        healthSystemScript = GetComponent<ShipHealthAmmoSystem>();
     }
     private void Start()
     {
@@ -82,7 +82,7 @@ public class ShipCategorizer_Player : MonoBehaviour
             PrintShipsInList(GetPlayer2ShipList(), "Player 2 Ship List");
         }
     }
-    private void CheckShipHealth()
+    private void CheckShipHealth()//later write same code inside shiphealthsystem, lack redundancy, no need of health system in categorizerplayer script
     {
         currentShipHealth = healthSystemScript.currentShipHealth;
         if (currentShipHealth <= 0)

@@ -26,14 +26,14 @@ public class ShipCategorizer_Level : MonoBehaviour
 
     private TargetingSystem_PhysicsOverlapSphere targetingSystem_PhysicsOverlapSphereScript;
     private ShipCategorizer_Size shipCategorizer_SizeScript;
-    private HealthAmmoSystem healthAmmoSystemScript;
+    private ShipHealthAmmoSystem healthAmmoSystemScript;
 
     //Move this code to update or another approach if level of ship upgrades within game
     private void Awake()
     {
         targetingSystem_PhysicsOverlapSphereScript = GetComponent<TargetingSystem_PhysicsOverlapSphere>();
         shipCategorizer_SizeScript = GetComponent<ShipCategorizer_Size>();
-        healthAmmoSystemScript = GetComponent<HealthAmmoSystem>();
+        healthAmmoSystemScript = GetComponent<ShipHealthAmmoSystem>();
 
         previousShipLevel = shipLevel;
 

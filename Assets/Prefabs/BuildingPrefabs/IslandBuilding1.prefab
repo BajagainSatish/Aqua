@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 177341914}
   - component: {fileID: 177341916}
-  - component: {fileID: 177341915}
+  - component: {fileID: 5871588218527489111}
   m_Layer: 5
   m_Name: BuildingHealthbar
   m_TagString: Untagged
@@ -264,7 +264,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &177341915
+--- !u!114 &5871588218527489111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 177341913}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a88cbb804d3b2504394cb54dd381c9d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f5b7ef9f2c25bc45bd2ccab5fab30bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gradient:
@@ -371,7 +371,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Main Building
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -22404,6 +22404,8 @@ GameObject:
   - component: {fileID: 7124240092298713867}
   - component: {fileID: 7606211903631829754}
   - component: {fileID: 7606211903631829753}
+  - component: {fileID: 8504866142728959820}
+  - component: {fileID: 8071417961784812541}
   m_Layer: 0
   m_Name: IslandBuilding1
   m_TagString: Untagged
@@ -22441,8 +22443,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 147f29cabe1cb2047b9cdb7bb1c3152f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingIsOfP1: 0
+  buildingIsOfP1: 1
   buildingIsFunctional: 0
+  buildingIsMainBuilding: 0
 --- !u!54 &7606211903631829754
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22467,11 +22470,36 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6543610202377878543}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 21.819366, y: 20.695955, z: 15.979118}
   m_Center: {x: 0.8545189, y: 0.21021271, z: 1.4466181}
+--- !u!114 &8504866142728959820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6543610202377878543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2f37dd3703485c489f2208760a6a27b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentBuildingHealth: 0
+--- !u!114 &8071417961784812541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6543610202377878543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f903541b03f75254b9219c25f2a20c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6559007560435849978
 GameObject:
   m_ObjectHideFlags: 0

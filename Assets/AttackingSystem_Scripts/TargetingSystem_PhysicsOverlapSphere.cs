@@ -29,6 +29,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
     private float shipMaxRange;
 
     private List<Collider> enemyShipsInRange = new List<Collider>();
+    private List<Collider> enemyBuildingsInRange = new List<Collider>();
 
     private int shipMenCount;
 
@@ -41,6 +42,12 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
     private bool thisShipIsFunctional;
     private bool thisShipMenAreAlive;
     private bool thisShipIsCannonOrMortarShip;
+
+    //For purpose of ship rotation towards enemy only
+    private ArcherShoot archerShoot;
+    private GunShoot gunShoot;
+    private CannonShoot cannonShoot;
+    private MortarShoot mortarShoot;
 
     private void Awake()
     {
@@ -105,21 +112,25 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
         {
             thisShipType = ShipType.ArcherShip;
             thisShipIsCannonOrMortarShip = false;
+            archerShoot = GetComponent<ArcherShoot>();
         }
         else if (TryGetComponent<CannonShoot>(out _))
         {
             thisShipType = ShipType.CannonShip;
             thisShipIsCannonOrMortarShip = true;
+            cannonShoot = GetComponent<CannonShoot>();
         }
         else if (TryGetComponent<GunShoot>(out _))
         {
             thisShipType = ShipType.GunmanShip;
             thisShipIsCannonOrMortarShip = false;
+            gunShoot = GetComponent<GunShoot>();
         }
         else if (TryGetComponent<MortarShoot>(out _))
         {
             thisShipType = ShipType.MortarShip;
             thisShipIsCannonOrMortarShip = true;
+            mortarShoot = GetComponent<MortarShoot>();
         }
         else//Remove this condition, since this script is attached only to attacker ship
         {
@@ -144,19 +155,77 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
 
         if (thisShipIsFunctional && thisShipMenAreAlive)
         {
-            AddEnemyShipsInRangeToOurList();
-            RemoveShipsOutsideRangeFromOurList();
-            DetermineWhichShipToAttack();
+            //check if main building is in range, and attack it if found
+            if (!AttackMainBuildingInRangeToOurList())
+            {
+                AddEnemyShipsInRangeToOurList();
+                RemoveShipsOutsideRangeFromOurList();
+                DetermineWhichShipToAttack();
+            }           
+            //if there are no ships in range, then only attack any building
         }
         else
         {
             enemyShipsInRange.Clear();
+            enemyBuildingsInRange.Clear();
             target = null;
         }
         AssignTargetToEachAttackerShip();
         //TestShipCode();
     }
+    private bool AttackMainBuildingInRangeToOurList()
+    {
+        Collider[] colliderArray = Physics.OverlapSphere(shipCenter.position, shipMaxRange);
 
+        // Create a copy of the original list to avoid modification during iteration
+        List<Collider> tempList = new List<Collider>(enemyBuildingsInRange);
+
+        bool foundMainBuildingInRange = false;
+
+        foreach (Collider collider in colliderArray)
+        {
+            if (collider.TryGetComponent<BuildingCategorizer_Player>(out _))
+            {
+                BuildingCategorizer_Player buildingCategorizer_Player = collider.GetComponent<BuildingCategorizer_Player>();
+                bool buildingInRangeIsPlayer1 = buildingCategorizer_Player.buildingIsOfP1;
+                bool buildingInRangeIsFunctional = buildingCategorizer_Player.buildingIsFunctional;
+                bool buildingInRangeIsMainBuilding = buildingCategorizer_Player.buildingIsMainBuilding;
+
+                if (buildingInRangeIsPlayer1 != isPlayer1)
+                {
+                    if (buildingInRangeIsFunctional && buildingInRangeIsMainBuilding)
+                    {
+                        //Vector3 enemyBuildingPosition = collider.transform.GetChild(0).transform.position;
+                        Vector3 enemyBuildingPosition = collider.transform.position;//replace later by child object, maintained at a level to calculate distance
+
+                        //be careful, as for each building, child 0 gameobject is assigned at very high height and may not detect.
+
+                        // Calculate the distance between this ship and the current enemy ship
+                        float distance = Vector3.Distance(myShipPosition, enemyBuildingPosition);
+
+                        if (distance <= shipMaxRange)
+                        {
+                            if (!tempList.Contains(collider))
+                            {
+                                /*if (testActiveShip)
+                                {
+                                    print("Added " + collider.name + " to our list.");
+                                }*/
+                                enemyBuildingsInRange.Add(collider);
+                            }
+                            foundMainBuildingInRange = true;
+                            //No attack code here, just verified that main building is in range.
+
+                            //Assign target as center of main building
+                            targetCollider = collider;
+                            target = targetCollider.gameObject;//Center of enemyBuilding is target
+                        }
+                    }
+                }
+            }
+        }
+        return foundMainBuildingInRange;
+    }
     private void AddEnemyShipsInRangeToOurList()
     {
         Collider[] colliderArray = Physics.OverlapSphere(shipCenter.position, shipMaxRange);
@@ -226,6 +295,49 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
             }
         }
     }
+    private void AddAllBuildingsInRangeToOurList()
+    {
+        Collider[] colliderArray = Physics.OverlapSphere(shipCenter.position, shipMaxRange);
+
+        // Create a copy of the original list to avoid modification during iteration
+        List<Collider> tempList = new List<Collider>(enemyBuildingsInRange);
+
+        foreach (Collider collider in colliderArray)
+        {
+            if (collider.TryGetComponent<BuildingCategorizer_Player>(out _))
+            {
+                BuildingCategorizer_Player buildingCategorizer_Player = collider.GetComponent<BuildingCategorizer_Player>();
+                bool buildingInRangeIsPlayer1 = buildingCategorizer_Player.buildingIsOfP1;
+                bool buildingInRangeIsFunctional = buildingCategorizer_Player.buildingIsFunctional;
+
+                if (buildingInRangeIsPlayer1 != isPlayer1)
+                {
+                    if (buildingInRangeIsFunctional)//attack until both ship health as well as ship men's health are zero
+                    {
+                        //Vector3 enemyBuildingPosition = collider.transform.GetChild(0).transform.position;
+                        Vector3 enemyBuildingPosition = collider.transform.position;//replace later by child object, maintained at a level to calculate distance
+
+                        //be careful, as for each building, child 0 gameobject is assigned at very high height and may not detect.
+
+                        // Calculate the distance between this ship and the current enemy ship
+                        float distance = Vector3.Distance(myShipPosition, enemyBuildingPosition);
+
+                        if (distance <= shipMaxRange)
+                        {
+                            if (!tempList.Contains(collider))
+                            {
+                                /*if (testActiveShip)
+                                {
+                                    print("Added " + collider.name + " to our list.");
+                                }*/
+                                enemyBuildingsInRange.Add(collider);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     private void RemoveShipsOutsideRangeFromOurList()
     {
         // Create a copy of the original list to avoid modification during iteration
@@ -266,6 +378,32 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
             }                      
         }
     }
+    private void RemoveBuildingsOutsideRangeFromOurList()
+    {
+        // Create a copy of the original list to avoid modification during iteration
+        List<Collider> tempEnemyBuildingsInRangeList = new List<Collider>(enemyBuildingsInRange);
+
+        foreach (Collider enemyBuilding in tempEnemyBuildingsInRangeList)
+        {
+            //Vector3 enemyBuildingPosition = enemyBuilding.transform.GetChild(0).transform.position;
+            Vector3 enemyBuildingPosition = enemyBuilding.transform.position;//replace later by child object, maintained at a level to calculate distance
+
+            // Calculate the distance between this ship and the current enemy ship
+            float distance = Vector3.Distance(myShipPosition, enemyBuildingPosition);
+
+            BuildingCategorizer_Player buildingCategorizer_PlayerScript = enemyBuilding.GetComponent<BuildingCategorizer_Player>();
+            bool buildingInRangeIsFunctional = buildingCategorizer_PlayerScript.buildingIsFunctional;
+
+            if (distance > shipMaxRange || !buildingInRangeIsFunctional)
+            {
+                /*if (testActiveShip)
+                {
+                    print("Removed " + enemyShip.name + " from our list.");
+                }*/
+                enemyBuildingsInRange.Remove(enemyBuilding);
+            }
+        }
+    }
     private void DetermineWhichShipToAttack()
     {
         NoTargetIfNoShipInRange();
@@ -278,8 +416,26 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
         {
             target = null;
             targetCollider = null;
+            AddAllBuildingsInRangeToOurList();
+            RemoveBuildingsOutsideRangeFromOurList();
+            DetermineWhichBuildingToAttack();
         }
     }
+    private void NoTargetIfNoBuildingInRange()
+    {
+        if (enemyBuildingsInRange.Count == 0)
+        {
+            target = null;
+            targetCollider = null;
+        }
+    }
+    private void DetermineWhichBuildingToAttack()
+    {
+        NoTargetIfNoBuildingInRange();
+        OneBuildingInRangeCase();
+        MultipleBuildingsInRange();
+    }
+
     private void OneShipInRangeCase()
     {
         if (enemyShipsInRange.Count == 1)
@@ -291,6 +447,17 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
             }
         }
     }
+    private void OneBuildingInRangeCase()
+    {
+        if (enemyBuildingsInRange.Count == 1)
+        {
+            foreach (Collider oneEnemyBuildingInList in enemyBuildingsInRange)
+            {
+                targetCollider = oneEnemyBuildingInList;
+                target = targetCollider.gameObject;//Center of enemyBuilding is target
+            }
+        }
+    }
     private void MultipleShipsInRange()
     {
         if (enemyShipsInRange.Count > 1)
@@ -299,7 +466,18 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
             {
                 SelectAnotherShipInRangeAsTarget();
             }
-            IfTargetMovesOutsideOfRange();
+            IfTargetShipMovesOutsideOfRange();
+        }
+    }
+    private void MultipleBuildingsInRange()
+    {
+        if (enemyBuildingsInRange.Count > 1)
+        {
+            if (target == null)
+            {
+                SelectAnotherBuildingInRangeAsTarget();
+            }
+            IfTargetBuildingMovesOutsideOfRange();
         }
     }
     private void SelectAnotherShipInRangeAsTarget()
@@ -333,7 +511,38 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
             }
         }
     }
-    private void IfTargetMovesOutsideOfRange()
+    private void SelectAnotherBuildingInRangeAsTarget()
+    {
+        if (enemyBuildingsInRange.Count > 1)
+        {
+            // Keep track of the nearest building and its distance
+            Collider nearestEnemyBuilding = null;
+            float nearestDistance = float.MaxValue;//Initially set to very large arbitrary value so that initial comparison in first iteration is always true.
+
+            //Find nearmost collider
+            foreach (Collider enemyBuilding in enemyBuildingsInRange)
+            {
+                Vector3 enemyBuildingPosition = enemyBuilding.transform.GetChild(0).transform.position;
+
+                // Calculate the distance between this ship and the current enemy ship
+                float distance = Vector3.Distance(myShipPosition, enemyBuildingPosition);
+
+                // Check if this is the closest ship so far
+                if (distance < nearestDistance)
+                {
+                    nearestDistance = distance;
+                    nearestEnemyBuilding = enemyBuilding;
+                }
+            }
+
+            //Finally assign target
+            if (nearestEnemyBuilding != null)
+            {
+                target = nearestEnemyBuilding.gameObject;
+            }
+        }
+    }
+    private void IfTargetShipMovesOutsideOfRange()
     {
         //Check for presence of target inside range. If target goes outside range, select another nearmost ship as target.
 
@@ -349,6 +558,22 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
             }
         }       
     }
+    private void IfTargetBuildingMovesOutsideOfRange()//maybe this case is not possible, and not required
+    {
+        //Check for presence of target inside range. If we go outside target's range, select another nearmost building as target.
+
+        // Create a copy of the original list to avoid modification during iteration
+        List<Collider> tempEnemyBuildingsInRangeList = new List<Collider>(enemyBuildingsInRange);
+
+        if (targetCollider != null)
+        {
+            //If our target ship is not inside enemyShipsInRange List, select another ship
+            if (!tempEnemyBuildingsInRangeList.Contains(targetCollider))
+            {
+                SelectAnotherBuildingInRangeAsTarget();
+            }
+        }
+    }
     private void AssignTargetToEachAttackerShip()
     {
         if (target != null)
@@ -362,6 +587,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
                 {
                     subArcherControllerScript.B = targetShipCenterTransform;
                 }
+                archerShoot.targetEnemyForShipRotation = targetShipCenterTransform;
             }
             else if (thisShipType == ShipType.CannonShip)
             {
@@ -369,6 +595,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
                 {
                     subCannonControllerScript.B = targetShipCenterTransform;
                 }
+                cannonShoot.targetEnemyForShipRotation = targetShipCenterTransform;
             }
             else if (thisShipType == ShipType.GunmanShip)
             {
@@ -376,6 +603,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
                 {
                     subGunmanControllerScript.B = targetShipCenterTransform;
                 }
+                gunShoot.targetEnemyForShipRotation = targetShipCenterTransform;
             }
             else if (thisShipType == ShipType.MortarShip)
             {
@@ -383,6 +611,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
                 {
                     subMortarControllerScript.B = targetShipCenterTransform;
                 }
+                mortarShoot.targetEnemyForShipRotation = targetShipCenterTransform;
             }
         }
         else
@@ -393,6 +622,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
                 {
                     subArcherControllerScript.B = null;
                 }
+                archerShoot.targetEnemyForShipRotation = null;
             }
             else if (thisShipType == ShipType.CannonShip)
             {
@@ -400,6 +630,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
                 {
                     subCannonControllerScript.B = null;
                 }
+                cannonShoot.targetEnemyForShipRotation = null;
             }
             else if (thisShipType == ShipType.GunmanShip)
             {
@@ -407,6 +638,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
                 {
                     subGunmanControllerScript.B = null;
                 }
+                gunShoot.targetEnemyForShipRotation = null;
             }
             else if (thisShipType == ShipType.MortarShip)
             {
@@ -414,6 +646,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
                 {
                     subMortarControllerScript.B = null;
                 }
+                mortarShoot.targetEnemyForShipRotation = null;
             }
         }
     }

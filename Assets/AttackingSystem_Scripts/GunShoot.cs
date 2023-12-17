@@ -30,19 +30,19 @@ public class GunShoot : MonoBehaviour
     private ShipCategorizer_Level shipCategorizer_LevelScript;
     private ShipCategorizer_Player shipCategorizer_PlayerScript;
     private ShipCategorizer_Size shipCategorizer_SizeScript;
-    private HealthAmmoSystem ammoSystemScript;
+    private ShipHealthAmmoSystem ammoSystemScript;
 
     public int totalAmmoCount;
     private bool sufficientAmmoPresent;
 
-    public Transform targetEnemy;
+    public Transform targetEnemyForShipRotation;
 
     private void Awake()
     {
         shipCategorizer_LevelScript = GetComponent<ShipCategorizer_Level>();
         shipCategorizer_PlayerScript = GetComponent<ShipCategorizer_Player>();
         shipCategorizer_SizeScript = GetComponent<ShipCategorizer_Size>();
-        ammoSystemScript = GetComponent<HealthAmmoSystem>();
+        ammoSystemScript = GetComponent<ShipHealthAmmoSystem>();
 
         ShipSize currentShipSize = DetermineThisShipSize();
         shipMenCount = GetShipMenCount(currentShipSize);
@@ -135,7 +135,7 @@ public class GunShoot : MonoBehaviour
         }
         gunmanMaxRange = shipCategorizer_LevelScript.weaponRange;
         
-        targetEnemy = null;
+        targetEnemyForShipRotation = null;
     }
 
     private void Update()
@@ -160,11 +160,6 @@ public class GunShoot : MonoBehaviour
 
                 if (distance < gunmanMaxRange)
                 {
-                    if (targetEnemy == null)//Assign only if targetEnemy is not already equal to target B.
-                    {
-                        targetEnemy = B;//Ensure rotation of ship towards enemy
-                    }
-
                     lineRenderer.SetPosition(0, Evaluate(0, A, B));//set start point (vertex = 0, position = Evaluate(0))
                     lineRenderer.SetPosition(1, Evaluate(1, A, B));//set end point
 
@@ -218,11 +213,6 @@ public class GunShoot : MonoBehaviour
                 gunmanAnimationScript[i].gunmanState = GunmanStates.idle;
 
                 gunmanControllerScript[i].noEnemyInSight = true;
-
-                if (targetEnemy != null)
-                {
-                    targetEnemy = null;
-                }
             }
         }
     }
