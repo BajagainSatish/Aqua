@@ -5380,7 +5380,6 @@ GameObject:
   - component: {fileID: 5576655635314812451}
   - component: {fileID: 7379755746948984094}
   - component: {fileID: 6088833254118460023}
-  - component: {fileID: 2711203461144006388}
   - component: {fileID: 4225939399598089001}
   m_Layer: 0
   m_Name: Mortar_Small
@@ -5510,6 +5509,7 @@ MonoBehaviour:
   shipLevel: 0
   shipHealth: 0
   shipMenHealth: 0
+  totalShipCost: 0
   weaponRange: 0
   weaponDamage: 0
 --- !u!114 &7379755746948984094
@@ -5537,23 +5537,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
---- !u!114 &2711203461144006388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4782823212274096782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4cbbdbd6c57e8f43a92a58534dc7665, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followPointerPosition: 0
-  draggableSurface:
-    serializedVersion: 2
-    m_Bits: 128
-  objectHeight: 0.44
 --- !u!114 &4225939399598089001
 MonoBehaviour:
   m_ObjectHideFlags: 0

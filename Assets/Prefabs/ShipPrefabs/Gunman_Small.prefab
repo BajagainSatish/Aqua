@@ -12804,7 +12804,6 @@ GameObject:
   - component: {fileID: 3114007539219828414}
   - component: {fileID: 997922803020785096}
   - component: {fileID: 3202475488746680945}
-  - component: {fileID: 3524435847329476004}
   - component: {fileID: 1336460805375870215}
   m_Layer: 0
   m_Name: Gunman_Small
@@ -12932,6 +12931,7 @@ MonoBehaviour:
   shipLevel: 0
   shipHealth: 0
   shipMenHealth: 0
+  totalShipCost: 0
   weaponRange: 0
   weaponDamage: 0
 --- !u!114 &997922803020785096
@@ -12959,23 +12959,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
---- !u!114 &3524435847329476004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3151885099365061330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4cbbdbd6c57e8f43a92a58534dc7665, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followPointerPosition: 0
-  draggableSurface:
-    serializedVersion: 2
-    m_Bits: 128
-  objectHeight: -0.17
 --- !u!114 &1336460805375870215
 MonoBehaviour:
   m_ObjectHideFlags: 0

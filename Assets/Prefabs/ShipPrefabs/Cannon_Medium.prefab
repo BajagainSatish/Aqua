@@ -1001,7 +1001,6 @@ GameObject:
   - component: {fileID: 25842373199297922}
   - component: {fileID: 3858088204507499456}
   - component: {fileID: 3725248982035569583}
-  - component: {fileID: 262250838}
   - component: {fileID: 4058734651310715239}
   m_Layer: 0
   m_Name: Cannon_Medium
@@ -1159,23 +1158,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
---- !u!114 &262250838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4149126135670364798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4cbbdbd6c57e8f43a92a58534dc7665, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followPointerPosition: 0
-  draggableSurface:
-    serializedVersion: 2
-    m_Bits: 128
-  objectHeight: -0.5
 --- !u!114 &4058734651310715239
 MonoBehaviour:
   m_ObjectHideFlags: 0

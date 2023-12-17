@@ -4875,7 +4875,6 @@ GameObject:
   - component: {fileID: 7549268756377832507}
   - component: {fileID: 4884727664621848326}
   - component: {fileID: 8205488955485102191}
-  - component: {fileID: 1191830764}
   - component: {fileID: 2235382253332629809}
   m_Layer: 0
   m_Name: Mortar_Medium
@@ -5005,6 +5004,7 @@ MonoBehaviour:
   shipLevel: 0
   shipHealth: 0
   shipMenHealth: 0
+  totalShipCost: 0
   weaponRange: 0
   weaponDamage: 0
 --- !u!114 &4884727664621848326
@@ -5032,23 +5032,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
---- !u!114 &1191830764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7476012147820114070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4cbbdbd6c57e8f43a92a58534dc7665, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followPointerPosition: 0
-  draggableSurface:
-    serializedVersion: 2
-    m_Bits: 128
-  objectHeight: 0.44
 --- !u!114 &2235382253332629809
 MonoBehaviour:
   m_ObjectHideFlags: 0

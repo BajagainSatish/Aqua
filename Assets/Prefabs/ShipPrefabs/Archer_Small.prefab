@@ -555,7 +555,6 @@ GameObject:
   - component: {fileID: 2851715218021792424}
   - component: {fileID: 63231472283461397}
   - component: {fileID: 8972936019124784350}
-  - component: {fileID: 3376469271129642711}
   - component: {fileID: 7341522200608750640}
   m_Layer: 0
   m_Name: Archer_Small
@@ -683,6 +682,7 @@ MonoBehaviour:
   shipLevel: 0
   shipHealth: 0
   shipMenHealth: 0
+  totalShipCost: 0
   weaponRange: 0
   weaponDamage: 0
 --- !u!114 &63231472283461397
@@ -710,23 +710,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
---- !u!114 &3376469271129642711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863684763099416751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4cbbdbd6c57e8f43a92a58534dc7665, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followPointerPosition: 0
-  draggableSurface:
-    serializedVersion: 2
-    m_Bits: 128
-  objectHeight: -0.15
 --- !u!114 &7341522200608750640
 MonoBehaviour:
   m_ObjectHideFlags: 0

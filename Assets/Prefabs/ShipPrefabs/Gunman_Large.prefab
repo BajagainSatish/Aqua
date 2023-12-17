@@ -19643,7 +19643,6 @@ GameObject:
   - component: {fileID: 4293423041985227953}
   - component: {fileID: 2124350307218966471}
   - component: {fileID: 4382876157254799486}
-  - component: {fileID: 2327005735565545387}
   - component: {fileID: 157187128873117448}
   m_Layer: 0
   m_Name: Gunman_Large
@@ -19771,6 +19770,7 @@ MonoBehaviour:
   shipLevel: 0
   shipHealth: 0
   shipMenHealth: 0
+  totalShipCost: 0
   weaponRange: 0
   weaponDamage: 0
 --- !u!114 &2124350307218966471
@@ -19798,23 +19798,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
---- !u!114 &2327005735565545387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4260367956499230941}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4cbbdbd6c57e8f43a92a58534dc7665, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followPointerPosition: 0
-  draggableSurface:
-    serializedVersion: 2
-    m_Bits: 128
-  objectHeight: -0.17
 --- !u!114 &157187128873117448
 MonoBehaviour:
   m_ObjectHideFlags: 0
