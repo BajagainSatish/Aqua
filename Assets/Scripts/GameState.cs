@@ -15,6 +15,7 @@ public class GameState : MonoBehaviour
 
     [SerializeField] private Timer timerScript;
     [SerializeField] private PlayerTurnSystem playerTurnSystemScript;
+    [SerializeField] private CameraControlRuntime cameraControlRuntime;
 
     private bool hasAssignedTime;//flag is used to prevent repeatedly assigning the time in each frame
 
@@ -27,6 +28,7 @@ public class GameState : MonoBehaviour
     {
         hasAssignedTime = false;
         currentGameState = CurrentGameState.None;
+        cameraControlRuntime.SetCameraToDefaultPosition();
     }
     private void Update()
     {
@@ -37,33 +39,39 @@ public class GameState : MonoBehaviour
             case CurrentGameState.StrategyTimeP1:
                 if (!hasAssignedTime)
                 {
+                    cameraControlRuntime.ResetTempBoolForCameraChange();
                     playerTurnSystemScript.SetTurnToPlayer1();//added in this block as it will execute just once, better performance
 
                     timerScript.RemainingTime = strategyTime;
                     hasAssignedTime = true;
                 }
+                cameraControlRuntime.SetCameraToRegion1Position();
                 StartCoroutine(StrategyTimeP1());
                 break;
 
             case CurrentGameState.StrategyTimeP2:
                 if (!hasAssignedTime)
                 {
+                    cameraControlRuntime.ResetTempBoolForCameraChange();
                     playerTurnSystemScript.SetTurnToPlayer2();
 
                     timerScript.RemainingTime = strategyTime;
                     hasAssignedTime = true;
                 }
+                cameraControlRuntime.SetCameraToRegion2Position();
                 StartCoroutine(StrategyTimeP2());
                 break;
 
             case CurrentGameState.CommonPlayTime:
                 if (!hasAssignedTime)
                 {
+                    cameraControlRuntime.ResetTempBoolForCameraChange();
                     playerTurnSystemScript.SetTurnToGameTime();
 
                     timerScript.RemainingTime = gameTime;
                     hasAssignedTime = true;
                 }
+                cameraControlRuntime.SetCameraToDefaultPosition();
                 StartCoroutine(GameTime());
                 break;
             case CurrentGameState.None:
