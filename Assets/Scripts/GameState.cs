@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static GameState;
 
@@ -18,62 +19,66 @@ public class GameState : MonoBehaviour
     [SerializeField] private CameraControlRuntime cameraControlRuntime;
 
     private bool hasAssignedTime;//flag is used to prevent repeatedly assigning the time in each frame
-    private float waitForCameraSwitch;
+    private bool gameBegin;
 
     private void Awake()
     {
         strategyTime = SetParameters.StrategyTime;
         gameTime = SetParameters.CommonGameTime;
-        waitForCameraSwitch = SetParameters.CameraSwitchDuration;
     }
     private void Start()
     {
+        gameBegin = false;
         hasAssignedTime = false;
         currentGameState = CurrentGameState.None;
         cameraControlRuntime.SetCameraToDefaultPosition();
     }
+    public void GameStateToP1StrategyTime()//Initially play button is pressed
+    {
+        if (!gameBegin)
+        {
+            cameraControlRuntime.startPosition = cameraControlRuntime.transform.position;
+            Vector3 rotationEuler = cameraControlRuntime.transform.eulerAngles;
+            cameraControlRuntime.startRotation = Quaternion.Euler(rotationEuler);
+            cameraControlRuntime.firstCameraSwitch = true;
+            gameBegin = true;
+        }       
+    }
     private void Update()
     {
         // Add code to check whether the main building of either player has been destroyed or not, then only proceed forward
-
         switch (currentGameState)
         {
             case CurrentGameState.StrategyTimeP1:
                 if (!hasAssignedTime)
                 {
-                    cameraControlRuntime.ResetTempBoolForCameraChange();
                     playerTurnSystemScript.SetTurnToPlayer1();//added in this block as it will execute just once, better performance
 
-                    timerScript.RemainingTime = strategyTime;
+                    timerScript.RemainingTime = strategyTime;//flag is used to prevent repeatedly assigning the time in each frame
                     hasAssignedTime = true;
                 }
-                cameraControlRuntime.SetCameraToRegion1Position();
                 StartCoroutine(StrategyTimeP1());
                 break;
 
             case CurrentGameState.StrategyTimeP2:
                 if (!hasAssignedTime)
                 {
-                    cameraControlRuntime.ResetTempBoolForCameraChange();
                     playerTurnSystemScript.SetTurnToPlayer2();
 
                     timerScript.RemainingTime = strategyTime;
                     hasAssignedTime = true;
                 }
-                cameraControlRuntime.SetCameraToRegion2Position();
                 StartCoroutine(StrategyTimeP2());
                 break;
 
             case CurrentGameState.CommonPlayTime:
                 if (!hasAssignedTime)
                 {
-                    cameraControlRuntime.ResetTempBoolForCameraChange();
                     playerTurnSystemScript.SetTurnToGameTime();
 
                     timerScript.RemainingTime = gameTime;
                     hasAssignedTime = true;
                 }
-                cameraControlRuntime.SetCameraToDefaultPosition();
                 StartCoroutine(GameTime());
                 break;
             case CurrentGameState.None:
@@ -88,8 +93,16 @@ public class GameState : MonoBehaviour
 
         if (currentGameState == CurrentGameState.StrategyTimeP1)
         {
-            currentGameState = CurrentGameState.StrategyTimeP2;
+            //currentGameState = CurrentGameState.StrategyTimeP2;//This value controlled from CameraControlRuntime
             hasAssignedTime = false;
+
+            cameraControlRuntime.startPosition = cameraControlRuntime.transform.position;
+            Vector3 rotationEuler = cameraControlRuntime.transform.eulerAngles;
+            cameraControlRuntime.startRotation = Quaternion.Euler(rotationEuler);
+            cameraControlRuntime.secondCameraSwitch = true;
+
+            currentGameState = CurrentGameState.None;//necessary to prevent startPosition from being updated during runtime
+            print("This block should execute just once!!!");
         }
     }
     private IEnumerator StrategyTimeP2()
@@ -99,8 +112,15 @@ public class GameState : MonoBehaviour
 
         if (currentGameState == CurrentGameState.StrategyTimeP2)
         {
-            currentGameState = CurrentGameState.CommonPlayTime;
             hasAssignedTime = false;
+
+            cameraControlRuntime.startPosition = cameraControlRuntime.transform.position;
+            Vector3 rotationEuler = cameraControlRuntime.transform.eulerAngles;
+            cameraControlRuntime.startRotation = Quaternion.Euler(rotationEuler);
+            cameraControlRuntime.thirdCameraSwitch = true;
+
+            currentGameState = CurrentGameState.None;
+            print("This block should execute just once!!!");
         }
     }
     private IEnumerator GameTime()
@@ -114,10 +134,5 @@ public class GameState : MonoBehaviour
             currentGameState = CurrentGameState.None;
             hasAssignedTime = false;
         }
-    }
-    public void GameStateToP1StrategyTime()//Initially play button is pressed
-    {
-        cameraControlRuntime.startPosition = cameraControlRuntime.transform.position;
-        cameraControlRuntime.firstCameraSwitch = true;
     }
 }
