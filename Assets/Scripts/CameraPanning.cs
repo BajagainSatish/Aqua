@@ -12,38 +12,48 @@ public class CameraPanning : MonoBehaviour
     private bool isPanning;
     public bool IsPanning() { return isPanning; }
 
+    private CameraControlRuntime cameraControlRuntime;
+    private void Awake()
+    {
+        cameraControlRuntime = GetComponent<CameraControlRuntime>();
+    }
+
     void Update()
     {
-        isPanning = false;
-        if (Input.touchCount == 1)
+        bool dontAccessCamera = cameraControlRuntime.DontAccessCameraDuringSwitchView;
+        if (!dontAccessCamera)
         {
-            Touch curTouch = Input.GetTouch(0);
-            if (curTouch.phase == TouchPhase.Began || curTouch.phase == TouchPhase.Stationary || prevTouchCount != 1)
+            isPanning = false;
+            if (Input.touchCount == 1)
             {
-                prevTouch = curTouch;
-            }
-            else
-            {
-                bool touchWithinArea;
-                if (touchArea == null)
-                    touchWithinArea = true;
-                else
-                    touchWithinArea = RectTransformUtility.RectangleContainsScreenPoint(touchArea, curTouch.position);
-
-                if (!touchSet && touchWithinArea)
-                    touchSet = true;
-                else if (touchSet && !touchWithinArea)
-                    touchSet = false;
-                else if (touchSet && touchWithinArea)
+                Touch curTouch = Input.GetTouch(0);
+                if (curTouch.phase == TouchPhase.Began || curTouch.phase == TouchPhase.Stationary || prevTouchCount != 1)
                 {
-                    isPanning = true;
-                    HandlePanning(curTouch);
+                    prevTouch = curTouch;
+                }
+                else
+                {
+                    bool touchWithinArea;
+                    if (touchArea == null)
+                        touchWithinArea = true;
+                    else
+                        touchWithinArea = RectTransformUtility.RectangleContainsScreenPoint(touchArea, curTouch.position);
+
+                    if (!touchSet && touchWithinArea)
+                        touchSet = true;
+                    else if (touchSet && !touchWithinArea)
+                        touchSet = false;
+                    else if (touchSet && touchWithinArea)
+                    {
+                        isPanning = true;
+                        HandlePanning(curTouch);
+                    }
                 }
             }
-        }
-        else { touchSet = false; }
+            else { touchSet = false; }
 
-        prevTouchCount = Input.touchCount;
+            prevTouchCount = Input.touchCount;
+        }  
     }
 
     void HandlePanning(Touch curTouch)

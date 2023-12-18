@@ -32,6 +32,12 @@ public class CameraControlRuntime : MonoBehaviour
     public bool secondCameraSwitch;
     public bool thirdCameraSwitch;
 
+    private bool dontAccessCameraDuringSwitchView;
+    public bool DontAccessCameraDuringSwitchView
+    {
+        get { return dontAccessCameraDuringSwitchView; }
+    }
+
     [SerializeField] private GameState gameState;
 
     private void Awake()
@@ -41,6 +47,7 @@ public class CameraControlRuntime : MonoBehaviour
         firstCameraSwitch = false;
         secondCameraSwitch = false;
         thirdCameraSwitch = false;
+        dontAccessCameraDuringSwitchView = false;
     }
     private void Start()
     {
@@ -65,6 +72,8 @@ public class CameraControlRuntime : MonoBehaviour
     {
         if (firstCameraSwitch)
         {
+            dontAccessCameraDuringSwitchView = true;
+
             elapsedTimePos += Time.deltaTime;
             float percentageCompletePos = elapsedTimePos/cameraSwitchDuration;
             transform.position = Vector3.Lerp(startPosition, endPosition, percentageCompletePos);
@@ -81,12 +90,16 @@ public class CameraControlRuntime : MonoBehaviour
                 elapsedTimePos = 0;
                 elapsedTimeRot = 0;//research if this assigning to 0 is neccessary or not.
 
+                dontAccessCameraDuringSwitchView = false;
+
                 endPosition = region2CameraPos;
                 endRotation = Quaternion.Euler(36, 27, 0);
             }
         }
         else if (secondCameraSwitch)
         {
+            dontAccessCameraDuringSwitchView = true;
+
             elapsedTimePos += Time.deltaTime;
             float percentageCompletePos = elapsedTimePos / cameraSwitchDuration;
             transform.position = Vector3.Lerp(startPosition, endPosition, percentageCompletePos);
@@ -103,12 +116,16 @@ public class CameraControlRuntime : MonoBehaviour
                 elapsedTimePos = 0;
                 elapsedTimeRot = 0;//research if this assigning to 0 is neccessary or not.
 
+                dontAccessCameraDuringSwitchView = false;
+
                 endPosition = defaultCameraPos;
                 endRotation = Quaternion.Euler(61, 0, 0);
             }
         }
         else if (thirdCameraSwitch)
         {
+            dontAccessCameraDuringSwitchView = true;
+
             elapsedTimePos += Time.deltaTime;
             float percentageCompletePos = elapsedTimePos / cameraSwitchDuration;
             transform.position = Vector3.Lerp(startPosition, endPosition, percentageCompletePos);
@@ -124,6 +141,8 @@ public class CameraControlRuntime : MonoBehaviour
                 thirdCameraSwitch = false;
                 elapsedTimePos = 0;
                 elapsedTimeRot = 0;//research if this assigning to 0 is neccessary or not.
+
+                dontAccessCameraDuringSwitchView = false;
             }
         }
     }
