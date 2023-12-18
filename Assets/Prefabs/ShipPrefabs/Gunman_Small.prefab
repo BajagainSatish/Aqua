@@ -12902,7 +12902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalAmmoCount: 0
-  targetEnemy: {fileID: 0}
+  targetEnemyForShipRotation: {fileID: 0}
 --- !u!114 &153440612002117633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32799,7 +32799,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8354836669965136277}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.23, y: 0.23, z: 0.23}
   m_ConstrainProportionsScale: 1
@@ -32808,7 +32808,7 @@ Transform:
   - {fileID: 2228179448192845865}
   m_Father: {fileID: 3352537144883946}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &8358155301649726875
 GameObject:
   m_ObjectHideFlags: 0

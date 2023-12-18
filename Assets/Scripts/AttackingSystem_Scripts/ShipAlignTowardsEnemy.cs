@@ -83,22 +83,40 @@ public class ShipAlignTowardsEnemy : MonoBehaviour
 
         if (target != null)
         {
+            // Calculate the direction vector to the target
             Vector3 toTarget = target.position - transform.position;
+
+            // Calculate the rotation to face the target
             Quaternion rotation = Quaternion.LookRotation(toTarget);
 
-            // Calculate the angle between the ship's forward and backward directions
-            float angleForward = Quaternion.Angle(transform.rotation, rotation);
-            float angleBackward = Quaternion.Angle(transform.rotation * Quaternion.Euler(0, 180, 0), rotation);
+            // Calculate the ship's right direction
+            Vector3 rightDirection = transform.right;
 
-            // Choose the rotation that requires less turning
-            Quaternion finalRotation = (angleBackward < angleForward) ? Quaternion.Euler(0, 180, 0) * rotation : rotation;
+            // Calculate the dot product between the ship's right vector and the vector to the target
+            float dotProduct = Vector3.Dot(rightDirection, toTarget);
+
+            // Choose the rotation side based on the dot product
+            Quaternion sidewaysRotation;
+            if (dotProduct > 0)
+            {
+                // If the target is on the left side, rotate to the left side (e.g., -90 degrees)
+                sidewaysRotation = Quaternion.Euler(0, -90, 0);
+            }
+            else
+            {
+                // If the target is on the right side or in front, rotate to the right side (e.g., 90 degrees)
+                sidewaysRotation = Quaternion.Euler(0, 90, 0);
+            }
+
+            // Apply the sideways rotation to the calculated rotation
+            Quaternion finalRotation = rotation * sidewaysRotation;
 
             // Apply the rotation gradually
             transform.rotation = Quaternion.Lerp(transform.rotation, finalRotation, speed * Time.deltaTime);
 
-            // Adjust the local Euler angles to ensure ship doesnot rotate along x axis.
-            transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z);
-        }       
+            // Adjust the local Euler angles to ensure the ship does not rotate along the x and z axis
+            transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+        }
     }
     private void AssignValue(int index)
     {

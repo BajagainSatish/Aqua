@@ -99,7 +99,7 @@ public static class SetParameters
 
     // Ship Rotation Speed to align to the enemy ship
     public static float[] ShipRotationSpeed { get; } = { 0.2f, 0.5f, 1f, 2f };
-    public static float[] ShipSpeed { get; } = { 1.05f, 1.10f, 1.15f, 1.20f };
+    public static float[] ShipSpeed { get; } = { 4f, 6f, 8f, 10f };
 
     //Max Building Health
     public static int BuildingHealth { get; } = 500;
