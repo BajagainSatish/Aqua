@@ -18,7 +18,7 @@ public static class SetParameters
     // Archer Values
     public static float ArcherLineWidth { get; } = 0.01f;
     public static float ArcherArrowVelocity { get; } = 2.5f;
-    public static float ArchersleastDistanceForStraightHit { get; } = 2f;
+    public static float ArchersleastDistanceForStraightHit { get; } = 5f;
     public static float ArcherAdjustCurveAngle { get; } = 0.7f;
 
     // Gunmen Values
@@ -39,10 +39,10 @@ public static class SetParameters
     public static int CurvePointsTotalCount { get; } = 20;
 
     // Ship Attributes on basis of Levels
-    public static float[] ArcherWeaponRange { get; } = { 3f, 5f, 7f, 10f };
-    public static float[] CannonWeaponRange { get; } = { 3f, 5f, 7f, 10f };
-    public static float[] GunmanWeaponRange { get; } = { 3f, 5f, 7f, 10f };
-    public static float[] MortarWeaponRange { get; } = { 3f, 5f, 7f, 10f };
+    public static float[] ArcherWeaponRange { get; } = { 8f, 12f, 16f, 20f };
+    public static float[] CannonWeaponRange { get; } = { 8f, 12f, 16f, 20f };
+    public static float[] GunmanWeaponRange { get; } = { 8f, 12f, 16f, 20f };
+    public static float[] MortarWeaponRange { get; } = { 8f, 12f, 16f, 20f };
 
     // Varying Ship Health
     public static int SupplyShipHealth { get; } = 140;
@@ -99,7 +99,7 @@ public static class SetParameters
 
     // Ship Rotation Speed to align to the enemy ship
     public static float[] ShipRotationSpeed { get; } = { 0.2f, 0.5f, 1f, 2f };
-    public static float[] ShipSpeed { get; } = { 4f, 6f, 8f, 10f };
+    public static float[] ShipSpeed { get; } = { 2f, 2.5f, 3f, 3.5f };
 
     //Max Building Health
     public static int BuildingHealth { get; } = 500;

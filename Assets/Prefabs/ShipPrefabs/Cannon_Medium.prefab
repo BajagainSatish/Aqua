@@ -1002,6 +1002,8 @@ GameObject:
   - component: {fileID: 3858088204507499456}
   - component: {fileID: 3725248982035569583}
   - component: {fileID: 4058734651310715239}
+  - component: {fileID: 6161699158587813735}
+  - component: {fileID: 1257431513804740571}
   m_Layer: 0
   m_Name: Cannon_Medium
   m_TagString: Untagged
@@ -1054,8 +1056,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.7295418, y: 1.980219, z: 0.87195396}
-  m_Center: {x: -0.16418648, y: 0.88556546, z: -0.029931068}
+  m_Size: {x: 0.95162964, y: 1.980219, z: 2.9738865}
+  m_Center: {x: 0.0007362366, y: 0.88556546, z: -0.075060844}
 --- !u!114 &6925756300066683501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1171,6 +1173,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipSize: 1
+--- !u!195 &6161699158587813735
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4149126135670364798}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1.69
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &1257431513804740571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4149126135670364798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f319a4a2450244182c0bd91f41c19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetBuilding: {fileID: 0}
 --- !u!1 &4188880822634816287
 GameObject:
   m_ObjectHideFlags: 0

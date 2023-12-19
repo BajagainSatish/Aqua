@@ -108,15 +108,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
+    agentRadius: 0.86
     agentHeight: 2
-    agentSlope: 45
-    agentClimb: 0.4
+    agentSlope: 0
+    agentClimb: 0.01
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.28666666
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -124,7 +124,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 0bc2ce99aa50c2e46aa94e7c9ed9a375, type: 2}
 --- !u!1 &9248034
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,7 +1062,7 @@ PrefabInstance:
     - target: {fileID: 6543610202377878543, guid: 371ae9a61e663494faf1caabc923d190,
         type: 3}
       propertyPath: m_Name
-      value: IslandBuilding1
+      value: Main
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 371ae9a61e663494faf1caabc923d190, type: 3}
@@ -1809,7 +1809,12 @@ MonoBehaviour:
   region2CameraPos: {x: -50, y: 27, z: -52}
   region2CameraRot: {x: 36, y: 387, z: 0}
   startPosition: {x: 0, y: 0, z: 0}
+  endPosition: {x: 0, y: 0, z: 0}
+  startRotation: {x: 0, y: 0, z: 0, w: 0}
+  endRotation: {x: 0, y: 0, z: 0, w: 0}
   firstCameraSwitch: 0
+  secondCameraSwitch: 0
+  thirdCameraSwitch: 0
   gameState: {fileID: 989155768}
 --- !u!1 &336297745
 GameObject:
@@ -3602,6 +3607,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: IslandBuilding1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7124240092298713867, guid: 371ae9a61e663494faf1caabc923d190,
+        type: 3}
+      propertyPath: buildingIsOfP1
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 371ae9a61e663494faf1caabc923d190, type: 3}
 --- !u!4 &511405511 stripped
@@ -3988,6 +3998,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: IslandBuilding1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7124240092298713867, guid: 371ae9a61e663494faf1caabc923d190,
+        type: 3}
+      propertyPath: buildingIsOfP1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 371ae9a61e663494faf1caabc923d190, type: 3}
@@ -4540,7 +4555,12 @@ PrefabInstance:
     - target: {fileID: 6543610202377878543, guid: 371ae9a61e663494faf1caabc923d190,
         type: 3}
       propertyPath: m_Name
-      value: IslandBuilding1
+      value: Main
+      objectReference: {fileID: 0}
+    - target: {fileID: 7124240092298713867, guid: 371ae9a61e663494faf1caabc923d190,
+        type: 3}
+      propertyPath: buildingIsOfP1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 371ae9a61e663494faf1caabc923d190, type: 3}
@@ -7872,6 +7892,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: IslandBuilding1 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7124240092298713867, guid: 371ae9a61e663494faf1caabc923d190,
+        type: 3}
+      propertyPath: buildingIsOfP1
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 371ae9a61e663494faf1caabc923d190, type: 3}
 --- !u!4 &1669079195 stripped
@@ -9609,6 +9634,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: IslandBuilding1 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7124240092298713867, guid: 371ae9a61e663494faf1caabc923d190,
+        type: 3}
+      propertyPath: buildingIsOfP1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 371ae9a61e663494faf1caabc923d190, type: 3}

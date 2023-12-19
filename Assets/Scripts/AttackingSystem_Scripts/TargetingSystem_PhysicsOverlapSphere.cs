@@ -49,6 +49,14 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
     private CannonShoot cannonShoot;
     private MortarShoot mortarShoot;
 
+    private bool shipOrBuildingIsInRange;
+    public bool ShipOrBuildingIsInRange
+    {
+        get
+        {
+            return shipOrBuildingIsInRange;
+        }
+    }
     private void Awake()
     {
         thisShipCategorizerPlayerScript = GetComponent<ShipCategorizer_Player>();
@@ -139,6 +147,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
         }
 
         shipCenter = transform.GetChild(0).transform;
+        shipOrBuildingIsInRange = false;
     }
     private void Start()
     {
@@ -213,12 +222,17 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
                                 }*/
                                 enemyBuildingsInRange.Add(collider);
                             }
+                            shipOrBuildingIsInRange = true;
                             foundMainBuildingInRange = true;
                             //No attack code here, just verified that main building is in range.
 
                             //Assign target as center of main building
                             targetCollider = collider;
                             target = targetCollider.gameObject;//Center of enemyBuilding is target
+                        }
+                        else
+                        {
+                            shipOrBuildingIsInRange = false;//can this code generate error later?
                         }
                     }
                 }
@@ -425,6 +439,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
     {
         if (enemyBuildingsInRange.Count == 0)
         {
+            shipOrBuildingIsInRange = false;
             target = null;
             targetCollider = null;
         }
@@ -440,6 +455,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
     {
         if (enemyShipsInRange.Count == 1)
         {
+            shipOrBuildingIsInRange = true;
             foreach (Collider oneEnemyShipInList in enemyShipsInRange)
             {
                 targetCollider = oneEnemyShipInList;
@@ -451,6 +467,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
     {
         if (enemyBuildingsInRange.Count == 1)
         {
+            shipOrBuildingIsInRange = true;
             foreach (Collider oneEnemyBuildingInList in enemyBuildingsInRange)
             {
                 targetCollider = oneEnemyBuildingInList;
@@ -462,6 +479,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
     {
         if (enemyShipsInRange.Count > 1)
         {
+            shipOrBuildingIsInRange = true;
             if (target == null)
             {
                 SelectAnotherShipInRangeAsTarget();
@@ -473,6 +491,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
     {
         if (enemyBuildingsInRange.Count > 1)
         {
+            shipOrBuildingIsInRange = true;
             if (target == null)
             {
                 SelectAnotherBuildingInRangeAsTarget();

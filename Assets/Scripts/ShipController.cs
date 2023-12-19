@@ -2,20 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static GameState;
+
 public class ShipController : MonoBehaviour
 {
     [SerializeField] private Transform targetBuilding;
     private float shipSpeed;
 
+    private ShipCategorizer_Player shipCategorizer_Player;
     private ShipCategorizer_Level shipCategorizer_Level;
+    private TargetingSystem_PhysicsOverlapSphere targetingSystem_PhysicsOverlapSphere;
+    private GameState gameState;
+
+    private NavMeshAgent navMeshAgent;
     private int shipLevel;
+    private bool isP1Ship;
+
+    private bool _shipOrBuildingInRange;
 
     private void Awake()
     {
+        shipCategorizer_Player = GetComponent<ShipCategorizer_Player>();
         shipCategorizer_Level = GetComponent<ShipCategorizer_Level>();
+        targetingSystem_PhysicsOverlapSphere = GetComponent<TargetingSystem_PhysicsOverlapSphere>();
+        navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
     }
     private void Start()
     {
+        GameObject gameStateManager = GameObject.Find("GameStateManager");
+        if (gameStateManager != null)
+        {
+            gameState = gameStateManager.GetComponent<GameState>();
+        }
+
         string shipLevelString = shipCategorizer_Level.shipLevel.ToString();
         if (shipLevelString == "Level1")
         {
@@ -34,21 +53,46 @@ public class ShipController : MonoBehaviour
             shipLevel = 4;
         }
         shipSpeed = SetParameters.ShipSpeed[shipLevel - 1];
+        isP1Ship = shipCategorizer_Player.isP1Ship;
     }
     private void Update()
     {
-        if (targetBuilding != null)
+        AssignSuitableEnemyAsTarget();
+        CurrentGameState currentGameState = gameState.currentGameState;
+
+        if (currentGameState == CurrentGameState.CommonPlayTime)
         {
-            print("shipspeed: " + shipSpeed);
+            _shipOrBuildingInRange = targetingSystem_PhysicsOverlapSphere.ShipOrBuildingIsInRange;
 
-            // Calculate the direction from the ship to the target building without normalization
-            Vector3 direction = (targetBuilding.position - transform.position);
-
-            // Ensure the ship is looking at the target building
-            transform.LookAt(targetBuilding.position);
-
-            // Move the ship towards the target building with the correct scaling
-            transform.Translate(direction.normalized * shipSpeed * Time.deltaTime, Space.World);
+            if (_shipOrBuildingInRange)
+            {
+                navMeshAgent.speed = 0;
+                navMeshAgent.isStopped = true;  // Stop the agent               
+            }
+            else
+            {
+                navMeshAgent.speed = shipSpeed;
+                navMeshAgent.destination = targetBuilding.transform.position;
+                navMeshAgent.isStopped = false;
+            }
         }
+    }
+    private void AssignSuitableEnemyAsTarget()
+    {
+        if (targetBuilding == null)
+        {
+            if (isP1Ship)
+            {
+                GameObject region2 = GameObject.Find("Region2");
+                GameObject buildings = region2.transform.GetChild(0).gameObject;
+                targetBuilding = buildings.transform.GetChild(0).transform;
+            }
+            else
+            {
+                GameObject region1 = GameObject.Find("Region1");
+                GameObject buildings = region1.transform.GetChild(0).gameObject;
+                targetBuilding = buildings.transform.GetChild(0).transform;
+            }
+        }    
     }
 }

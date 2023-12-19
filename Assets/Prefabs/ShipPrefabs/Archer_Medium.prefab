@@ -359,6 +359,8 @@ GameObject:
   - component: {fileID: 3331261132299277582}
   - component: {fileID: 5935151866268270277}
   - component: {fileID: 5420631231521525291}
+  - component: {fileID: 8497903977711078688}
+  - component: {fileID: 8203429494241435072}
   m_Layer: 0
   m_Name: Archer_Medium
   m_TagString: Untagged
@@ -411,8 +413,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.2457886, y: 2.4952116, z: 1.029108}
-  m_Center: {x: -0.14360428, y: 1.2884309, z: -0.010826111}
+  m_Size: {x: 0.87848186, y: 2.4952116, z: 2.5248284}
+  m_Center: {x: 0.016251087, y: 1.2884309, z: -0.1289711}
 --- !u!114 &517082705005159477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,6 +528,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipSize: 1
+--- !u!195 &8497903977711078688
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677333210658142900}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1.41
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2.38
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &8203429494241435072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677333210658142900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8f319a4a2450244182c0bd91f41c19d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetBuilding: {fileID: 0}
 --- !u!1 &4143788649906602373
 GameObject:
   m_ObjectHideFlags: 0

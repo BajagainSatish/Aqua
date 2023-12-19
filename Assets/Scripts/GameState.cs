@@ -10,7 +10,7 @@ public class GameState : MonoBehaviour
     private float gameTime;
     public enum CurrentGameState
     {
-        StrategyTimeP1, StrategyTimeP2, CommonPlayTime, None
+        StrategyTimeP1, StrategyTimeP2, CommonPlayTime, None, GameOver
     }
     public CurrentGameState currentGameState;
 
