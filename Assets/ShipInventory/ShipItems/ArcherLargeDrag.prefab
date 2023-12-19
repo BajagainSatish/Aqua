@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 5151033682930254083}
   - component: {fileID: 2604319908808936489}
   - component: {fileID: 34928883471906807}
+  - component: {fileID: 2671923162092218317}
   m_Layer: 0
   m_Name: ArcherLargeDrag
   m_TagString: Untagged
@@ -182,3 +183,15 @@ MonoBehaviour:
   spawnableMaterial: {fileID: 2100000, guid: c1f80ecd423627b44a4d14776044e52d, type: 2}
   notSpawnableMaterial: {fileID: 2100000, guid: edb1ce9ee02dda74e9336f90b0c80718,
     type: 2}
+--- !u!114 &2671923162092218317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4213680578999260542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c7d478278a63c244a696f3a5cb6e8bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

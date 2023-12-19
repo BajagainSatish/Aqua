@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2362013607827144772}
   - component: {fileID: 2362013607827144773}
   - component: {fileID: 2362013607827144774}
+  - component: {fileID: 3394493991447326870}
   m_Layer: 0
   m_Name: InitializationPoint
   m_TagString: SpawnRegion
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2362013607827144775}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -27.8, y: -0.53, z: -13.5}
   m_LocalScale: {x: 4, y: 0.1119403, z: 4}
   m_ConstrainProportionsScale: 1
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e4c27216323f9d340b29d657c4f008f7, type: 2}
+  - {fileID: 2100000, guid: 7fa218f2d14996c41b4f82dca34b3d2f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,6 +99,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.34
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3394493991447326870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2362013607827144775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4094af4b4c8174c9c410815970954b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initializationPointBelongsToP1: 0
 --- !u!1 &2362013608563924931
 GameObject:
   m_ObjectHideFlags: 0

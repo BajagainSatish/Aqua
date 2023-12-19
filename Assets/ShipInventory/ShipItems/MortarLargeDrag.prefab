@@ -2177,6 +2177,7 @@ GameObject:
   - component: {fileID: 6138576844419029206}
   - component: {fileID: 4074522277668092122}
   - component: {fileID: 3200911507804999485}
+  - component: {fileID: 4439137068968200254}
   m_Layer: 0
   m_Name: MortarLargeDrag
   m_TagString: Untagged
@@ -2262,6 +2263,18 @@ MonoBehaviour:
   spawnableMaterial: {fileID: 2100000, guid: c1f80ecd423627b44a4d14776044e52d, type: 2}
   notSpawnableMaterial: {fileID: 2100000, guid: edb1ce9ee02dda74e9336f90b0c80718,
     type: 2}
+--- !u!114 &4439137068968200254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4597674437048287453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c7d478278a63c244a696f3a5cb6e8bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4621202464150612830
 GameObject:
   m_ObjectHideFlags: 0
