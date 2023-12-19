@@ -103,4 +103,17 @@ public static class SetParameters
 
     //Max Building Health
     public static int BuildingHealth { get; } = 500;
+
+    //Score system value
+    //Evaluate how much score to give based on level,type and size of ship
+    public static int BuildingDestroyScore { get; } = 500;
+
+    public static int[] ArcherShipDestroyScore { get; } = { 250,500,750,1000 };
+    public static int[] GunmanShipDestroyScore { get; } = { 250, 500, 750, 1000 };
+    public static int[] CannonShipDestroyScore { get; } = { 250, 500, 750, 1000 };
+    public static int[] MortarShipDestroyScore { get; } = { 250, 500, 750, 1000 };
+
+    public static int LargeShipDestroyScore { get; } = 750;
+    public static int MediumShipDestroyScore { get; } = 500;
+    public static int SmallShipDestroyScore { get; } = 250;
 }

@@ -12,6 +12,7 @@ public class ShipCategorizer_Level : MonoBehaviour
     public ShipLevels shipLevel;
     private ShipLevels previousShipLevel;
 
+    //None of these values except ship level are changed, eg. ship health during update.
     public int shipHealth;
     public int shipMenHealth;
     private float shipSpeed;

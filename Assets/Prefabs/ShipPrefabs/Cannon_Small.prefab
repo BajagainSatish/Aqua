@@ -46311,6 +46311,7 @@ GameObject:
   - component: {fileID: 7260475208269710579}
   - component: {fileID: -6504706930025431601}
   - component: {fileID: 5309130278087232984}
+  - component: {fileID: 2960527448921990896}
   m_Layer: 0
   m_Name: Cannon_Small
   m_TagString: Untagged
@@ -46515,6 +46516,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetBuilding: {fileID: 0}
+--- !u!114 &2960527448921990896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7279310334159499242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3aeb9637b2b2754083bb5ca0e047698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7306596606549393535
 GameObject:
   m_ObjectHideFlags: 0

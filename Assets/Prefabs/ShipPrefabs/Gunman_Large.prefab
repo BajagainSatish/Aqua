@@ -19646,6 +19646,7 @@ GameObject:
   - component: {fileID: 157187128873117448}
   - component: {fileID: 6703713018725313971}
   - component: {fileID: -4634683479373477459}
+  - component: {fileID: -3847449713940826298}
   m_Layer: 0
   m_Name: Gunman_Large
   m_TagString: Untagged
@@ -19848,6 +19849,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetBuilding: {fileID: 0}
+--- !u!114 &-3847449713940826298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260367956499230941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3aeb9637b2b2754083bb5ca0e047698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4280516846166527542
 GameObject:
   m_ObjectHideFlags: 0

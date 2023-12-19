@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using static ShipCategorizer_Size;
+using static GameState;
 
 public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
 {
@@ -57,6 +58,7 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
             return shipOrBuildingIsInRange;
         }
     }
+    private GameState gameState;
     private void Awake()
     {
         thisShipCategorizerPlayerScript = GetComponent<ShipCategorizer_Player>();
@@ -151,37 +153,42 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
     }
     private void Start()
     {
+        GameObject gameStateManager = GameObject.Find("GameStateManager");
+        gameState = gameStateManager.GetComponent<GameState>();
         isPlayer1 = thisShipCategorizerPlayerScript.isP1Ship;
     }
 
     private void Update()
     {
         shipMaxRange = thisShipCategorizer_LevelScript.weaponRange;//later rather than putting this code in Update(), put it when level is switched. Better performance.
-
         myShipPosition = shipCenter.position;
 
         thisShipIsFunctional = thisShipCategorizerPlayerScript.shipIsFunctional;
         thisShipMenAreAlive = thisShipCategorizerPlayerScript.shipMenAreAlive;
 
-        if (thisShipIsFunctional && thisShipMenAreAlive)
+        CurrentGameState currentGameState = gameState.currentGameState;
+        if (currentGameState == CurrentGameState.CommonPlayTime)//Prevent attack between ships during strategy time
         {
-            //check if main building is in range, and attack it if found
-            if (!AttackMainBuildingInRangeToOurList())
+            if (thisShipIsFunctional && thisShipMenAreAlive)
             {
-                AddEnemyShipsInRangeToOurList();
-                RemoveShipsOutsideRangeFromOurList();
-                DetermineWhichShipToAttack();
-            }           
-            //if there are no ships in range, then only attack any building
+                //check if main building is in range, and attack it if found
+                if (!AttackMainBuildingInRangeToOurList())
+                {
+                    AddEnemyShipsInRangeToOurList();
+                    RemoveShipsOutsideRangeFromOurList();
+                    DetermineWhichShipToAttack();
+                }
+                //if there are no ships in range, then only attack any building
+            }
+            else
+            {
+                enemyShipsInRange.Clear();
+                enemyBuildingsInRange.Clear();
+                target = null;
+            }
+            AssignTargetToEachAttackerShip();
+            //TestShipCode();
         }
-        else
-        {
-            enemyShipsInRange.Clear();
-            enemyBuildingsInRange.Clear();
-            target = null;
-        }
-        AssignTargetToEachAttackerShip();
-        //TestShipCode();
     }
     private bool AttackMainBuildingInRangeToOurList()
     {
