@@ -89,7 +89,7 @@ public class GameState : MonoBehaviour
     private IEnumerator StrategyTimeP1()
     {
         yield return new WaitForSeconds(strategyTime);
-        print("Player 1's strategy time is over");
+        //print("Player 1's strategy time is over");
 
         if (currentGameState == CurrentGameState.StrategyTimeP1)
         {
@@ -102,13 +102,13 @@ public class GameState : MonoBehaviour
             cameraControlRuntime.secondCameraSwitch = true;
 
             currentGameState = CurrentGameState.None;//necessary to prevent startPosition from being updated during runtime
-            print("This block should execute just once!!!");
+            //print("This block should execute just once!!!");
         }
     }
     private IEnumerator StrategyTimeP2()
     {
         yield return new WaitForSeconds(strategyTime);
-        print("Player 2's strategy time is over");
+        //print("Player 2's strategy time is over");
 
         if (currentGameState == CurrentGameState.StrategyTimeP2)
         {
@@ -120,14 +120,14 @@ public class GameState : MonoBehaviour
             cameraControlRuntime.thirdCameraSwitch = true;
 
             currentGameState = CurrentGameState.None;
-            print("This block should execute just once!!!");
+            //print("This block should execute just once!!!");
         }
     }
     private IEnumerator GameTime()
     {
-        print("Game time begins!");
+        //print("Game time begins!");
         yield return new WaitForSeconds(gameTime);
-        print("Game time is over");
+        //print("Game time is over");
 
         if (currentGameState == CurrentGameState.CommonPlayTime)
         {

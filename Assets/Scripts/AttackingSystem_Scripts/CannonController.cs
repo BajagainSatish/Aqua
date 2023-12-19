@@ -84,8 +84,6 @@ public class CannonController : MonoBehaviour
         shipCategorizer_LevelScript = shipGameObject.GetComponent<ShipCategorizer_Level>();
         shipCategorizer_PlayerScript = shipGameObject.GetComponent<ShipCategorizer_Player>();
 
-        cannonMaxRange = shipCategorizer_LevelScript.weaponRange;
-
         if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level1)
         {
             AssignValue(0);
@@ -106,6 +104,7 @@ public class CannonController : MonoBehaviour
 
     private void Update()
     {
+        cannonMaxRange = shipCategorizer_LevelScript.weaponRange;
         myShipPosition = myShipCenter.position;
         sufficientAmmoPresent = cannonShootScript.sufficientAmmoPresent;
 

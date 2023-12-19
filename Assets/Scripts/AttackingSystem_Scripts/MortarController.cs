@@ -72,8 +72,6 @@ public class MortarController : MonoBehaviour
         shipCategorizer_LevelScript = shipGameObject.GetComponent<ShipCategorizer_Level>();
         shipCategorizer_PlayerScript = shipGameObject.GetComponent<ShipCategorizer_Player>();
 
-        mortarMaxRange = shipCategorizer_LevelScript.weaponRange;
-
         if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level1)
         {
             AssignValue(0);
@@ -94,6 +92,7 @@ public class MortarController : MonoBehaviour
 
     private void Update()
     {
+        mortarMaxRange = shipCategorizer_LevelScript.weaponRange;
         myShipPosition = myShipCenter.position;
         sufficientAmmoPresent = mortarShootScript.sufficientAmmoPresent;
 

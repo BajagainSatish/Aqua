@@ -133,13 +133,13 @@ public class GunShoot : MonoBehaviour
             gunmanControllerScript[i].lineRenderer.startWidth = lineWidth;
             gunmanControllerScript[i].lineRenderer.positionCount = 2;
         }
-        gunmanMaxRange = shipCategorizer_LevelScript.weaponRange;
         
         targetEnemyForShipRotation = null;
     }
 
     private void Update()
     {
+        gunmanMaxRange = shipCategorizer_LevelScript.weaponRange;
         myShipPosition = shipCenter.transform.position;
         HandleAmmoCount();
 

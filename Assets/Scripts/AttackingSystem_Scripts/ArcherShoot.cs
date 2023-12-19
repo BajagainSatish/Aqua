@@ -138,13 +138,13 @@ public class ArcherShoot : MonoBehaviour
             archerControllerScript[i].lineRenderer.startWidth = lineWidth;
             archerControllerScript[i].lineRenderer.positionCount = curvePointsTotalCount + 1;
         }
-        archerMaxRange = shipCategorizer_LevelScript.weaponRange;
 
         sufficientAmmoPresent = true;
         targetEnemyForShipRotation = null;
     }
     private void Update()
     {
+        archerMaxRange = shipCategorizer_LevelScript.weaponRange;
         HandleAmmoCount();
         myShipPosition = myShipCenter.transform.position;
         for (int i = 0; i < totalArcherCount; i++)

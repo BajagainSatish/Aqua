@@ -34,13 +34,13 @@ public class ShipReceiveDamage : MonoBehaviour
                 if (attackerShipIsArcherOrGunmanShip)//Damage only to ship men health
                 {
                     healthSystemScript.ShipMenTakeDamage(damage);
-                    print(this.name + " took only MAN damage: " + damage + " from archer/gunman ship.");
+                    //print(this.name + " took only MAN damage: " + damage + " from archer/gunman ship.");
                 }
                 else//Damage to both ship as well as ship men
                 {
                     healthSystemScript.ShipTakeDamage(damage);
                     healthSystemScript.ShipMenTakeDamage(damage);
-                    print(this.name + " took whole damage: " + damage + " from cannon/mortar ship.");
+                    //print(this.name + " took whole damage: " + damage + " from cannon/mortar ship.");
                 }
             }          
         }

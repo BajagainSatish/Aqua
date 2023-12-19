@@ -17,7 +17,7 @@ public static class SetParameters
 
     // Archer Values
     public static float ArcherLineWidth { get; } = 0.01f;
-    public static float ArcherArrowVelocity { get; } = 2.5f;
+    public static float ArcherArrowVelocity { get; } = 8f;
     public static float ArchersleastDistanceForStraightHit { get; } = 5f;
     public static float ArcherAdjustCurveAngle { get; } = 0.7f;
 
@@ -32,7 +32,7 @@ public static class SetParameters
 
     // Mortar Values
     public static float MortarLineWidth { get; } = 0.07f;
-    public static float MortarBombVelocity { get; } = 5f;
+    public static float MortarBombVelocity { get; } = 25f;//the mortarbomb has to travel a comparitively way longer distance
     public static float MortarAdjustCurveAngle { get; } = -0.7f;
 
     // Common Archer and Mortar Values

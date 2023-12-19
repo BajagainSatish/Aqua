@@ -152,11 +152,12 @@ public class TargetingSystem_PhysicsOverlapSphere : MonoBehaviour
     private void Start()
     {
         isPlayer1 = thisShipCategorizerPlayerScript.isP1Ship;
-        shipMaxRange = thisShipCategorizer_LevelScript.weaponRange;
     }
 
     private void Update()
     {
+        shipMaxRange = thisShipCategorizer_LevelScript.weaponRange;//later rather than putting this code in Update(), put it when level is switched. Better performance.
+
         myShipPosition = shipCenter.position;
 
         thisShipIsFunctional = thisShipCategorizerPlayerScript.shipIsFunctional;
