@@ -17,14 +17,20 @@ public class GameState : MonoBehaviour
     [SerializeField] private Timer timerScript;
     [SerializeField] private PlayerTurnSystem playerTurnSystemScript;
     [SerializeField] private CameraControlRuntime cameraControlRuntime;
+    [SerializeField] private GameOver gameOver;
+    [SerializeField] private GameObject playButton;
 
+    private GameObject gameOverGameObject;
     private bool hasAssignedTime;//flag is used to prevent repeatedly assigning the time in each frame
     private bool gameBegin;
+
+    private bool gameIsOver;
 
     private void Awake()
     {
         strategyTime = SetParameters.StrategyTime;
         gameTime = SetParameters.CommonGameTime;
+        gameIsOver = false;
     }
     private void Start()
     {
@@ -32,6 +38,9 @@ public class GameState : MonoBehaviour
         hasAssignedTime = false;
         currentGameState = CurrentGameState.None;
         cameraControlRuntime.SetCameraToDefaultPosition();
+
+        gameOverGameObject = GameObject.Find("GameOver");
+        gameOver = gameOverGameObject.GetComponent<GameOver>();
     }
     public void GameStateToP1StrategyTime()//Initially play button is pressed
     {
@@ -41,6 +50,7 @@ public class GameState : MonoBehaviour
             Vector3 rotationEuler = cameraControlRuntime.transform.eulerAngles;
             cameraControlRuntime.startRotation = Quaternion.Euler(rotationEuler);
             cameraControlRuntime.firstCameraSwitch = true;
+            playButton.SetActive(false);
             gameBegin = true;
         }       
     }
@@ -131,8 +141,18 @@ public class GameState : MonoBehaviour
 
         if (currentGameState == CurrentGameState.CommonPlayTime)
         {
+            GameOverCondition();
             currentGameState = CurrentGameState.None;
             hasAssignedTime = false;
+        }
+    }
+    private void GameOverCondition()
+    {
+        if (!gameIsOver)
+        {
+            gameOver.GameOverDueToTimeOver();
+            currentGameState = CurrentGameState.GameOver;
+            gameIsOver = true;
         }
     }
 }

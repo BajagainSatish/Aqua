@@ -11,15 +11,25 @@ public class BuildingCategorizer_Player : MonoBehaviour
 
     [SerializeField] private GameState gameState;
     [SerializeField] private ScoreSystem scoreSystem;
+    [SerializeField] private GameOver gameOver;
+
+    private GameObject gameOverGameObject;
     private bool scoreAlreadyUpdated;//flag to prevent repeatedly update of score inside update method
+
+    private bool gameIsOver;
 
     private void Awake()
     {
         buildingValueForScoreSystem = SetParameters.BuildingDestroyScore;
         buildingIsFunctional = true;
         scoreAlreadyUpdated = false;
+        gameIsOver = false;
     }
-
+    private void Start()
+    {
+        gameOverGameObject = GameObject.Find("GameOver");
+        gameOver = gameOverGameObject.GetComponent<GameOver>();
+    }
     private void Update()
     {
         OnBuildingDestroyUpdateEnemyScore();
@@ -44,21 +54,11 @@ public class BuildingCategorizer_Player : MonoBehaviour
 
     private void GameOverCondition()
     {
-        if (buildingIsMainBuilding && !buildingIsFunctional)
+        if (buildingIsMainBuilding && !buildingIsFunctional && !gameIsOver)
         {
-            if (buildingIsOfP1)
-            {
-                print("Player 1 loses!");
-                print("Player 2 wins!!!");
-
-                //Add condition to stop game/prevent ships from attacking.
-            }
-            else
-            {
-                print("Player 2 loses!");
-                print("Player 1 wins!!!");
-            }
-            gameState.currentGameState = CurrentGameState.GameOver; 
+            gameOver.GameOverDueToMainBuildingDestroy(buildingIsOfP1);           
+            gameState.currentGameState = CurrentGameState.GameOver;
+            gameIsOver = true;
         }
     }
 }

@@ -9,14 +9,6 @@ public class ScoreSystem : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI player1ScoreTMP;
     [SerializeField] private TextMeshProUGUI player2ScoreTMP;
-
-    private void Awake()
-    {
-        player1Score = 0;
-        player2Score = 0;
-        player1ScoreTMP.text = player1Score.ToString();
-        player2ScoreTMP.text = player2Score.ToString();
-    }
     public int Player1Score
     {
         get { return player1Score; }
@@ -24,6 +16,13 @@ public class ScoreSystem : MonoBehaviour
     public int Player2Score
     {
         get { return player2Score; }
+    }
+    private void Awake()
+    {
+        player1Score = 0;
+        player2Score = 0;
+        player1ScoreTMP.text = player1Score.ToString();
+        player2ScoreTMP.text = player2Score.ToString();
     }
     public void IncreasePlayer1Score(int increaseValue)
     {
