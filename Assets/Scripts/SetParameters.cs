@@ -7,6 +7,10 @@ public static class SetParameters
     public static float StrategyTime { get; } = 16;//gives effect of 15 seconds
     public static float CommonGameTime { get; } = 240;//4 minutes
     public static float CameraSwitchDuration { get; } = 3f;
+
+    public static float timeLimitForTextToRed_StrategyTime { get; } = 5f;
+    public static float timeLimitForTextToRed_GameTime { get; } = 30f;
+
     //Values in array are in order of increasing levels
     // {Level1, Level2, Level3, Level4}
 
