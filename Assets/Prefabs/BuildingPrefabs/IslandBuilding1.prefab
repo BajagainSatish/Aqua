@@ -373,8 +373,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 65d42b69cbed1b54b9565ea5f104743b, type: 2}
+  m_sharedMaterial: {fileID: -2891800764058178762, guid: 65d42b69cbed1b54b9565ea5f104743b,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -22446,6 +22447,9 @@ MonoBehaviour:
   buildingIsOfP1: 1
   buildingIsFunctional: 0
   buildingIsMainBuilding: 0
+  gameState: {fileID: 0}
+  scoreSystem: {fileID: 0}
+  gameOver: {fileID: 0}
 --- !u!54 &7606211903631829754
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22473,8 +22477,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 21.819366, y: 20.695955, z: 15.979118}
-  m_Center: {x: 0.8545189, y: 0.21021271, z: 1.4466181}
+  m_Size: {x: 6.7596054, y: 5.1420445, z: 15.979118}
+  m_Center: {x: -0.31420135, y: -0.0108885765, z: 1.4466181}
 --- !u!114 &8504866142728959820
 MonoBehaviour:
   m_ObjectHideFlags: 0

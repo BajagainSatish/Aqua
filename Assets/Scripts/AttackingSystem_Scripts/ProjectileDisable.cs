@@ -31,8 +31,10 @@ public class ProjectileDisable : MonoBehaviour
         {
             ShipCategorizer_Player shipCategorizer_Player = other.GetComponent<ShipCategorizer_Player>();
             bool enemyShipIsP1 = shipCategorizer_Player.isP1Ship;
+            bool enemyShipsMenAreAlive = shipCategorizer_Player.shipMenAreAlive;//Projectile should pass through destroyed ships colliders
 
-            if (isP1Projectile != enemyShipIsP1)
+            //Under the assumption that if shipmenaredead, then ship is always no longer functional.
+            if (isP1Projectile != enemyShipIsP1 && enemyShipsMenAreAlive)
             {
                 gameObject.SetActive(false);
             }
@@ -41,8 +43,9 @@ public class ProjectileDisable : MonoBehaviour
         {
             BuildingCategorizer_Player buildingCategorizer_Player = other.GetComponent<BuildingCategorizer_Player>();
             bool enemyBuildingIsP1 = buildingCategorizer_Player.buildingIsOfP1;
+            bool enemyBuildingIsFunctional = buildingCategorizer_Player.buildingIsFunctional;
 
-            if (isP1Projectile != enemyBuildingIsP1)
+            if (isP1Projectile != enemyBuildingIsP1 && enemyBuildingIsFunctional)
             {
                 gameObject.SetActive(false);
             }

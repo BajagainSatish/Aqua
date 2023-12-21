@@ -23002,6 +23002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3aeb9637b2b2754083bb5ca0e047698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreSystem: {fileID: 0}
 --- !u!1 &2707006169962246659
 GameObject:
   m_ObjectHideFlags: 0
@@ -23863,8 +23864,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 51168c07701d57a489097d8cd67a74b0, type: 2}
+  m_sharedMaterial: {fileID: 9048611669830740408, guid: 51168c07701d57a489097d8cd67a74b0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using static GameState;
 public class SpawnObjectPlaceholder : MonoBehaviour
 {
     public string SpawnRegionTag = "SpawnRegion";
@@ -16,6 +16,10 @@ public class SpawnObjectPlaceholder : MonoBehaviour
     private MeshRenderer[] meshRenderers;
     private DragShipClassifier dragShipClassifier;
 
+    private GameObject gameStateManager;
+    private GameState gameState;
+    private CurrentGameState _currentGameState;
+
     private bool isInValidSpawnableRegionWrtPlayer;
     private bool _dragShipBelongsToP1;
     private bool spawnableRegionBelongsToP1;
@@ -26,11 +30,14 @@ public class SpawnObjectPlaceholder : MonoBehaviour
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
         canSpawn = false;
         prevFrameSpawnValue = false;
+        gameStateManager = GameObject.Find("GameStateManager");
+        gameState = gameStateManager.GetComponent<GameState>();
         SetMaterials();
     }
 
     private void Update()
     {
+        _currentGameState = gameState.currentGameState;
         CheckSpawnableRegionValidityWrtPlayer();
         CheckIfSpawnable();
         //only if previous frame was different try to change material
@@ -42,7 +49,7 @@ public class SpawnObjectPlaceholder : MonoBehaviour
     }
     private void SetMaterials()
     {
-        if (canSpawn)
+        if (canSpawn && (_currentGameState == CurrentGameState.StrategyTimeP1 || _currentGameState == CurrentGameState.StrategyTimeP2))
         {
             foreach (MeshRenderer mr in meshRenderers)
             {
