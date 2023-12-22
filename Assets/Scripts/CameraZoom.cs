@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class CameraZoom : MonoBehaviour
 {
-    public float zoomSpeed = 0.03f;
+    private float zoomSpeed;
+    private float minZoomFOV;
+    private float maxZoomFOV;
 
     private float previousBetweenFingerDistance;  //holds distance between two fingers used for zooming in previous frame
 
@@ -13,6 +15,10 @@ public class CameraZoom : MonoBehaviour
     private void Awake()
     {
         cameraControlRuntime = GetComponent<CameraControlRuntime>();
+
+        zoomSpeed = SetParameters.ZoomSpeed;
+        minZoomFOV = SetParameters.MinZoomFOV;
+        maxZoomFOV = SetParameters.MaxZoomFOV;
     }
 
     private void Update()
@@ -46,7 +52,13 @@ public class CameraZoom : MonoBehaviour
             return;
 
         float zoomAmount = deltaFingerDistance * zoomSpeed * Time.deltaTime;
-        transform.position += transform.forward * zoomAmount;
+        float newFOV = Camera.main.fieldOfView - zoomAmount;
+
+        // Apply restrictions
+        newFOV = Mathf.Clamp(newFOV, minZoomFOV, maxZoomFOV);
+
+        // Update the camera's field of view to simulate zooming
+        Camera.main.fieldOfView = newFOV;
 
         previousBetweenFingerDistance = currentBetweenFingerDistance;
     }

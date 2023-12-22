@@ -126,9 +126,26 @@ public class ShipScoreSystem : MonoBehaviour
         for (int i = 0; i < canvasObject.transform.childCount; i++)
         {
             GameObject childObject = canvasObject.transform.GetChild(i).gameObject;
-            if (childObject.name == "PlayerScoreSystem")
+            if (childObject.name == "SideMenuParent")
             {
-                scoreSystem = childObject.GetComponent<ScoreSystem>();
+                GameObject sideMenu = childObject.transform.GetChild(0).gameObject;
+
+                if (sideMenu.name == "SideMenu")
+                {
+                    for (int j = 0; j < sideMenu.transform.childCount; j++)
+                    {
+                        GameObject scoreSystemGameObject = sideMenu.transform.GetChild(j).gameObject;
+                        if (scoreSystemGameObject.name == "PlayerScoreSystem")
+                        {
+                            scoreSystem = scoreSystemGameObject.GetComponent<ScoreSystem>();
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("Update this script to find player score system!!");
+                    Debug.LogWarning("Player Score System not found by ship!!!");
+                }
             }
         }
     }

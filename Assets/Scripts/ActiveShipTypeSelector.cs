@@ -5,10 +5,10 @@ using UnityEngine.UI;
 public class ActiveShipTypeSelector : MonoBehaviour
 {
     public string activeShipType;
-    private int totalShipTypes = 4;
-    private readonly static int totalSizeCount = 3;
+    private int totalShipTypes = SetParameters.TotalShipTypesCount;
+    private readonly static int totalSizeCount = SetParameters.TotalShipSizesCount;
 
-    private GameObject[] background = new GameObject[4];
+    private GameObject[] background = new GameObject[SetParameters.TotalShipTypesCount];
     [SerializeField]private InventoryItemDisplay[] inventoryItemDisplayScript = new InventoryItemDisplay[totalSizeCount];
     [SerializeField] private InventoryItemDragHandler[] inventoryItemDragHandlerScript = new InventoryItemDragHandler[totalSizeCount];
 

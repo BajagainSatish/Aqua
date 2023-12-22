@@ -14,6 +14,9 @@ public static class SetParameters
     //Values in array are in order of increasing levels
     // {Level1, Level2, Level3, Level4}
 
+    public static int TotalShipTypesCount { get; } = 4;
+    public static int TotalShipSizesCount { get; } = 3;
+
     // Common to all 4 attacking ships
     public static int SmallShipMenCount { get; } = 2;
     public static int MediumShipMenCount { get; } = 4;
@@ -131,4 +134,13 @@ public static class SetParameters
 
     public static float BackgroundColorAlphaValue { get; } = 0.43f;
     public static float TextColorAlphaValue { get; } = 0.87f;
+
+    //Camera values
+    public static float ZoomSpeed { get; } = 0.03f;
+    public static float MinZoomFOV { get; } = 5f;
+    public static float MaxZoomFOV { get; } = 60f;
+    public static float PanSpeed { get; } = 0.06f;
+
+    //To modify camera position and rotation parameters of default, player 1 and 2 strategy time, and game time(default), go to MainCamera script
+    //Then modify contents of CameraControlRuntime Script.
 }

@@ -2264,6 +2264,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoomSpeed: 0.3
+  minZoomFOV: 5
+  maxZoomFOV: 60
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2277,7 +2279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   touchArea: {fileID: 0}
-  panSpeed: 0.05
+  panSpeed: 0.06
 --- !u!114 &330585550
 MonoBehaviour:
   m_ObjectHideFlags: 0

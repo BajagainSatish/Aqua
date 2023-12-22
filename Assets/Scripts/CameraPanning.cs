@@ -4,7 +4,7 @@ using UnityEngine;
 public class CameraPanning : MonoBehaviour
 {
     [SerializeField] private RectTransform touchArea;
-    [SerializeField] private float panSpeed = 0.01f;
+    private float panSpeed;
 
     private Touch prevTouch;
     private int prevTouchCount = 0;
@@ -16,6 +16,7 @@ public class CameraPanning : MonoBehaviour
     private void Awake()
     {
         cameraControlRuntime = GetComponent<CameraControlRuntime>();
+        panSpeed = SetParameters.PanSpeed;
     }
 
     void Update()
