@@ -7,14 +7,14 @@ public class InventoryItemDisplay : MonoBehaviour
     [SerializeField] Text shipCostText;
     [SerializeField] Text shipMenCountText;
 
-    private static readonly int totalLevels = 4;
+    private int totalLevels = SetParameters.TotalShipLevelsCount;
 
-    [SerializeField] private Sprite[] levelSprites = new Sprite[2 * totalLevels];//lower index = active, higher index = inactive sprite
+    [SerializeField] private Sprite[] levelSprites = new Sprite[2 * SetParameters.TotalShipLevelsCount];//lower index = active, higher index = inactive sprite
     [SerializeField] private ActiveShipTypeSelector activeShipTypeSelectorScript;
 
     private GameObject levelsGameObject;
-    private GameObject[] level = new GameObject[totalLevels];
-    private bool[] levelIsActive = new bool[totalLevels];
+    private GameObject[] level = new GameObject[SetParameters.TotalShipLevelsCount];
+    private bool[] levelIsActive = new bool[SetParameters.TotalShipLevelsCount];
 
     private int currentlyActiveLevel;
 

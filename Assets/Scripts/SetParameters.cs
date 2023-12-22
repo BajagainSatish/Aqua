@@ -16,6 +16,7 @@ public static class SetParameters
 
     public static int TotalShipTypesCount { get; } = 4;
     public static int TotalShipSizesCount { get; } = 3;
+    public static int TotalShipLevelsCount { get; } = 4;
 
     // Common to all 4 attacking ships
     public static int SmallShipMenCount { get; } = 2;
