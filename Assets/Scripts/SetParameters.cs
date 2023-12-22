@@ -120,4 +120,15 @@ public static class SetParameters
     public static int LargeShipDestroyScore { get; } = 750;
     public static int MediumShipDestroyScore { get; } = 500;
     public static int SmallShipDestroyScore { get; } = 250;
+
+    //Hex color values
+    public static string Player1TurnBackgroundColor { get; } = "#FC78FD";
+    public static string Player1TurnTextColor { get; } = "#79FD78";
+    public static string Player2TurnBackgroundColor { get; } = "#F6FF80";
+    public static string Player2TurnTextColor { get; } = "#8980FF";
+    public static string GameTimeBackgroundColor { get; } = "#1AD4E5";
+    public static string GameTimeTextColor { get; } = "#E52B1A";
+
+    public static float BackgroundColorAlphaValue { get; } = 0.43f;
+    public static float TextColorAlphaValue { get; } = 0.87f;
 }

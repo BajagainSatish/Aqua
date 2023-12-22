@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static GameState;
+using UnityEngine.UI;
 
 public class GameState : MonoBehaviour
 {
@@ -18,7 +18,14 @@ public class GameState : MonoBehaviour
     [SerializeField] private PlayerTurnSystem playerTurnSystemScript;
     [SerializeField] private CameraControlRuntime cameraControlRuntime;
     [SerializeField] private GameOver gameOver;
-    [SerializeField] private GameObject playButton;
+    [SerializeField] private GameObject playButton_DisplayState;
+
+    [SerializeField] private Sprite playButtonSprite;
+    [SerializeField] private Sprite strategyTimeP1Sprite;
+    [SerializeField] private Sprite strategyTimeP2Sprite;
+    [SerializeField] private Sprite gameTimeSprite;
+
+    private Image image;
 
     private GameObject gameOverGameObject;
     private bool hasAssignedTime;//flag is used to prevent repeatedly assigning the time in each frame
@@ -30,6 +37,9 @@ public class GameState : MonoBehaviour
     {
         strategyTime = SetParameters.StrategyTime;
         gameTime = SetParameters.CommonGameTime;
+
+        image = playButton_DisplayState.GetComponent<Image>();
+
         gameIsOver = false;
     }
     private void Start()
@@ -41,6 +51,8 @@ public class GameState : MonoBehaviour
 
         gameOverGameObject = GameObject.Find("GameOver");
         gameOver = gameOverGameObject.GetComponent<GameOver>();
+
+        image.sprite = playButtonSprite;
     }
     public void GameStateToP1StrategyTime()//Initially play button is pressed
     {
@@ -50,9 +62,9 @@ public class GameState : MonoBehaviour
             Vector3 rotationEuler = cameraControlRuntime.transform.eulerAngles;
             cameraControlRuntime.startRotation = Quaternion.Euler(rotationEuler);
             cameraControlRuntime.firstCameraSwitch = true;
-            playButton.SetActive(false);
+            playButton_DisplayState.SetActive(false);
             gameBegin = true;
-        }       
+        }
     }
     private void Update()
     {
@@ -63,6 +75,9 @@ public class GameState : MonoBehaviour
                 if (!hasAssignedTime)
                 {
                     playerTurnSystemScript.SetTurnToPlayer1();//added in this block as it will execute just once, better performance
+
+                    playButton_DisplayState.SetActive(true);
+                    image.sprite = strategyTimeP1Sprite;
 
                     timerScript.RemainingTime = strategyTime;//flag is used to prevent repeatedly assigning the time in each frame
                     hasAssignedTime = true;
@@ -75,6 +90,9 @@ public class GameState : MonoBehaviour
                 {
                     playerTurnSystemScript.SetTurnToPlayer2();
 
+                    playButton_DisplayState.SetActive(true);
+                    image.sprite = strategyTimeP2Sprite;
+
                     timerScript.RemainingTime = strategyTime;
                     hasAssignedTime = true;
                 }
@@ -85,6 +103,9 @@ public class GameState : MonoBehaviour
                 if (!hasAssignedTime)
                 {
                     playerTurnSystemScript.SetTurnToGameTime();
+
+                    playButton_DisplayState.SetActive(true);
+                    image.sprite = gameTimeSprite;
 
                     timerScript.RemainingTime = gameTime;
                     hasAssignedTime = true;
@@ -112,6 +133,8 @@ public class GameState : MonoBehaviour
             cameraControlRuntime.secondCameraSwitch = true;
 
             currentGameState = CurrentGameState.None;//necessary to prevent startPosition from being updated during runtime
+
+            playButton_DisplayState.SetActive(false);
             //print("This block should execute just once!!!");
         }
     }
@@ -130,6 +153,8 @@ public class GameState : MonoBehaviour
             cameraControlRuntime.thirdCameraSwitch = true;
 
             currentGameState = CurrentGameState.None;
+
+            playButton_DisplayState.SetActive(false);
             //print("This block should execute just once!!!");
         }
     }
