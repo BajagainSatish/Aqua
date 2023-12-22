@@ -29,7 +29,6 @@ public class CameraZoom : MonoBehaviour
                 {
                     previousBetweenFingerDistance = (touch1.position - touch2.position).magnitude;
                 }
-
                 else
                 {
                     HandleCameraZoom(touch1, touch2);
