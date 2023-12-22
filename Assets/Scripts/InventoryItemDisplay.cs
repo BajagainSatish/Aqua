@@ -3,8 +3,9 @@ using UnityEngine.UI;
 
 public class InventoryItemDisplay : MonoBehaviour
 {
-    [SerializeField] Text itemName;
-    [SerializeField] Text itemCost;
+    [SerializeField] Text shipSizeName;
+    [SerializeField] Text shipCostText;
+    [SerializeField] Text shipMenCountText;
 
     private static readonly int totalLevels = 4;
 
@@ -23,6 +24,7 @@ public class InventoryItemDisplay : MonoBehaviour
     private int weaponBasedShipCost;
     private int sizeBasedShipCost;
     private int totalShipCost;
+    private int totalShipMenCount;
 
     public int GetShipCost
     {
@@ -60,14 +62,16 @@ public class InventoryItemDisplay : MonoBehaviour
         {
             levelIsActive[i] = false;
         }
-        DetermineShipSize();       
+        DetermineShipSize();      
     }
     private void Start()
     {
+        EvaluateShipMenCount();
         EvaluateShipCost();
 
-        itemName.text = sizeOfShip_Item;
-        itemCost.text = totalShipCost.ToString();
+        shipSizeName.text = sizeOfShip_Item;
+        shipCostText.text = totalShipCost.ToString();
+        shipMenCountText.text = totalShipMenCount.ToString();
 
         currentlyActiveLevel = 1;
         ActivateDeactivateLevelSprite();
@@ -258,6 +262,21 @@ public class InventoryItemDisplay : MonoBehaviour
         }
 
         totalShipCost = weaponBasedShipCost + sizeBasedShipCost;
-        itemCost.text = totalShipCost.ToString();
+        shipCostText.text = totalShipCost.ToString();
+    }
+    private void EvaluateShipMenCount()
+    {
+        if (name == "Large")
+        {
+            totalShipMenCount = SetParameters.LargeShipMenCount;
+        }
+        else if (name == "Medium")
+        {
+            totalShipMenCount = SetParameters.MediumShipMenCount;
+        }
+        else if (name == "Small")
+        {
+            totalShipMenCount = SetParameters.SmallShipMenCount;
+        }
     }
 }
