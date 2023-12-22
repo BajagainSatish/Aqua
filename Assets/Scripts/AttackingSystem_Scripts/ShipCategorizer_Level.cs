@@ -13,9 +13,8 @@ public class ShipCategorizer_Level : MonoBehaviour
     private ShipLevels previousShipLevel;
 
     //None of these values except ship level are changed, eg. ship health during update.
-    public int shipHealth;
-    public int shipMenHealth;
-    private float shipSpeed;
+    public int maxShipHealth;
+    public int maxShipMenHealth;
 
     private int weaponBasedShipCost;
     private int sizeBasedShipCost;
@@ -107,44 +106,42 @@ public class ShipCategorizer_Level : MonoBehaviour
         if (targetingSystem_PhysicsOverlapSphereScript.thisShipType == TargetingSystem_PhysicsOverlapSphere.ShipType.ArcherShip)
         {
             weaponRange = SetParameters.ArcherWeaponRange[index];
-            shipHealth = SetParameters.ArcherShipHealth[index];
-            shipMenHealth = SetParameters.ArcherShipMenHealth[index];
+            maxShipHealth = SetParameters.ArcherShipHealth[index];
+            maxShipMenHealth = SetParameters.ArcherShipMenHealth[index];
             weaponDamage = SetParameters.ArcherWeaponDamage[index];
             weaponBasedShipCost = SetParameters.ArcherShipCost[index];
 
-            healthAmmoSystemScript.SetShipAndShipMenHealth(shipHealth,shipMenHealth);
+            healthAmmoSystemScript.SetShipAndShipMenHealth(maxShipHealth,maxShipMenHealth);
         }
         else if (targetingSystem_PhysicsOverlapSphereScript.thisShipType == TargetingSystem_PhysicsOverlapSphere.ShipType.CannonShip)
         {
             weaponRange = SetParameters.CannonWeaponRange[index];
-            shipHealth = SetParameters.CannonShipHealth[index];
-            shipMenHealth = SetParameters.CannonShipMenHealth[index];
+            maxShipHealth = SetParameters.CannonShipHealth[index];
+            maxShipMenHealth = SetParameters.CannonShipMenHealth[index];
             weaponDamage = SetParameters.CannonWeaponDamage[index];
             weaponBasedShipCost = SetParameters.CannonShipCost[index];
 
-            healthAmmoSystemScript.SetShipAndShipMenHealth(shipHealth, shipMenHealth);
+            healthAmmoSystemScript.SetShipAndShipMenHealth(maxShipHealth, maxShipMenHealth);
         }
         else if (targetingSystem_PhysicsOverlapSphereScript.thisShipType == TargetingSystem_PhysicsOverlapSphere.ShipType.GunmanShip)
         {
             weaponRange = SetParameters.GunmanWeaponRange[index];
-            shipHealth = SetParameters.GunmanShipHealth[index];
-            shipMenHealth = SetParameters.GunmanShipMenHealth[index];
+            maxShipHealth = SetParameters.GunmanShipHealth[index];
+            maxShipMenHealth = SetParameters.GunmanShipMenHealth[index];
             weaponDamage = SetParameters.GunmanWeaponDamage[index];
             weaponBasedShipCost = SetParameters.GunmanShipCost[index];
 
-            healthAmmoSystemScript.SetShipAndShipMenHealth(shipHealth, shipMenHealth);
+            healthAmmoSystemScript.SetShipAndShipMenHealth(maxShipHealth, maxShipMenHealth);
         }
         else if (targetingSystem_PhysicsOverlapSphereScript.thisShipType == TargetingSystem_PhysicsOverlapSphere.ShipType.MortarShip)
         {
             weaponRange = SetParameters.MortarWeaponRange[index];
-            shipHealth = SetParameters.MortarShipHealth[index];
-            shipMenHealth = SetParameters.MortarShipMenHealth[index];
+            maxShipHealth = SetParameters.MortarShipHealth[index];
+            maxShipMenHealth = SetParameters.MortarShipMenHealth[index];
             weaponDamage = SetParameters.MortarWeaponDamage[index];
             weaponBasedShipCost = SetParameters.MortarShipCost[index];
 
-            healthAmmoSystemScript.SetShipAndShipMenHealth(shipHealth, shipMenHealth);
+            healthAmmoSystemScript.SetShipAndShipMenHealth(maxShipHealth, maxShipMenHealth);
         }
-
-        shipSpeed = SetParameters.ShipSpeed[index];
     }
 }

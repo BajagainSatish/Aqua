@@ -13,8 +13,6 @@ public class ShipHealthAmmoSystem : MonoBehaviour
     public int currentShipMenHealth;
     public int currentAmmo;
 
-    private ShipHealthBar shipHealthBarScript;
-    private ShipMenHealthBar shipMenHealthBarScript;
     private ShipAmmoBar shipAmmoBarScript;
 
     private ShipCategorizer_Level shipCategorizer_LevelScript;
@@ -33,20 +31,11 @@ public class ShipHealthAmmoSystem : MonoBehaviour
 
                 for (int j = 0; j < canvasGameObject.transform.childCount; j++)
                 {
-                    GameObject healthbarGameObject = canvasGameObject.transform.GetChild(j).gameObject;
+                    GameObject ammoGameObject = canvasGameObject.transform.GetChild(j).gameObject;
 
-                    if (healthbarGameObject.TryGetComponent<ShipHealthBar>(out _))
+                    if (ammoGameObject.TryGetComponent<ShipAmmoBar>(out _))
                     {
-                        shipHealthBarScript = healthbarGameObject.GetComponent<ShipHealthBar>();
-                    }
-                    else if (healthbarGameObject.TryGetComponent<ShipMenHealthBar>(out _))
-                    {
-                        shipMenHealthBarScript = healthbarGameObject.GetComponent<ShipMenHealthBar>();
-                        isNotSupplyShip = true;
-                    }
-                    else if (healthbarGameObject.TryGetComponent<ShipAmmoBar>(out _))
-                    {
-                        shipAmmoBarScript = healthbarGameObject.GetComponent<ShipAmmoBar>();
+                        shipAmmoBarScript = ammoGameObject.GetComponent<ShipAmmoBar>();
                         isNotSupplyShip = true;
                     }
                 }
@@ -79,8 +68,8 @@ public class ShipHealthAmmoSystem : MonoBehaviour
         else
         {
             shipCategorizer_LevelScript = GetComponent<ShipCategorizer_Level>();
-            maxShipHealth = shipCategorizer_LevelScript.shipHealth;
-            maxShipMenHealth = shipCategorizer_LevelScript.shipMenHealth;
+            maxShipHealth = shipCategorizer_LevelScript.maxShipHealth;
+            maxShipMenHealth = shipCategorizer_LevelScript.maxShipMenHealth;
 
             if (TryGetComponent<ArcherShoot>(out _))
             {
@@ -107,23 +96,19 @@ public class ShipHealthAmmoSystem : MonoBehaviour
         currentShipHealth = maxShipHealth;
         currentShipMenHealth = maxShipMenHealth;
         currentAmmo = maxAmmo;
-        shipHealthBarScript.SetShipMaxHealth(maxShipHealth);
 
         if (isNotSupplyShip)
         {
-            shipMenHealthBarScript.SetShipMenMaxHealth(maxShipMenHealth);
             shipAmmoBarScript.SetMaxAmmo(maxAmmo);
         }
     }
     public void ShipTakeDamage(int damage)
     {
         currentShipHealth -= damage;
-        shipHealthBarScript.SetShipHealth(currentShipHealth);
     }
     public void ShipMenTakeDamage(int damage)
     {
         currentShipMenHealth -= damage;
-        shipMenHealthBarScript.SetShipMenHealth(currentShipMenHealth);
     }
     public void AmmoCountDecrease(int ammoCount)
     {
