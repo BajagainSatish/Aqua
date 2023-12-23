@@ -5478,7 +5478,7 @@ Transform:
   m_GameObject: {fileID: 4782823212274096782}
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
   m_LocalPosition: {x: 47.3, y: 0.34, z: -24.494}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8080919258402332193}
@@ -5588,8 +5588,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipLevel: 0
-  shipHealth: 0
-  shipMenHealth: 0
+  maxShipHealth: 0
+  maxShipMenHealth: 0
   totalShipCost: 0
   weaponRange: 0
   weaponDamage: 0
