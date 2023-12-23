@@ -16,7 +16,6 @@ public class GunShoot : MonoBehaviour
     private int totalGunmanCount;
     private int shipMenCount;
 
-    private GameObject bullet;
     private Vector3 myShipPosition;
     private GameObject scaleFactorGameObject;
     private GameObject shipCenter;
@@ -177,7 +176,7 @@ public class GunShoot : MonoBehaviour
                             gunmanControllerScript[i].shootBullet = false;
                             if (!shootOnce)
                             {
-                                bullet = objectPoolBulletScript.ReturnProjectile();
+                                GameObject bullet = objectPoolBulletScript.ReturnProjectile();
 
                                 ProjectileController projectileControllerScript = bullet.GetComponent<ProjectileController>();
                                 projectileControllerScript.weaponDamage = shipCategorizer_LevelScript.weaponDamage;

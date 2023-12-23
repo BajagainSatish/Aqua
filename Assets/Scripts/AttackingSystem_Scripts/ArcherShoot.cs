@@ -19,7 +19,6 @@ public class ArcherShoot : MonoBehaviour
     private int curvePointsTotalCount;
     private int shipMenCount;
 
-    private GameObject arrow;
     private Vector3 myShipPosition;
     private GameObject scaleFactorGameObject;
     private GameObject myShipCenter;
@@ -204,7 +203,7 @@ public class ArcherShoot : MonoBehaviour
                             archerControllerScript[i].shootArrow = false;
                             if (!shootOnce)
                             {
-                                arrow = objectPoolArrowScript.ReturnProjectile();
+                                GameObject arrow = objectPoolArrowScript.ReturnProjectile();
 
                                 ProjectileController projectileControllerScript = arrow.GetComponent<ProjectileController>();
                                 projectileControllerScript.weaponDamage = shipCategorizer_LevelScript.weaponDamage;
