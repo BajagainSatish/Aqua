@@ -8,6 +8,8 @@ public class ShipReceiveDamage : MonoBehaviour
     private ShipCategorizer_Player shipCategorizer_PlayerScript;
 
     private bool thisShipIsPlayer1;
+    private bool thisShipMenAreAlive;
+    private bool thisShipIsFunctional;
 
     private void Awake()
     {
@@ -19,7 +21,11 @@ public class ShipReceiveDamage : MonoBehaviour
     {
         thisShipIsPlayer1 = shipCategorizer_PlayerScript.isP1Ship;
     }
-
+    private void Update()
+    {
+        thisShipMenAreAlive = shipCategorizer_PlayerScript.shipMenAreAlive;
+        thisShipIsFunctional = shipCategorizer_PlayerScript.shipIsFunctional;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<ProjectileController>(out ProjectileController projectileControllerScript))
@@ -31,18 +37,19 @@ public class ShipReceiveDamage : MonoBehaviour
             {
                 int damage = projectileControllerScript.weaponDamage;
 
-                if (attackerShipIsArcherOrGunmanShip)//Damage only to ship men health
+                if (attackerShipIsArcherOrGunmanShip && thisShipMenAreAlive)//Damage only to ship men health
                 {
                     healthSystemScript.ShipMenTakeDamage(damage);
+                    other.gameObject.SetActive(false);
                     //print(this.name + " took only MAN damage: " + damage + " from archer/gunman ship.");
                 }
-                else//Damage to both ship as well as ship men
+                else if(!attackerShipIsArcherOrGunmanShip && (thisShipMenAreAlive || thisShipIsFunctional))
                 {
                     healthSystemScript.ShipTakeDamage(damage);
-                    healthSystemScript.ShipMenTakeDamage(damage);
+                    healthSystemScript.ShipMenTakeDamage(damage);//later handle health below 0 case
+                    other.gameObject.SetActive(false);
                     //print(this.name + " took whole damage: " + damage + " from cannon/mortar ship.");
                 }
-                other.gameObject.SetActive(false);
             }          
         }
     }

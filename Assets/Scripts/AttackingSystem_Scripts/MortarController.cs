@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static ShipCategorizer_Level;
+using static ShipCategorizer_Size;
 
 public class MortarController : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class MortarController : MonoBehaviour
     private MortarShoot mortarShootScript;
     private ShipCategorizer_Level shipCategorizer_LevelScript;
     private ShipCategorizer_Player shipCategorizer_PlayerScript;
+    private ShipCategorizer_Size shipCategorizer_SizeScript;
 
     private void Awake()
     {
@@ -46,16 +48,6 @@ public class MortarController : MonoBehaviour
 
     private void Start()
     {
-        GameObject objectPoolMortarBomb = GameObject.Find("ObjectPoolMortarBombs");
-        if (objectPoolMortarBomb != null)
-        {
-            objectPoolMortarScript = objectPoolMortarBomb.GetComponent<ObjectPool_Projectile>();
-        }
-        else
-        {
-            Debug.LogWarning("Object Pool Mortar script not assigned!!!");
-        }
-
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.startWidth = lineWidth;
         lineRenderer.positionCount = curvePointsTotalCount + 1;
@@ -71,6 +63,7 @@ public class MortarController : MonoBehaviour
         mortarShootScript = shipGameObject.GetComponent<MortarShoot>();
         shipCategorizer_LevelScript = shipGameObject.GetComponent<ShipCategorizer_Level>();
         shipCategorizer_PlayerScript = shipGameObject.GetComponent<ShipCategorizer_Player>();
+        shipCategorizer_SizeScript = shipGameObject.GetComponent<ShipCategorizer_Size>();
 
         if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level1)
         {
@@ -88,6 +81,7 @@ public class MortarController : MonoBehaviour
         {
             AssignValue(3);
         }
+        HandleProjectileStuff();
     }
 
     private void Update()
@@ -239,5 +233,29 @@ public class MortarController : MonoBehaviour
     {
         waitBeforeShoot_Aiming = SetParameters.MortarWaitBeforeShootAiming[index];
         waitAfterShoot = SetParameters.MortarWaitAfterShoot[index];
+    }
+    private void HandleProjectileStuff()
+    {
+        GameObject objectPoolPrefabCollectorGameObject = GameObject.Find("ObjectPoolPrefabs");
+        ObjectPoolPrefabCollector objectPoolPrefabCollector = objectPoolPrefabCollectorGameObject.GetComponent<ObjectPoolPrefabCollector>();
+
+        GameObject objectPoolMortarBombs = new GameObject();
+        objectPoolMortarBombs.name = "ObjectPoolMortarBombs";
+        objectPoolMortarBombs.AddComponent<ObjectPool_Projectile>();
+        objectPoolMortarScript = objectPoolMortarBombs.GetComponent<ObjectPool_Projectile>();
+
+        if (shipCategorizer_SizeScript.shipSize == ShipSize.Small)
+        {
+            objectPoolMortarScript.totalProjectileCount = SetParameters.TotalProjectileCountSmallShip;
+        }
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Medium)
+        {
+            objectPoolMortarScript.totalProjectileCount = SetParameters.TotalProjectileCountMediumShip;
+        }
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Large)
+        {
+            objectPoolMortarScript.totalProjectileCount = SetParameters.TotalProjectileCountLargeShip;
+        }
+        objectPoolMortarScript.projectilePrefab = objectPoolPrefabCollector.mortarBombPrefab;
     }
 }

@@ -24,7 +24,9 @@ public static class SetParameters
     public static int LargeShipMenCount { get; } = 6;
 
     //Total projectiles to instantiate for object pooling
-    public static int TotalProjectileCount { get; } = 100;
+    public static int TotalProjectileCountSmallShip { get; } = 6;
+    public static int TotalProjectileCountMediumShip { get; } = 12;
+    public static int TotalProjectileCountLargeShip { get; } = 18;
 
     // Archer Values
     public static float ArcherLineWidth { get; } = 0.01f;

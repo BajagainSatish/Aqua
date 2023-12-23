@@ -117,16 +117,7 @@ public class GunShoot : MonoBehaviour
 
     private void Start()
     {
-        GameObject objectPoolBullet = GameObject.Find("ObjectPoolBullets");
-        if (objectPoolBullet != null)
-        {
-            objectPoolBulletScript = objectPoolBullet.GetComponent<ObjectPool_Projectile>();
-        }
-        else
-        {
-            Debug.LogWarning("Object Pool Bullet script not assigned!!!");
-        }
-
+        HandleProjectileStuff();
         for (int i = 0; i < totalGunmanCount; i++)
         {
             gunmanControllerScript[i].lineRenderer.startWidth = lineWidth;
@@ -309,5 +300,29 @@ public class GunShoot : MonoBehaviour
             default:
                 return 0;
         }
+    }
+    private void HandleProjectileStuff()
+    {
+        GameObject objectPoolPrefabCollectorGameObject = GameObject.Find("ObjectPoolPrefabs");
+        ObjectPoolPrefabCollector objectPoolPrefabCollector = objectPoolPrefabCollectorGameObject.GetComponent<ObjectPoolPrefabCollector>();
+
+        GameObject objectPoolBullets = new GameObject();
+        objectPoolBullets.name = "ObjectPoolBullets";
+        objectPoolBullets.AddComponent<ObjectPool_Projectile>();
+        objectPoolBulletScript = objectPoolBullets.GetComponent<ObjectPool_Projectile>();
+
+        if (shipCategorizer_SizeScript.shipSize == ShipSize.Small)
+        {
+            objectPoolBulletScript.totalProjectileCount = SetParameters.TotalProjectileCountSmallShip;
+        }
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Medium)
+        {
+            objectPoolBulletScript.totalProjectileCount = SetParameters.TotalProjectileCountMediumShip;
+        }
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Large)
+        {
+            objectPoolBulletScript.totalProjectileCount = SetParameters.TotalProjectileCountLargeShip;
+        }
+        objectPoolBulletScript.projectilePrefab = objectPoolPrefabCollector.bulletPrefab;
     }
 }

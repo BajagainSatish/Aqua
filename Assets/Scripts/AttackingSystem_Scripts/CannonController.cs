@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static ShipCategorizer_Level;
+using static ShipCategorizer_Size;
 
 public class CannonController : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class CannonController : MonoBehaviour
     private CannonShoot cannonShootScript;
     private ShipCategorizer_Level shipCategorizer_LevelScript;
     private ShipCategorizer_Player shipCategorizer_PlayerScript;
+    private ShipCategorizer_Size shipCategorizer_SizeScript;
 
     private void Awake()
     {
@@ -60,16 +62,6 @@ public class CannonController : MonoBehaviour
 
     private void Start()
     {
-        GameObject objectPoolCannonBall = GameObject.Find("ObjectPoolCannonBalls");
-        if (objectPoolCannonBall != null)
-        {
-            objectPoolCannonBallScript = objectPoolCannonBall.GetComponent<ObjectPool_Projectile>();
-        }
-        else
-        {
-            Debug.LogWarning("Object Pool Cannon script not assigned!!!");
-        }
-
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.startWidth = lineWidth;
         lineRenderer.positionCount = 2;
@@ -83,6 +75,7 @@ public class CannonController : MonoBehaviour
 
         shipCategorizer_LevelScript = shipGameObject.GetComponent<ShipCategorizer_Level>();
         shipCategorizer_PlayerScript = shipGameObject.GetComponent<ShipCategorizer_Player>();
+        shipCategorizer_SizeScript = shipGameObject.GetComponent<ShipCategorizer_Size>();
 
         if (shipCategorizer_LevelScript.shipLevel == ShipLevels.Level1)
         {
@@ -100,6 +93,7 @@ public class CannonController : MonoBehaviour
         {
             AssignValue(3);
         }
+        HandleProjectileStuff();
     }
 
     private void Update()
@@ -271,5 +265,29 @@ public class CannonController : MonoBehaviour
     {
         waitBeforeShoot_Aiming = SetParameters.CannonWaitBeforeShootAiming[index];
         waitAfterShoot = SetParameters.CannonWaitAfterShoot[index];
+    }
+    private void HandleProjectileStuff()
+    {
+        GameObject objectPoolPrefabCollectorGameObject = GameObject.Find("ObjectPoolPrefabs");
+        ObjectPoolPrefabCollector objectPoolPrefabCollector = objectPoolPrefabCollectorGameObject.GetComponent<ObjectPoolPrefabCollector>();
+
+        GameObject objectPoolCannonBalls = new GameObject();
+        objectPoolCannonBalls.name = "ObjectPoolCannonBalls";
+        objectPoolCannonBalls.AddComponent<ObjectPool_Projectile>();
+        objectPoolCannonBallScript = objectPoolCannonBalls.GetComponent<ObjectPool_Projectile>();
+
+        if (shipCategorizer_SizeScript.shipSize == ShipSize.Small)
+        {
+            objectPoolCannonBallScript.totalProjectileCount = SetParameters.TotalProjectileCountSmallShip;
+        }
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Medium)
+        {
+            objectPoolCannonBallScript.totalProjectileCount = SetParameters.TotalProjectileCountMediumShip;
+        }
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Large)
+        {
+            objectPoolCannonBallScript.totalProjectileCount = SetParameters.TotalProjectileCountLargeShip;
+        }
+        objectPoolCannonBallScript.projectilePrefab = objectPoolPrefabCollector.cannonBallPrefab;
     }
 }

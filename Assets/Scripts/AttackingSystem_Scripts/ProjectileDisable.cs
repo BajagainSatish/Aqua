@@ -34,7 +34,7 @@ public class ProjectileDisable : MonoBehaviour
             bool enemyShipsMenAreAlive = shipCategorizer_Player.shipMenAreAlive;//Projectile should pass through destroyed ships colliders
 
             //Under the assumption that if shipmenaredead, then ship is always no longer functional.
-            if (isP1Projectile != enemyShipIsP1 && enemyShipsMenAreAlive)
+            if ((isP1Projectile != enemyShipIsP1) && enemyShipsMenAreAlive)
             {
                 gameObject.SetActive(false);
             }
@@ -45,10 +45,17 @@ public class ProjectileDisable : MonoBehaviour
             bool enemyBuildingIsP1 = buildingCategorizer_Player.buildingIsOfP1;
             bool enemyBuildingIsFunctional = buildingCategorizer_Player.buildingIsFunctional;
 
-            if (isP1Projectile != enemyBuildingIsP1 && enemyBuildingIsFunctional)
+            if ((isP1Projectile != enemyBuildingIsP1) && enemyBuildingIsFunctional)
             {
                 gameObject.SetActive(false);
             }
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Water"))
+        {
+            gameObject.SetActive(false);
         }
     }
 }

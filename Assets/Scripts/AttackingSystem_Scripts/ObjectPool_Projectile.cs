@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ObjectPool_Projectile : MonoBehaviour
 {
-    private int totalProjectileCount = SetParameters.TotalProjectileCount;
-    [SerializeField] private GameObject projectilePrefab;
+    public int totalProjectileCount;
+    public GameObject projectilePrefab;
 
-    private void Awake()
+    private void Start()
     {
         for (int i = 0; i < totalProjectileCount; i++)
         {

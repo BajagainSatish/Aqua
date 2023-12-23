@@ -8,6 +8,7 @@ public class BuildingReceiveDamage : MonoBehaviour
     private BuildingCategorizer_Player buildingCategorizer_PlayerScript;
 
     private bool thisBuildingIsPlayer1;
+    private bool thisBuildingIsFunctional;
 
     private void Awake()
     {
@@ -19,10 +20,13 @@ public class BuildingReceiveDamage : MonoBehaviour
     {
         thisBuildingIsPlayer1 = buildingCategorizer_PlayerScript.buildingIsOfP1;
     }
-
+    private void Update()
+    {
+        thisBuildingIsFunctional = buildingCategorizer_PlayerScript.buildingIsFunctional;
+    }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<ProjectileController>(out ProjectileController projectileControllerScript))
+        if (other.TryGetComponent<ProjectileController>(out ProjectileController projectileControllerScript) && thisBuildingIsFunctional)
         {
             bool projectileIsOfPlayer1 = projectileControllerScript.isPlayer1Projectile;
 

@@ -122,15 +122,7 @@ public class ArcherShoot : MonoBehaviour
 
     private void Start()
     {
-        GameObject objectPoolArrows = GameObject.Find("ObjectPoolArrows");
-        if (objectPoolArrows != null)
-        {
-            objectPoolArrowScript = objectPoolArrows.GetComponent<ObjectPool_Projectile>();
-        }
-        else
-        {
-            Debug.LogWarning("Object Pool Arrow script not assigned!!!");
-        }
+        HandleProjectileStuff();
 
         for (int i = 0; i < totalArcherCount; i++)
         {
@@ -353,5 +345,29 @@ public class ArcherShoot : MonoBehaviour
             default:
                 return 0;
         }
+    }
+    private void HandleProjectileStuff()
+    {
+        GameObject objectPoolPrefabCollectorGameObject = GameObject.Find("ObjectPoolPrefabs");
+        ObjectPoolPrefabCollector objectPoolPrefabCollector = objectPoolPrefabCollectorGameObject.GetComponent<ObjectPoolPrefabCollector>();
+
+        GameObject objectPoolArrows = new GameObject();
+        objectPoolArrows.name = "ObjectPoolArrows";
+        objectPoolArrows.AddComponent<ObjectPool_Projectile>();
+        objectPoolArrowScript = objectPoolArrows.GetComponent<ObjectPool_Projectile>();
+
+        if (shipCategorizer_SizeScript.shipSize == ShipSize.Small)
+        {
+            objectPoolArrowScript.totalProjectileCount = SetParameters.TotalProjectileCountSmallShip;
+        }
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Medium)
+        {
+            objectPoolArrowScript.totalProjectileCount = SetParameters.TotalProjectileCountMediumShip;
+        }
+        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Large)
+        {
+            objectPoolArrowScript.totalProjectileCount = SetParameters.TotalProjectileCountLargeShip;
+        }
+        objectPoolArrowScript.projectilePrefab = objectPoolPrefabCollector.arrowPrefab;
     }
 }
