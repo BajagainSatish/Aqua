@@ -32,6 +32,8 @@ public class BuildingReceiveDamage : MonoBehaviour
                 //damage to building
                 healthSystemScript.BuildingTakeDamage(damage);
                 print(this.name + " took whole damage: " + damage);
+
+                other.gameObject.SetActive(false);
             }
         }
     }

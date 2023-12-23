@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectPool_Projectile : MonoBehaviour
 {
-    [SerializeField] private int totalProjectileCount = 50;
+    private int totalProjectileCount = SetParameters.TotalProjectileCount;
     [SerializeField] private GameObject projectilePrefab;
 
     private void Awake()

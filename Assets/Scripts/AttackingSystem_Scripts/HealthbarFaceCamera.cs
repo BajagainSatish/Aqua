@@ -10,6 +10,12 @@ public class HealthbarFaceCamera : MonoBehaviour
     private Transform shipOrBuildingObject;
     private string shipLevelText;
 
+    private ShipCategorizer_Player shipCategorizer_Player;
+    private BuildingCategorizer_Player buildingCategorizer_Player;
+
+    private string p1TextColor;
+    private string p2TextColor;
+
     private void Awake()
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -20,6 +26,8 @@ public class HealthbarFaceCamera : MonoBehaviour
                 descriptionText = gameObject.GetComponent<TextMeshProUGUI>();
             }
         }
+        p1TextColor = SetParameters.Player1TurnBackgroundColor;
+        p2TextColor = SetParameters.Player2TurnBackgroundColor;
     }
     private void Start()
     {
@@ -39,6 +47,8 @@ public class HealthbarFaceCamera : MonoBehaviour
         {
             shipLevelText = shipOrBuildingObject.GetComponent<ShipCategorizer_Level>().shipLevel.ToString();
             descriptionText.text = shipLevelText;//later handle case when ship's level is upgraded in runtime, level text also changes.
+
+            shipCategorizer_Player = shipOrBuildingObject.GetComponent<ShipCategorizer_Player>();
         }
         else if (shipOrBuildingObject.TryGetComponent<ShipCategorizer_Player>(out _))
         {
@@ -50,7 +60,7 @@ public class HealthbarFaceCamera : MonoBehaviour
 
             if (islandBuilding.TryGetComponent<BuildingCategorizer_Player>(out _))
             {
-                BuildingCategorizer_Player buildingCategorizer_Player = islandBuilding.GetComponent<BuildingCategorizer_Player>();
+                buildingCategorizer_Player = islandBuilding.GetComponent<BuildingCategorizer_Player>();
 
                 if (buildingCategorizer_Player.buildingIsMainBuilding)
                 {
@@ -63,9 +73,44 @@ public class HealthbarFaceCamera : MonoBehaviour
             }
         }
     }
+    private void Update()
+    {
+        if (shipCategorizer_Player != null)
+        {
+            SetLevelTextColorBasedOnPlayer_Ship();
+        }
+        else if (buildingCategorizer_Player != null)
+        {
+            SetLevelTextColorBasedOnPlayer_Building();
+        }
+    }
     private void LateUpdate()
     {
         transform.LookAt(transform.position + mainCamera.forward);
+    }
+    private void SetLevelTextColorBasedOnPlayer_Ship()
+    {
+        bool thisShipIsP1 = shipCategorizer_Player.isP1Ship;
+        if (thisShipIsP1)
+        {
+            descriptionText.color = HexToColor(p1TextColor);
+        }
+        else
+        {
+            descriptionText.color = HexToColor(p2TextColor);
+        }
+    }
+    private void SetLevelTextColorBasedOnPlayer_Building()
+    {
+        bool thisBuildingIsP1 = buildingCategorizer_Player.buildingIsOfP1;
+        if (thisBuildingIsP1)
+        {
+            descriptionText.color = HexToColor(p1TextColor);
+        }
+        else
+        {
+            descriptionText.color = HexToColor(p2TextColor);
+        }
     }
     public static Transform FindBuildingParent(Transform childTransform)
     {
@@ -77,5 +122,11 @@ public class HealthbarFaceCamera : MonoBehaviour
         {
             return FindBuildingParent(childTransform.parent);
         }
+    }
+
+    private Color HexToColor(string hex)
+    {
+        ColorUtility.TryParseHtmlString(hex, out Color color);
+        return color;
     }
 }

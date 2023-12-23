@@ -23,6 +23,9 @@ public static class SetParameters
     public static int MediumShipMenCount { get; } = 4;
     public static int LargeShipMenCount { get; } = 6;
 
+    //Total projectiles to instantiate for object pooling
+    public static int TotalProjectileCount { get; } = 120;
+
     // Archer Values
     public static float ArcherLineWidth { get; } = 0.01f;
     public static float ArcherArrowVelocity { get; } = 8f;
@@ -47,10 +50,10 @@ public static class SetParameters
     public static int CurvePointsTotalCount { get; } = 20;
 
     // Ship Attributes on basis of Levels
-    public static float[] ArcherWeaponRange { get; } = { 8f, 12f, 16f, 20f };
-    public static float[] CannonWeaponRange { get; } = { 8f, 12f, 16f, 20f };
-    public static float[] GunmanWeaponRange { get; } = { 8f, 12f, 16f, 20f };
-    public static float[] MortarWeaponRange { get; } = { 8f, 12f, 16f, 20f };
+    public static float[] ArcherWeaponRange { get; } = { 15f, 20f, 25f, 30f };
+    public static float[] CannonWeaponRange { get; } = { 15f, 20f, 25f, 30f };
+    public static float[] GunmanWeaponRange { get; } = { 15f, 20f, 25f, 30f };
+    public static float[] MortarWeaponRange { get; } = { 15f, 20f, 25f, 30f };
 
     // Varying Ship Health
     public static int SupplyShipHealth { get; } = 140;

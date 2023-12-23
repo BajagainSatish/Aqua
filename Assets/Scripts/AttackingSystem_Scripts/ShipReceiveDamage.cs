@@ -42,6 +42,7 @@ public class ShipReceiveDamage : MonoBehaviour
                     healthSystemScript.ShipMenTakeDamage(damage);
                     //print(this.name + " took whole damage: " + damage + " from cannon/mortar ship.");
                 }
+                other.gameObject.SetActive(false);
             }          
         }
     }
