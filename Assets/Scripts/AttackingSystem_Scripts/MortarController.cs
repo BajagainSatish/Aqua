@@ -126,6 +126,7 @@ public class MortarController : MonoBehaviour
                             projectileControllerScript.weaponDamage = shipCategorizer_LevelScript.weaponDamage;
                             projectileControllerScript.isPlayer1Projectile = shipCategorizer_PlayerScript.isP1Ship;
                             projectileControllerScript.isArcherOrGunmanProjectile = false;
+                            projectileControllerScript.finalPos = B.position;
 
                             if (mortarBomb != null)
                             {
@@ -244,18 +245,7 @@ public class MortarController : MonoBehaviour
         objectPoolMortarBombs.AddComponent<ObjectPool_Projectile>();
         objectPoolMortarScript = objectPoolMortarBombs.GetComponent<ObjectPool_Projectile>();
 
-        if (shipCategorizer_SizeScript.shipSize == ShipSize.Small)
-        {
-            objectPoolMortarScript.totalProjectileCount = SetParameters.TotalProjectileCountSmallShip;
-        }
-        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Medium)
-        {
-            objectPoolMortarScript.totalProjectileCount = SetParameters.TotalProjectileCountMediumShip;
-        }
-        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Large)
-        {
-            objectPoolMortarScript.totalProjectileCount = SetParameters.TotalProjectileCountLargeShip;
-        }
+        objectPoolMortarScript.totalProjectileCount = SetParameters.TotalProjectileCountPerShooter;
         objectPoolMortarScript.projectilePrefab = objectPoolPrefabCollector.mortarBombPrefab;
     }
 }

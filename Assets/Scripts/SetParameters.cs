@@ -23,10 +23,16 @@ public static class SetParameters
     public static int MediumShipMenCount { get; } = 4;
     public static int LargeShipMenCount { get; } = 6;
 
-    //Total projectiles to instantiate for object pooling
+    //Total projectiles to instantiate for object pooling, for archer and gunman ship
     public static int TotalProjectileCountSmallShip { get; } = 6;
     public static int TotalProjectileCountMediumShip { get; } = 12;
     public static int TotalProjectileCountLargeShip { get; } = 18;
+
+    //Total projectiles to instantiate for object pooling, for mortar and cannon ship
+    public static int TotalProjectileCountPerShooter { get; } = 3;
+
+    public static float ProjectileDistanceDisableThreshold { get; } = 1f;
+    //When the projectile reaches approximately atleast this distance from it's final position, it will be disabled.
 
     // Archer Values
     public static float ArcherLineWidth { get; } = 0.01f;

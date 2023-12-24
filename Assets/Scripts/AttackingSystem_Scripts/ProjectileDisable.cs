@@ -51,11 +51,4 @@ public class ProjectileDisable : MonoBehaviour
             }
         }
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Water"))
-        {
-            gameObject.SetActive(false);
-        }
-    }
 }

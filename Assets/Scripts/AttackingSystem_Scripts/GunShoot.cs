@@ -173,6 +173,7 @@ public class GunShoot : MonoBehaviour
                                 projectileControllerScript.weaponDamage = shipCategorizer_LevelScript.weaponDamage;
                                 projectileControllerScript.isPlayer1Projectile = shipCategorizer_PlayerScript.isP1Ship;
                                 projectileControllerScript.isArcherOrGunmanProjectile = true;
+                                projectileControllerScript.finalPos = B.position;
 
                                 //gunman shoot animation
                                 gunmanAnimationScript[i].gunmanState = GunmanStates.shoot;

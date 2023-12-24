@@ -136,6 +136,7 @@ public class CannonController : MonoBehaviour
                                 projectileControllerScript.weaponDamage = shipCategorizer_LevelScript.weaponDamage;
                                 projectileControllerScript.isPlayer1Projectile = shipCategorizer_PlayerScript.isP1Ship;
                                 projectileControllerScript.isArcherOrGunmanProjectile = false;
+                                projectileControllerScript.finalPos = B.position;
 
                                 if (cannonBall != null)
                                 {
@@ -276,18 +277,7 @@ public class CannonController : MonoBehaviour
         objectPoolCannonBalls.AddComponent<ObjectPool_Projectile>();
         objectPoolCannonBallScript = objectPoolCannonBalls.GetComponent<ObjectPool_Projectile>();
 
-        if (shipCategorizer_SizeScript.shipSize == ShipSize.Small)
-        {
-            objectPoolCannonBallScript.totalProjectileCount = SetParameters.TotalProjectileCountSmallShip;
-        }
-        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Medium)
-        {
-            objectPoolCannonBallScript.totalProjectileCount = SetParameters.TotalProjectileCountMediumShip;
-        }
-        else if (shipCategorizer_SizeScript.shipSize == ShipSize.Large)
-        {
-            objectPoolCannonBallScript.totalProjectileCount = SetParameters.TotalProjectileCountLargeShip;
-        }
+        objectPoolCannonBallScript.totalProjectileCount = SetParameters.TotalProjectileCountPerShooter;
         objectPoolCannonBallScript.projectilePrefab = objectPoolPrefabCollector.cannonBallPrefab;
     }
 }

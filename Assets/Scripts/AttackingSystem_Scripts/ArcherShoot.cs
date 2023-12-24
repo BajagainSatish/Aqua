@@ -201,6 +201,7 @@ public class ArcherShoot : MonoBehaviour
                                 projectileControllerScript.weaponDamage = shipCategorizer_LevelScript.weaponDamage;
                                 projectileControllerScript.isPlayer1Projectile = shipCategorizer_PlayerScript.isP1Ship;
                                 projectileControllerScript.isArcherOrGunmanProjectile = true;
+                                projectileControllerScript.finalPos = B.position;
 
                                 //archer shoot animation
                                 archerAnimatorScript[i].archerState = ArcherStates.shoot;
